@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin | Vitrine Brasil</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5f9;color:#172033;font-family:Arial,sans-serif}
+header{background:#125bd3;color:white;padding:22px;text-align:center}
+main{max-width:850px;margin:auto;padding:18px}
+.card{background:white;border-radius:15px;padding:20px;margin:16px 0;box-shadow:0 3px 12px #0001}
+button,.btn{display:inline-block;background:#1263df;color:white;border:0;border-radius:9px;padding:12px 17px;margin:5px 4px 5px 0;text-decoration:none;cursor:pointer;font-size:15px}
+input{padding:13px;width:100%;margin:8px 0;border:1px solid #ccc;border-radius:8px}
+.ok{background:#15803d}.danger{background:#b91c1c}
+a{color:#1263df}
+small{color:#64748b}
+#painel{display:none}
+.item{border-bottom:1px solid #ddd;padding:14px 0}
+</style>
+</head>
+<body>
+<header>
+<h1>Vitrine Brasil</h1>
+<p>Painel Administrativo</p>
+</header>
+<main>
+<div class="card" id="login">
+<h2>Acesso administrativo</h2>
+<input id="email" type="email" placeholder="E-mail do administrador">
+<input id="senha" type="password" placeholder="Senha">
+<button id="entrar">Entrar</button>
+<p id="mensagem"></p>
+</div>
+
+<div id="painel">
+<div class="card">
+<h2>Administração</h2>
+<p id="usuario"></p>
+<button id="sair" class="danger">Sair</button>
+<a class="btn" href="./index.html">Abrir site</a>
+</div>
+
+<div class="card">
+<h2>Backup do código</h2>
+<p>Baixe os arquivos atualizados do GitHub.</p>
+<a class="btn ok"
+href="https://github.com/eletronicoslimagyn/vitrine-brasil-classificados/archive/refs/heads/main.zip">
+Baixar código completo ZIP
+</a>
+<p><small>Este backup não inclui os dados armazenados no Supabase.</small></p>
+</div>
+
+<div class="card">
+<h2>Moderação de anúncios</h2>
+<button id="atualizar">Atualizar lista</button>
+<div id="anuncios"></div>
+</div>
+</div>
+</main>
+
+<script type="module">
+import {createClient} from
+'https://esm.sh/@supabase/supabase-js@2';
+import {SUPABASE_URL,SUPABASE_ANON_KEY} from './config.js';
+
+const $=id=>document.getElementById(id);
+let db=null;
+let usuario=null;
+
+if(!SUPABASE_URL||!SUPABASE_ANON_KEY){
+ $('mensagem').textContent='Configure o Supabase no config.js.';
+}else{
+ db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+}
+
+async function verificar(){
+ if(!db)return;
+ const {data:{user},error}=await db.auth.getUser();
+ if(error||!user)return;
+ const {data:admin,error:erro}=await db.from('admins')
+ .select('user_id').eq('user_id',user.id).maybeSingle();
+ if(erro||!admin){
+  $('mensagem').textContent='Conta sem permissão administrativa.';
+  return;
+ }
+ usuario=user;
+ $('login').style.display='none';
+ $('painel').style.display='block';
+ $('usuario').textContent=user.email;
+ await carregar();
+}
+
+$('entrar').onclick=async()=>{
+ if(!db)return;
+ $('mensagem').textContent='Verificando acesso...';
+ const {error}=await db.auth.signInWithPassword({
+  email:$('email').value.trim(),
+  password:$('senha').value
+ });
+ if(error){
+  $('mensagem').textContent=error.message;
+  return;
+ }
+ await verificar();
+};
+
+$('sair').onclick=async()=>{
+ await db.auth.signOut();
+ location.reload();
+};
+
+async function carregar(){
+ if(!usuario)return;
+ const area=$('anuncios');
+ area.replaceChildren();
+ const {data,error}=await db.from('listings')
+ .select('id,title,city,state,status,price')
+ .eq('status','pending')
+ .order('created_at',{ascending:false})
+ .limit(100);
+ if(error){
+  area.textContent=error.message;
+  return;
+ }
+ if(!data?.length){
+  area.textContent='Nenhum anúncio aguardando aprovação.';
+  return;
+ }
+ for(const item of data){
+  const div=document.createElement('div');
+  div.className='item';
+  const titulo=document.createElement('h3');
+  titulo.textContent=item.title;
+  const info=document.createElement('p');
+  info.textContent=`${item.city} - ${item.state} | R$ ${item.price}`;
+  div.append(titulo,info);
+  for(const [texto,status,classe] of [
+   ['Aprovar','approved','ok'],
+   ['Rejeitar','rejected','danger']
+  ]){
+   const botao=document.createElement('button');
+   botao.textContent=texto;
+   botao.className=classe;
+   botao.onclick=async()=>{
+    if(!confirm(`${texto} este anúncio?`))return;
+    botao.disabled=true;
+    const {error}=await db.from('listings')
+     .update({status}).eq('id',item.id);
+    if(error){
+     alert(error.message);
+     botao.disabled=false;
+    }else await carregar();
+   };
+   div.append(botao);
+  }
+  area.append(div);
+ }
+}
+$('atualizar').onclick=carregar;
+verificar();
+</script>
+</body>
+</html>
