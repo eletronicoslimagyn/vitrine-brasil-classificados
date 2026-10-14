@@ -1,4 +1,2 @@
-// Substitua pelos dados públicos em Supabase > Project Settings > API.
-// Nunca coloque a chave service_role ou senhas neste arquivo.
-export const SUPABASE_URL = '';
-export const SUPABASE_ANON_KEY = '';
+export const SUPABASE_URL = "https://oxhzzxnrpnmderaeypcs.supabase.co";
+export const SUPABASE_ANON_KEY = "\rexport SUPA_URL SUPA_KEY\r\rpython - <<'PY'\rimport os,json\rfrom pathlib import Path\rPath(\"config.js\").write_text(\r \"export const SUPABASE_URL = \" +\r json.dumps(os.environ[\"SUPA_URL\"]) + \";\\n\" +\r \"export const SUPABASE_ANON_KEY = \" +\r json.dumps(os.environ[\"SUPA_KEY\"]) + \";\\n\"\r)\rPY\r\rgit add config.js\rgit commit -m \"Conecta Supabase ao Vitrine Brasil\"\rgit push origin main\r\recho \"CONFIGURACAO ENVIADA AO GITHUB\"sb_publishable_I3Vy2OqzHYfK9OkUC1Nb5A__sCNtLH3";
