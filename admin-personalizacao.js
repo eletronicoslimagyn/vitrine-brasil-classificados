@@ -1,6 +1,6 @@
 const $=id=>document.getElementById(id);
 const repo='eletronicoslimagyn/zixlima';
-const defaults={nome:'ZixLima',slogan:'ZixLima Anúncie Aqui',email:'rodrigocostalimajus@gmail.com',whatsapp:'5562982565827'};
+const defaults={nome:'ZixLima',slogan:'ZixLima Anúncie Aqui',email:'suportezixlima@gmail.com',whatsapp:'5562982565827'};
 const ids={nome:'zzNome',slogan:'zzSlogan',email:'zzEmail',whatsapp:'zzWhatsapp'};
 function fill(v){for(const k of Object.keys(ids))$(ids[k]).value=typeof v[k]==='string'?v[k]:defaults[k]}
 function collect(){return Object.fromEntries(Object.entries(ids).map(([k,id])=>[k,$(id).value.trim()]))}
