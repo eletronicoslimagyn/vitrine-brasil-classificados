@@ -742,3 +742,159 @@ header .actions button {
 }
 
 /* ZIX RESPONSIVO V2 FIM */
+
+
+
+/* ZIX CABECALHO V3 INICIO */
+
+/* Barra superior */
+header .top {
+  display:grid !important;
+  grid-template-columns:
+    minmax(0,1fr) auto auto;
+  align-items:center;
+  gap:12px;
+  max-width:1440px;
+  padding:12px 20px;
+}
+
+/* Marca */
+header .brand {
+  grid-column:1;
+  grid-row:1;
+  font-size:clamp(25px,2.8vw,39px);
+  font-weight:950;
+  white-space:nowrap;
+}
+
+/* Menu na linha inferior */
+header nav {
+  grid-column:1/-1;
+  grid-row:2;
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+  min-width:0;
+}
+
+/* Relógio dentro do menu */
+header nav #zixRelogio {
+  display:inline-flex;
+  flex-shrink:0;
+  margin:0;
+}
+
+/* Controles no topo direito */
+header .zz-controls {
+  grid-column:2;
+  grid-row:1;
+  display:flex;
+  gap:7px;
+  margin:0;
+}
+
+/* Anunciar e Sair */
+header .actions {
+  grid-column:3;
+  grid-row:1;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+}
+
+header #postBtn {
+  order:1;
+  border-radius:24px;
+  background:linear-gradient(
+    180deg,#329cff,#0755cf
+  );
+  color:white;
+  font-weight:850;
+  white-space:nowrap;
+}
+
+header #loginBtn {
+  order:2;
+  border-radius:24px;
+  background:white;
+  color:#1263df;
+  font-weight:850;
+  white-space:nowrap;
+}
+
+/* Ícones */
+header .zz-controls button {
+  display:grid;
+  place-items:center;
+  width:39px;
+  height:39px;
+  border-radius:13px;
+  font-size:20px;
+}
+
+/* Celular */
+@media(max-width:700px) {
+  header .top {
+    grid-template-columns:
+      minmax(0,1fr) auto;
+    gap:10px;
+    padding:12px;
+  }
+
+  header .brand {
+    grid-column:1;
+    grid-row:1;
+    font-size:clamp(21px,5vw,28px);
+  }
+
+  header .zz-controls {
+    grid-column:2;
+    grid-row:1;
+    justify-self:end;
+  }
+
+  header .actions {
+    grid-column:1/-1;
+    grid-row:2;
+    justify-content:flex-end;
+  }
+
+  header nav {
+    grid-column:1/-1;
+    grid-row:3;
+    display:flex !important;
+    justify-content:flex-start;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    max-width:100%;
+    padding:5px 0;
+    scrollbar-width:thin;
+  }
+
+  header nav a {
+    flex-shrink:0;
+    font-size:12px;
+    padding:8px 11px;
+  }
+
+  header nav #zixRelogio {
+    flex-shrink:0;
+  }
+
+  header .actions button {
+    min-height:38px;
+    padding:8px 13px;
+    font-size:12px;
+  }
+
+  header .zz-controls button {
+    width:35px;
+    height:35px;
+    font-size:18px;
+  }
+}
+
+/* ZIX CABECALHO V3 FIM */
