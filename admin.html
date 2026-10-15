@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin | Vitrine Brasil</title>
+<title>Admin | ZZixBr</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#f1f5f9;color:#172033;font-family:Arial,sans-serif}
@@ -21,7 +21,7 @@ small{color:#64748b}
 </head>
 <body>
 <header>
-<h1>Vitrine Brasil</h1>
+<h1>ZZixBr</h1>
 <p>Painel Administrativo</p>
 </header>
 <main>
@@ -39,6 +39,33 @@ small{color:#64748b}
 <p id="usuario"></p>
 <button id="sair" class="danger">Sair</button>
 <a class="btn" href="./index.html">Abrir site</a>
+</div>
+
+<div class="card" id="zzixbrPerfil">
+<h2>👤 Meu perfil administrativo</h2>
+<p><small>Informações privadas da sua conta, salvas no Supabase.</small></p>
+<label>Nome<input id="zzPerfilNome" maxlength="100"></label>
+<label>Telefone<input id="zzPerfilFone" maxlength="30"></label>
+<label>Cidade<input id="zzPerfilCidade" maxlength="80"></label>
+<button id="zzSalvarPerfil" class="ok">Salvar meu perfil</button>
+<p id="zzPerfilMensagem" role="status"></p>
+</div>
+<div class="card" id="zzixbrConfig">
+<h2>✨ Personalizar o site ZZixBr</h2>
+<p><small>Altere a identidade e os contatos do site. Clique em Publicar no GitHub para disponibilizar as mudanças.</small></p>
+<label>Nome do site<input id="zzNome" maxlength="60"></label>
+<label>Frase de impacto<input id="zzSlogan" maxlength="160"></label>
+<label>E-mail de suporte<input id="zzEmail" type="email" maxlength="150"></label>
+<label>WhatsApp com DDI e DDD<input id="zzWhatsapp" inputmode="numeric" maxlength="16"></label>
+<h3>🔐 Conexão GitHub</h3>
+<p><small>Token clássico com permissão repo ou token refinado com Contents: Read and write. O token não é salvo no site nem no backup.</small></p>
+<label>Token GitHub<input id="zzToken" type="password" autocomplete="off" spellcheck="false" placeholder="Cole seu token somente para publicar"></label>
+<button id="zzTestar">Testar conexão</button>
+<button id="zzPublicar" class="ok">Salvar no GitHub</button>
+<button id="zzBaixar">Baixar backup JSON</button>
+<label class="btn" style="cursor:pointer">Importar backup JSON<input id="zzImportar" type="file" accept=".json,application/json" style="display:none"></label>
+<p id="zzMensagem" role="status" style="white-space:pre-wrap;overflow-wrap:anywhere"></p>
+<p><small>O backup inclui apenas as configurações públicas. Anúncios e imagens permanecem no Supabase.</small></p>
 </div>
 
 <div class="card">
@@ -160,5 +187,5 @@ async function carregar(){
 $('atualizar').onclick=carregar;
 verificar();
 </script>
-</body>
+<script type="module" src="admin-personalizacao.js"></script><script type="module" src="admin-perfil.js"></script></body>
 </html>
