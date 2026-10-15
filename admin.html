@@ -79,10 +79,7 @@ Baixar código completo ZIP
 </div>
 
 <div class="card" id="zixFinanceiro"><h2>💳 Planos, descontos e prazos</h2><p>Configurações salvas no Supabase. Somente administradores autorizados podem modificar.</p><label><input type="checkbox" id="zixCobrar" style="width:auto"> Ativar cobrança dos planos</label><p><small>Desativado: anúncios podem ser enviados gratuitamente para moderação. Ativado: exige crédito concedido pelo Admin após confirmar o Pix.</small></p><h3>Promoções</h3><label>Aplicar a<select id="zixPlanoAlvo"><option value="todos">Todos os planos pagos</option><option value="avulso">Avulso</option><option value="iniciante">Iniciante</option><option value="negocio">Negócio</option><option value="profissional">Profissional</option></select></label><label>Desconto (%)<input id="zixDesconto" type="number" min="0" max="100" value="0"></label><button id="zixSalvarFinanceiro" class="ok">Salvar cobrança e promoção</button><p id="zixFinanceiroMsg" role="status"></p><section id="zixDiscountExtra" style="border-top:1px solid #ddd;margin-top:18px;padding-top:12px"><h3>Desconto individual por plano</h3><p><small>Configure descontos diferentes para cada plano. Salve somente depois de aplicar o SQL no Supabase.</small></p><label>Plano<select id="zixDiscountPlan"><option value="boasvindas">Boas-vindas</option><option value="avulso">Avulso</option><option value="iniciante">Iniciante</option><option value="negocio">Negócio</option><option value="profissional">Profissional</option></select></label><label>Desconto (%)<input id="zixDiscountPercent" type="number" min="0" max="100" value="0"></label><label><input id="zixDiscountEnabled" type="checkbox" style="width:auto"> Ativar desconto deste plano</label><button id="zixDiscountSave" type="button">Salvar desconto individual</button><p id="zixDiscountMsg" role="status"></p></section>
-<div id="zixPrecoFinal" style="background:#f0fdf4;border:1px solid #86efac;border-radius:12px;padding:16px;margin:18px 0">
-<h3>Calculadora de preços promocionais</h3>
-<p><small>Prévia dos valores. O preço efetivamente cobrado deve ser validado no servidor.</small></p>
-<div id="zixPrecoIndividual"></div>
+
 <hr>
 <div id="zixPrecoGeral"></div>
 </div>
@@ -197,8 +194,10 @@ $('atualizar').onclick=carregar;
 verificar();
 </script>
 <script type="module" src="admin-personalizacao.js"></script><script type="module" src="admin-perfil.js"></script><script type="module" src="zix-planos-admin.js?v=1"></script>
+
+
 <script>
-(function(){
+(function () {
   const precos = {
     boasvindas: 0,
     avulso: 3.95,
@@ -207,71 +206,75 @@ verificar();
     profissional: 64.95
   };
 
-  const nomes = {
-    boasvindas: "Boas-vindas",
-    avulso: "Avulso",
-    iniciante: "Iniciante",
-    negocio: "Negócio",
-    profissional: "Profissional"
-  };
-
-  const $ = id => document.getElementById(id);
   const moeda = n => n.toLocaleString("pt-BR", {
-    style: "currency", currency: "BRL"
+    style: "currency",
+    currency: "BRL"
   });
 
-  function resumo(plano, desconto, ativo) {
-    const original = precos[plano] ?? 0;
-    const pct = ativo ? Math.min(100, Math.max(0, desconto)) : 0;
-    const final = Math.round(original * (100 - pct)) / 100;
-    const economia = Math.round((original - final) * 100) / 100;
+  function iniciar() {
+    const painel = document.getElementById("zixFinanceiro");
+    if (!painel) return;
 
-    return nomes[plano] + "\n" +
-      "Preço original: " + moeda(original) + "\n" +
-      "Desconto: " + pct + "%\n" +
-      "Economia: " + moeda(economia) + "\n" +
-      "PREÇO FINAL: " + moeda(final);
-  }
+    const selects = [...painel.querySelectorAll("select")];
+    const inputs = [...painel.querySelectorAll("input")];
 
-  function atualizar() {
-    const plano = $("zixDiscountPlan").value;
-    const pct = Number($("zixDiscountPercent").value) || 0;
-    const ativo = $("zixDiscountEnabled").checked;
-
-    $("zixPrecoIndividual").textContent =
-      "DESCONTO INDIVIDUAL\n" + resumo(plano, pct, ativo);
-
-    const alvo = $("zixPlanoAlvo").value;
-    const geral = Number($("zixDesconto").value) || 0;
-    const planos = Object.keys(precos).filter(
-      p => p !== "boasvindas" && (
-        alvo === "todos" || alvo === "all" ||
-        alvo === "all_paid" || alvo === p
-      )
+    const descontos = inputs.filter(el =>
+      el.type === "number" &&
+      (el.value === "0" || el.min === "0")
     );
 
-    $("zixPrecoGeral").textContent =
-      "PROMOÇÃO GERAL\n" +
-      (planos.length
-        ? planos.map(p => resumo(p, geral, true)).join("\n\n")
-        : "Selecione um plano para visualizar.");
+    if (selects.length < 2 || descontos.length < 2) return;
 
-    $("zixPrecoIndividual").style.whiteSpace = "pre-line";
-    $("zixPrecoGeral").style.whiteSpace = "pre-line";
+    const caixas = [];
+
+    descontos.slice(0, 2).forEach((campo, i) => {
+      const div = document.createElement("div");
+      div.style.cssText =
+        "margin:10px 0;padding:12px;border-radius:8px;" +
+        "background:#ecfdf5;border:1px solid #86efac;" +
+        "font-weight:bold;white-space:pre-line";
+
+      div.textContent = "Calculando preço final...";
+      campo.insertAdjacentElement("afterend", div);
+      caixas.push(div);
+    });
+
+    function atualizar() {
+      descontos.slice(0, 2).forEach((campo, i) => {
+        const select = selects[i];
+        const codigo = String(select.value || "").toLowerCase();
+        const preco = precos[codigo];
+
+        if (preco === undefined) {
+          caixas[i].textContent =
+            "Selecione um plano para visualizar o preço final.";
+          return;
+        }
+
+        const desconto = Math.max(
+          0, Math.min(100, Number(campo.value) || 0)
+        );
+
+        const final = Math.round(preco * (100 - desconto)) / 100;
+
+        caixas[i].textContent =
+          "Valor original: " + moeda(preco) +
+          "\nDesconto: " + desconto + "%" +
+          "\nValor final: " + moeda(final);
+      });
+    }
+
+    selects.forEach(el => el.addEventListener("change", atualizar));
+    descontos.forEach(el => el.addEventListener("input", atualizar));
+
+    atualizar();
   }
 
-  [
-    "zixDiscountPlan",
-    "zixDiscountPercent",
-    "zixDiscountEnabled",
-    "zixPlanoAlvo",
-    "zixDesconto"
-  ].forEach(id => {
-    $(id).addEventListener("input", atualizar);
-    $(id).addEventListener("change", atualizar);
-  });
-
-  atualizar();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", iniciar);
+  } else {
+    iniciar();
+  }
 })();
 </script>
 </body>
