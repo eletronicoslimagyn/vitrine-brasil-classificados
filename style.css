@@ -11,3 +11,26 @@
 .category:hover{transform:translateY(-4px);box-shadow:0 10px 25px #09234a1a}
 .zz-whats{background:#16bb59}
 @media(max-width:650px){.hero{background-position:60% center;min-height:370px}.hero h1{font-size:36px}.brand{font-size:19px}}
+
+
+/* ZZIXBR PREMIUM V2 */
+:root{--zz-page:#f5f7fb;--zz-panel:white;--zz-text:#1c2939;--zz-muted:#64758a;--zz-border:#e0e8f2}
+body{background:var(--zz-page);color:var(--zz-text);transition:background .2s,color .2s}
+body[data-zz-theme="dark"]{--zz-page:#101827;--zz-panel:#1c293b;--zz-text:#f1f5fa;--zz-muted:#b4c2d5;--zz-border:#35445a}
+body[data-zz-color="green"]{--zz-page:#e9f5ed}
+body[data-zz-color="sand"]{--zz-page:#faf1df}
+body[data-zz-color="purple"]{--zz-page:#f1edfa}
+body[data-zz-theme="dark"][data-zz-color]{--zz-page:#101827}
+header,.category,.card,.empty{background:var(--zz-panel);color:var(--zz-text);border-color:var(--zz-border)}
+header{box-shadow:0 3px 22px #0001}
+.category,.card{box-shadow:0 5px 20px #0000000c}
+.category:hover,.card:hover{box-shadow:0 14px 30px #0002}
+.sectionTitle p,.mine p,.muted{color:var(--zz-muted)}
+.hero{border-radius:0 0 25px 25px;overflow:hidden}
+.zz-whats{bottom:calc(115px + env(safe-area-inset-bottom,0px));right:19px;width:62px;height:62px;z-index:60;box-shadow:0 12px 30px #007c4077}
+.zz-controls{display:flex;align-items:center;gap:5px;margin-left:auto}
+.zz-controls button{width:36px;height:36px;border:1px solid var(--zz-border);border-radius:10px;background:var(--zz-panel);color:var(--zz-text);cursor:pointer}
+.zz-palette{display:none;position:absolute;right:15px;top:68px;z-index:50;background:var(--zz-panel);color:var(--zz-text);border:1px solid var(--zz-border);padding:12px;border-radius:14px;box-shadow:0 12px 32px #0003}
+.zz-palette.open{display:block}
+.zz-palette button{display:block;width:100%;padding:10px;text-align:left;border:0;background:transparent;color:inherit;cursor:pointer}
+@media(max-width:540px){.zz-controls button{width:31px;height:34px}.zz-whats{bottom:calc(125px + env(safe-area-inset-bottom,0px));right:16px}}
