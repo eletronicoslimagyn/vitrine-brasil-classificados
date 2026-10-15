@@ -1,17 +1,32 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1263df"><meta name="description" content="Classificados de carros, motos, imóveis, eletrônicos e serviços."><title>ZixLima | Classificados</title><link rel="stylesheet" href="style.css?v=20261015alugueis"></head><body><header><div class="wrap top"><a class="brand" href="#inicio">🇧🇷 <span id="siteBrand">ZixLima</span></a><nav><a href="#inicio">Início</a><a href="#anuncios">Anúncios</a><a href="#meus">Meus anúncios</a><a href="admin.html">Admin</a></nav><div class="zz-controls"><button type="button" id="zzThemeToggle" title="Modo escuro" aria-label="Modo escuro">🌙</button><button type="button" id="zzPaletteToggle" title="Cor de fundo" aria-label="Cor de fundo">🎨</button></div><div class="zz-palette" id="zzPalette"><strong>Cor de fundo</strong><button data-color="blue">🔵 Azul</button><button data-color="green">🟢 Verde</button><button data-color="sand">🟡 Dourado</button><button data-color="purple">🟣 Lilás</button></div><div class="actions"><button id="loginBtn" class="ghost">Entrar</button><button id="postBtn" class="primary">+ Anunciar</button></div></div>
-
-</header><main><section class="hero" id="inicio"><div class="wrap"><div class="eyebrow">NEGÓCIOS PERTO DE VOCÊ</div><h1><span id="siteHero">ZixLima Anúncie Aqui</span></h1><p>Encontre, anuncie e faça grandes negócios em um só lugar.</p><form id="searchForm" class="search"><input id="term" placeholder="O que você está procurando?" aria-label="Buscar anúncios"><input id="city" placeholder="Cidade" aria-label="Cidade"><button class="primary" type="submit">Buscar</button></form></div></section><section class="wrap content">
-<div class="zixCategoriasTopo">
-  <h2>Explore as categorias</h2>
-  <div id="zixRelogio" aria-label="Data e hora do Brasil">
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1263df"><meta name="description" content="Classificados de carros, motos, imóveis, eletrônicos e serviços."><title>ZixLima | Classificados</title><link rel="stylesheet" href="style.css?v=20261015alugueis">
+<style id="zixRelogioPosicao">
+header #zixRelogio {
+  display:inline-flex;
+  align-items:center;
+  margin:0 6px;
+  vertical-align:middle;
+}
+@media(max-width:600px){
+  header #zixRelogio {
+    padding:3px 5px;
+    margin:0 3px;
+  }
+  header #zixHora {font-size:13px}
+  header .zixFlag {font-size:19px}
+}
+</style>
+</head><body><header><div class="wrap top"><a class="brand" href="#inicio">🇧🇷 <span id="siteBrand">ZixLima</span></a><nav><a href="#inicio">Início</a><a href="#anuncios">Anúncios</a><a href="#meus">Meus anúncios</a><a href="admin.html">Admin</a><div id="zixRelogio" aria-label="Data e hora do Brasil">
     <span class="zixFlag">🇧🇷</span>
     <span class="zixClockDisplay">
       <span id="zixData">--/--/----</span>
       <strong id="zixHora">--:--:--</strong>
     </span>
-  </div>
-</div>
+  </div></nav><div class="zz-controls"><button type="button" id="zzThemeToggle" title="Modo escuro" aria-label="Modo escuro">🌙</button><button type="button" id="zzPaletteToggle" title="Cor de fundo" aria-label="Cor de fundo">🎨</button></div><div class="zz-palette" id="zzPalette"><strong>Cor de fundo</strong><button data-color="blue">🔵 Azul</button><button data-color="green">🟢 Verde</button><button data-color="sand">🟡 Dourado</button><button data-color="purple">🟣 Lilás</button></div><div class="actions"><button id="loginBtn" class="ghost">Entrar</button><button id="postBtn" class="primary">+ Anunciar</button></div></div>
 
+</header><main><section class="hero" id="inicio"><div class="wrap"><div class="eyebrow">NEGÓCIOS PERTO DE VOCÊ</div><h1><span id="siteHero">ZixLima Anúncie Aqui</span></h1><p>Encontre, anuncie e faça grandes negócios em um só lugar.</p><form id="searchForm" class="search"><input id="term" placeholder="O que você está procurando?" aria-label="Buscar anúncios"><input id="city" placeholder="Cidade" aria-label="Cidade"><button class="primary" type="submit">Buscar</button></form></div></section><section class="wrap content">
+
+  <h2>Explore as categorias</h2>
+  
 <style>
 .zixCategoriasTopo {
   display:flex;
