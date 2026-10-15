@@ -87,6 +87,11 @@ Baixar código completo ZIP
 <div class="card">
 <h2>Moderação de anúncios</h2>
 <button id="atualizar">Atualizar lista</button>
+<label>Pesquisar anúncio pelo código
+<input id="zixBuscaCodigo" placeholder="Ex.: ZIX-000001">
+</label>
+<button id="zixBuscarCodigo" type="button">Buscar código</button>
+<p id="zixBuscaResultado"></p>
 <div id="anuncios"></div>
 </div>
 </div>
@@ -148,7 +153,7 @@ async function carregar(){
  const area=$('anuncios');
  area.replaceChildren();
  const {data,error}=await db.from('listings')
- .select('id,title,city,state,status,price')
+ .select('id,zix_code,title,city,state,status,price')
  .eq('status','pending')
  .order('created_at',{ascending:false})
  .limit(100);
@@ -168,6 +173,9 @@ async function carregar(){
   const info=document.createElement('p');
   info.textContent=`${item.city} - ${item.state} | R$ ${item.price}`;
   div.append(titulo,info);
+  const codigo=document.createElement('p');
+  codigo.textContent='Código: '+(item.zix_code||item.id);
+  div.append(codigo);
   for(const [texto,status,classe] of [
    ['Aprovar','approved','ok'],
    ['Rejeitar','rejected','danger']
@@ -277,5 +285,55 @@ verificar();
   }
 })();
 </script>
+
+<script type="module">
+// ZIX-BUSCA-CODIGO-V1
+import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
+import {SUPABASE_URL,SUPABASE_ANON_KEY} from './config.js';
+const db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+document.getElementById('zixBuscarCodigo').onclick=async()=>{
+ const out=document.getElementById('zixBuscaResultado');
+ const code=document.getElementById('zixBuscaCodigo').value.trim().toUpperCase();
+ if(!/^ZIX-[0-9]+$/.test(code)){
+  out.textContent='Informe um código como ZIX-000001.';
+  return;
+ }
+ out.textContent='Pesquisando...';
+ const {data:{user}}=await db.auth.getUser();
+ if(!user){out.textContent='Entre como administrador.';return;}
+ const {data:admin}=await db.from('admins')
+  .select('user_id').eq('user_id',user.id).maybeSingle();
+ if(!admin){out.textContent='Acesso não autorizado.';return;}
+ const {data,error}=await db.from('listings')
+  .select('id,zix_code,title,status,price,user_id,created_at,zix_expires_at')
+  .eq('zix_code',code).maybeSingle();
+ if(error){
+  if(error.message.includes('zix_expires_at')){
+   out.textContent='Código cadastrado, mas o campo de vencimento precisa ser verificado.';
+  }else out.textContent=error.message;
+  return;
+ }
+ if(!data){out.textContent='Anúncio não encontrado.';return;}
+ out.replaceChildren();
+ const pre=document.createElement('pre');
+ pre.style.whiteSpace='pre-wrap';
+ pre.textContent=
+  'Código: '+data.zix_code+'\n'+
+  'Título: '+data.title+'\n'+
+  'Status: '+data.status+'\n'+
+  'Usuário: '+data.user_id+'\n'+
+  'UUID do anúncio: '+data.id+'\n'+
+  'Vencimento: '+(data.zix_expires_at||'Não informado');
+ out.append(pre);
+ const copiar=document.createElement('button');
+ copiar.textContent='Copiar UUID para controlar vencimento';
+ copiar.onclick=()=>{
+  document.getElementById('zixAnuncioId').value=data.id;
+  out.append(document.createTextNode(' UUID preenchido.'));
+ };
+ out.append(copiar);
+};
+</script>
+
 </body>
 </html>
