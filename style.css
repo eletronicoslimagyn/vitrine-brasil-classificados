@@ -1217,3 +1217,355 @@ main .wrap {
 }
 
 /* ZIX ALINHAMENTO V5 FIM */
+
+
+/* ZIX PREMIUM V6 INICIO */
+
+header {
+  background:linear-gradient(115deg,#061d43,#103d79)!important;
+  border-bottom:4px solid #f3c735!important;
+  box-shadow:0 5px 22px #061b4055!important;
+}
+
+header .top {
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto auto!important;
+  grid-template-rows:auto auto!important;
+  align-items:center!important;
+  gap:14px!important;
+  padding:15px 18px!important;
+  max-width:1300px;
+  margin:auto;
+}
+
+header .brand {
+  grid-column:1!important;
+  grid-row:1!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  font-size:clamp(30px,4vw,48px)!important;
+  font-weight:950!important;
+  letter-spacing:-1.5px!important;
+  line-height:1.1!important;
+  min-width:0;
+}
+
+header #siteBrand {
+  color:#fff!important;
+  background:linear-gradient(180deg,#fff 20%,#bcd9ff 65%,#ffdf66 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 3px 2px #00152b);
+}
+
+header .zix-brasil {
+  width:62px!important;
+  height:51px!important;
+  font-size:39px!important;
+  flex-shrink:0;
+  display:grid!important;
+  place-items:center;
+  border:2px solid #f7d64c;
+  border-radius:13px!important;
+  background:linear-gradient(145deg,#0bc86a,#006a37);
+  box-shadow:0 4px 12px #0006,inset 0 1px 5px #ffffff80;
+}
+
+header .zz-controls {
+  grid-column:2!important;
+  grid-row:1!important;
+  display:flex!important;
+  gap:8px!important;
+  margin:0!important;
+}
+
+header .zz-controls button {
+  width:43px!important;
+  height:43px!important;
+  min-width:43px;
+  padding:0!important;
+  display:grid!important;
+  place-items:center;
+  font-size:22px!important;
+  border-radius:13px!important;
+}
+
+header .actions {
+  grid-column:3!important;
+  grid-row:1!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  margin:0!important;
+}
+
+header .actions button {
+  height:43px!important;
+  min-height:43px!important;
+  padding:0 15px!important;
+  font-size:14px!important;
+  border-radius:22px!important;
+  white-space:nowrap;
+}
+
+header #postBtn {
+  order:1;
+  background:linear-gradient(#38a9ff,#0756cb)!important;
+  color:#fff!important;
+  border:1px solid #6dc3ff!important;
+}
+
+header #loginBtn {
+  order:2;
+  background:white!important;
+  color:#0756cb!important;
+}
+
+header nav {
+  grid-column:1/-1!important;
+  grid-row:2!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:10px!important;
+  width:100%!important;
+  max-width:850px!important;
+  justify-self:center;
+  overflow:visible!important;
+}
+
+header nav a {
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  min-width:0;
+  min-height:46px!important;
+  padding:9px 8px!important;
+  border:1px solid #59baff!important;
+  border-radius:15px!important;
+  background:linear-gradient(180deg,#219cff,#064dbd)!important;
+  color:white!important;
+  font-weight:800!important;
+  font-size:clamp(11px,1.4vw,15px)!important;
+  text-align:center;
+  box-shadow:0 4px 9px #001e4670;
+}
+
+.hero {
+  position:relative!important;
+  background:linear-gradient(125deg,#eaf4ff,#fff 55%,#ddecff)!important;
+  color:#143764!important;
+  min-height:0!important;
+  padding:110px 0 55px!important;
+  border-radius:0 0 30px 30px;
+}
+
+.hero>.wrap {
+  position:relative;
+  max-width:1250px;
+}
+
+.hero #zixRelogio {
+  position:absolute!important;
+  top:-88px!important;
+  right:20px!important;
+  left:auto!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:9px!important;
+  padding:8px 13px!important;
+  margin:0!important;
+  background:linear-gradient(130deg,#00aa51,#006b32)!important;
+  border:3px solid #ffdc31!important;
+  border-radius:16px!important;
+  box-shadow:0 5px 17px #005a3060!important;
+  z-index:2;
+}
+
+.hero .zixClockDisplay {
+  color:white!important;
+  font-size:12px!important;
+}
+
+.hero #zixHora {
+  color:#ffed43!important;
+  font-size:24px!important;
+  letter-spacing:1px;
+}
+
+.hero .eyebrow {
+  color:#0759c7!important;
+  letter-spacing:3px;
+}
+
+.hero h1,
+.hero #siteHero {
+  color:#0962d8!important;
+  text-shadow:none!important;
+  font-weight:950!important;
+}
+
+.hero p {
+  color:#53677f!important;
+}
+
+.hero .search {
+  box-shadow:0 8px 24px #124a8c18!important;
+  border:1px solid #d8e6f6;
+}
+
+.cards {
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:20px!important;
+}
+
+.card {
+  width:100%!important;
+  min-width:0;
+  border-radius:18px!important;
+  overflow:hidden;
+}
+
+.card .cover,
+.card .placeholder {
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:4/3!important;
+  object-fit:cover!important;
+}
+
+.card .placeholder {
+  display:grid!important;
+  place-items:center;
+}
+
+.cardbody {
+  padding:16px!important;
+}
+
+@media(max-width:900px) {
+  .cards {
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+@media(max-width:700px) {
+  header .top {
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:auto auto auto!important;
+    gap:11px!important;
+    padding:13px 12px!important;
+  }
+
+  header .brand {
+    grid-column:1/-1!important;
+    grid-row:1!important;
+    font-size:clamp(32px,8vw,43px)!important;
+  }
+
+  header .zix-brasil {
+    width:52px!important;
+    height:44px!important;
+    font-size:32px!important;
+  }
+
+  header .zz-controls {
+    grid-column:1!important;
+    grid-row:2!important;
+    justify-self:start;
+  }
+
+  header .zz-controls button {
+    width:38px!important;
+    min-width:38px;
+    height:38px!important;
+  }
+
+  header .actions {
+    grid-column:2!important;
+    grid-row:2!important;
+    justify-self:end;
+    gap:6px!important;
+  }
+
+  header .actions button {
+    height:38px!important;
+    min-height:38px!important;
+    padding:0 10px!important;
+    font-size:12px!important;
+  }
+
+  header nav {
+    grid-column:1/-1!important;
+    grid-row:3!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:5px!important;
+    max-width:none!important;
+  }
+
+  header nav a {
+    min-height:43px!important;
+    padding:7px 3px!important;
+    font-size:clamp(9px,2.6vw,12px)!important;
+    border-radius:11px!important;
+    line-height:1.2;
+  }
+
+  .hero {
+    padding:96px 0 38px!important;
+  }
+
+  .hero #zixRelogio {
+    top:-80px!important;
+    right:12px!important;
+    padding:6px 9px!important;
+  }
+
+  .hero .zixFlag {
+    font-size:23px!important;
+  }
+
+  .hero #zixHora {
+    font-size:19px!important;
+  }
+
+  .hero .zixClockDisplay {
+    font-size:10px!important;
+  }
+
+  .hero h1 {
+    font-size:clamp(29px,7vw,41px)!important;
+  }
+
+  .cards {
+    grid-template-columns:1fr!important;
+    gap:18px!important;
+  }
+
+  .card .cover,
+  .card .placeholder {
+    aspect-ratio:16/10!important;
+  }
+
+  .categories {
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+
+@media(max-width:370px) {
+  header .brand {
+    font-size:30px!important;
+  }
+
+  header .actions button {
+    padding:0 7px!important;
+    font-size:11px!important;
+  }
+}
+
+/* ZIX PREMIUM V6 FIM */
