@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin | ZixLima</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5f9;color:#172033;font-family:Arial,sans-serif}
+header{background:#125bd3;color:white;padding:22px;text-align:center}
+main{max-width:850px;margin:auto;padding:18px}
+.card{background:white;border-radius:15px;padding:20px;margin:16px 0;box-shadow:0 3px 12px #0001}
+button,.btn{display:inline-block;background:#1263df;color:white;border:0;border-radius:9px;padding:12px 17px;margin:5px 4px 5px 0;text-decoration:none;cursor:pointer;font-size:15px}
+input,select{padding:13px;width:100%;margin:8px 0;border:1px solid #ccc;border-radius:8px}
+.ok{background:#15803d}.danger{background:#b91c1c}
+a{color:#1263df}
+small{color:#64748b}
+#painel{display:none}
+.item{border-bottom:1px solid #ddd;padding:14px 0}
+</style>
+</head>
+<body>
+<header>
+<h1>ZixLima</h1>
+<p>Painel Administrativo</p>
+</header>
+<main>
+<div class="card" id="login">
+<h2>Acesso administrativo</h2>
+<input id="email" type="email" placeholder="E-mail do administrador">
+<input id="senha" type="password" placeholder="Senha">
+<button id="entrar">Entrar</button><p><a href="./recuperar-senha.html">Esqueci minha senha</a></p>
+<p id="mensagem"></p>
+</div>
+
+<div id="painel">
+<div class="card">
+<h2>Administração</h2>
+<p id="usuario"></p>
+<button id="sair" class="danger">Sair</button>
+<a class="btn" href="./index.html">Abrir site</a>
+</div>
+
+<div class="card" id="zzixbrPerfil">
+<h2>👤 Meu perfil administrativo</h2>
+<p><small>Informações privadas da sua conta, salvas no Supabase.</small></p>
+<label>Nome<input id="zzPerfilNome" maxlength="100"></label>
+<label>Telefone<input id="zzPerfilFone" maxlength="30"></label>
+<label>Cidade<input id="zzPerfilCidade" maxlength="80"></label>
+<button id="zzSalvarPerfil" class="ok">Salvar meu perfil</button>
+<p id="zzPerfilMensagem" role="status"></p>
+</div>
+<div class="card" id="zzixbrConfig">
+<h2>✨ Personalizar o site ZixLima</h2>
+<p><small>Altere a identidade e os contatos do site. Clique em Publicar no GitHub para disponibilizar as mudanças.</small></p>
+<label>Nome do site<input id="zzNome" maxlength="60"></label>
+<label>Frase de impacto<input id="zzSlogan" maxlength="160"></label>
+<label>E-mail de suporte<input id="zzEmail" type="email" maxlength="150"></label>
+<label>WhatsApp com DDI e DDD<input id="zzWhatsapp" inputmode="numeric" maxlength="16"></label>
+<h3>🔐 Conexão GitHub</h3>
+<p><small>Token clássico com permissão repo ou token refinado com Contents: Read and write. O token não é salvo no site nem no backup.</small></p>
+<label>Token GitHub<input id="zzToken" type="password" autocomplete="off" spellcheck="false" placeholder="Cole seu token somente para publicar"></label>
+<button id="zzTestar">Testar conexão</button>
+<button id="zzPublicar" class="ok">Salvar no GitHub</button>
+<button id="zzBaixar">Baixar backup JSON</button>
+<label class="btn" style="cursor:pointer">Importar backup JSON<input id="zzImportar" type="file" accept=".json,application/json" style="display:none"></label>
+<p id="zzMensagem" role="status" style="white-space:pre-wrap;overflow-wrap:anywhere"></p>
+<p><small>O backup inclui apenas as configurações públicas. Anúncios e imagens permanecem no Supabase.</small></p>
+</div>
+
+<div class="card">
+<h2>Backup do código</h2>
+<p>Baixe os arquivos atualizados do GitHub.</p>
+<a class="btn ok"
+href="https://github.com/eletronicoslimagyn/zixlima/archive/refs/heads/main.zip">
+Baixar código completo ZIP
+</a>
+<p><small>Este backup não inclui os dados armazenados no Supabase.</small></p>
+</div>
+
+<div class="card" id="zixFinanceiro"><h2>💳 Planos, descontos e prazos</h2><p>Configurações salvas no Supabase. Somente administradores autorizados podem modificar.</p><label><input type="checkbox" id="zixCobrar" style="width:auto"> Ativar cobrança dos planos</label><p><small>Desativado: anúncios podem ser enviados gratuitamente para moderação. Ativado: exige crédito concedido pelo Admin após confirmar o Pix.</small></p><h3>Promoções</h3><label>Aplicar a<select id="zixPlanoAlvo"><option value="todos">Todos os planos pagos</option><option value="avulso">Avulso</option><option value="iniciante">Iniciante</option><option value="negocio">Negócio</option><option value="profissional">Profissional</option></select></label><label>Desconto (%)<input id="zixDesconto" type="number" min="0" max="100" value="0"></label><button id="zixSalvarFinanceiro" class="ok">Salvar cobrança e promoção</button><p id="zixFinanceiroMsg" role="status"></p><section id="zixDiscountExtra" style="border-top:1px solid #ddd;margin-top:18px;padding-top:12px"><h3>Desconto individual por plano</h3><p><small>Configure descontos diferentes para cada plano. Salve somente depois de aplicar o SQL no Supabase.</small></p><label>Plano<select id="zixDiscountPlan"><option value="boasvindas">Boas-vindas</option><option value="avulso">Avulso</option><option value="iniciante">Iniciante</option><option value="negocio">Negócio</option><option value="profissional">Profissional</option></select></label><label>Desconto (%)<input id="zixDiscountPercent" type="number" min="0" max="100" value="0"></label><label><input id="zixDiscountEnabled" type="checkbox" style="width:auto"> Ativar desconto deste plano</label><button id="zixDiscountSave" type="button">Salvar desconto individual</button><p id="zixDiscountMsg" role="status"></p></section>
+<div id="zixPrecoFinal" style="background:#f0fdf4;border:1px solid #86efac;border-radius:12px;padding:16px;margin:18px 0">
+<h3>Calculadora de preços promocionais</h3>
+<p><small>Prévia dos valores. O preço efetivamente cobrado deve ser validado no servidor.</small></p>
+<div id="zixPrecoIndividual"></div>
+<hr>
+<div id="zixPrecoGeral"></div>
+</div>
+<h3>Conceder créditos após confirmar Pix</h3><label>ID do usuário (UUID)<input id="zixClienteId" placeholder="UUID do usuário"></label><label>Plano<select id="zixConcederPlano"><option value="boasvindas">Boas-vindas — 1 anúncio, 7 dias</option><option value="avulso">Avulso — 1 anúncio, 7 dias</option><option value="iniciante">Iniciante — 5 anúncios, 30 dias</option><option value="negocio">Negócio — 15 anúncios, 30 dias</option><option value="profissional">Profissional — 40 anúncios, 30 dias</option></select></label><button id="zixConceder" class="ok">Confirmar e conceder créditos</button><p id="zixCreditoMsg" role="status"></p><h3>Controle individual de vencimento</h3><label>ID do anúncio<input id="zixAnuncioId" placeholder="UUID do anúncio"></label><label>Ação<select id="zixAcao"><option value="extend">Adicionar dias</option><option value="pause">Pausar</option><option value="resume">Retomar</option><option value="renew">Renovar prazo</option><option value="block">Bloquear</option><option value="release">Liberar</option></select></label><label>Dias<input id="zixDias" type="number" min="1" max="365" value="30"></label><label>Motivo<input id="zixMotivo" maxlength="200" placeholder="Motivo da alteração"></label><button id="zixAplicarPrazo">Aplicar alteração</button><p id="zixPrazoMsg" role="status"></p></div>
+<div class="card">
+<h2>Moderação de anúncios</h2>
+<button id="atualizar">Atualizar lista</button>
+<div id="anuncios"></div>
+</div>
+</div>
+</main>
+
+<script type="module">
+import {createClient} from
+'https://esm.sh/@supabase/supabase-js@2';
+import {SUPABASE_URL,SUPABASE_ANON_KEY} from './config.js';
+
+const $=id=>document.getElementById(id);
+let db=null;
+let usuario=null;
+
+if(!SUPABASE_URL||!SUPABASE_ANON_KEY){
+ $('mensagem').textContent='Configure o Supabase no config.js.';
+}else{
+ db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+}
+
+async function verificar(){
+ if(!db)return;
+ const {data:{user},error}=await db.auth.getUser();
+ if(error||!user)return;
+ const {data:admin,error:erro}=await db.from('admins')
+ .select('user_id').eq('user_id',user.id).maybeSingle();
+ if(erro||!admin){
+  $('mensagem').textContent='Conta sem permissão administrativa.';
+  return;
+ }
+ usuario=user;
+ $('login').style.display='none';
+ $('painel').style.display='block';
+ $('usuario').textContent=user.email;
+ await carregar();
+}
+
+$('entrar').onclick=async()=>{
+ if(!db)return;
+ $('mensagem').textContent='Verificando acesso...';
+ const {error}=await db.auth.signInWithPassword({
+  email:$('email').value.trim(),
+  password:$('senha').value
+ });
+ if(error){
+  $('mensagem').textContent=error.message;
+  return;
+ }
+ await verificar();
+};
+
+$('sair').onclick=async()=>{
+ await db.auth.signOut();
+ location.reload();
+};
+
+async function carregar(){
+ if(!usuario)return;
+ const area=$('anuncios');
+ area.replaceChildren();
+ const {data,error}=await db.from('listings')
+ .select('id,title,city,state,status,price')
+ .eq('status','pending')
+ .order('created_at',{ascending:false})
+ .limit(100);
+ if(error){
+  area.textContent=error.message;
+  return;
+ }
+ if(!data?.length){
+  area.textContent='Nenhum anúncio aguardando aprovação.';
+  return;
+ }
+ for(const item of data){
+  const div=document.createElement('div');
+  div.className='item';
+  const titulo=document.createElement('h3');
+  titulo.textContent=item.title;
+  const info=document.createElement('p');
+  info.textContent=`${item.city} - ${item.state} | R$ ${item.price}`;
+  div.append(titulo,info);
+  for(const [texto,status,classe] of [
+   ['Aprovar','approved','ok'],
+   ['Rejeitar','rejected','danger']
+  ]){
+   const botao=document.createElement('button');
+   botao.textContent=texto;
+   botao.className=classe;
+   botao.onclick=async()=>{
+    if(!confirm(`${texto} este anúncio?`))return;
+    botao.disabled=true;
+    const {error}=await db.from('listings')
+     .update({status}).eq('id',item.id);
+    if(error){
+     alert(error.message);
+     botao.disabled=false;
+    }else await carregar();
+   };
+   div.append(botao);
+  }
+  area.append(div);
+ }
+}
+$('atualizar').onclick=carregar;
+verificar();
+</script>
+<script type="module" src="admin-personalizacao.js"></script><script type="module" src="admin-perfil.js"></script><script type="module" src="zix-planos-admin.js?v=1"></script>
+<script>
+(function(){
+  const precos = {
+    boasvindas: 0,
+    avulso: 3.95,
+    iniciante: 14.95,
+    negocio: 34.95,
+    profissional: 64.95
+  };
+
+  const nomes = {
+    boasvindas: "Boas-vindas",
+    avulso: "Avulso",
+    iniciante: "Iniciante",
+    negocio: "Negócio",
+    profissional: "Profissional"
+  };
+
+  const $ = id => document.getElementById(id);
+  const moeda = n => n.toLocaleString("pt-BR", {
+    style: "currency", currency: "BRL"
+  });
+
+  function resumo(plano, desconto, ativo) {
+    const original = precos[plano] ?? 0;
+    const pct = ativo ? Math.min(100, Math.max(0, desconto)) : 0;
+    const final = Math.round(original * (100 - pct)) / 100;
+    const economia = Math.round((original - final) * 100) / 100;
+
+    return nomes[plano] + "\n" +
+      "Preço original: " + moeda(original) + "\n" +
+      "Desconto: " + pct + "%\n" +
+      "Economia: " + moeda(economia) + "\n" +
+      "PREÇO FINAL: " + moeda(final);
+  }
+
+  function atualizar() {
+    const plano = $("zixDiscountPlan").value;
+    const pct = Number($("zixDiscountPercent").value) || 0;
+    const ativo = $("zixDiscountEnabled").checked;
+
+    $("zixPrecoIndividual").textContent =
+      "DESCONTO INDIVIDUAL\n" + resumo(plano, pct, ativo);
+
+    const alvo = $("zixPlanoAlvo").value;
+    const geral = Number($("zixDesconto").value) || 0;
+    const planos = Object.keys(precos).filter(
+      p => p !== "boasvindas" && (
+        alvo === "todos" || alvo === "all" ||
+        alvo === "all_paid" || alvo === p
+      )
+    );
+
+    $("zixPrecoGeral").textContent =
+      "PROMOÇÃO GERAL\n" +
+      (planos.length
+        ? planos.map(p => resumo(p, geral, true)).join("\n\n")
+        : "Selecione um plano para visualizar.");
+
+    $("zixPrecoIndividual").style.whiteSpace = "pre-line";
+    $("zixPrecoGeral").style.whiteSpace = "pre-line";
+  }
+
+  [
+    "zixDiscountPlan",
+    "zixDiscountPercent",
+    "zixDiscountEnabled",
+    "zixPlanoAlvo",
+    "zixDesconto"
+  ].forEach(id => {
+    $(id).addEventListener("input", atualizar);
+    $(id).addEventListener("change", atualizar);
+  });
+
+  atualizar();
+})();
+</script>
+</body>
+</html>
