@@ -295,3 +295,450 @@ header .zixFlag {
 }
 
 /* ZIXLIMA AZUL PREMIUM FIM */
+
+
+
+/* ZIX RESPONSIVO V2 INICIO */
+
+:root {
+  --zix-blue:#1263df;
+  --zix-dark:#102b50;
+  --zix-bg:#f5f8ff;
+}
+
+/* Base */
+html {
+  overflow-x:clip;
+}
+
+body {
+  overflow-x:clip;
+  background:var(--zix-bg);
+}
+
+/* Cabeçalho */
+header {
+  position:relative;
+  background:#172b45;
+  color:white;
+  border-bottom:3px solid #2384ff;
+}
+
+header .top {
+  max-width:1440px;
+  min-height:84px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  padding:12px 20px;
+}
+
+header .brand {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-size:clamp(25px,2.5vw,39px);
+  font-weight:950;
+  color:#47a6ff;
+  white-space:nowrap;
+}
+
+header .brand span {
+  color:#47a6ff;
+}
+
+/* Menu */
+header nav {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+header nav a {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:39px;
+  padding:9px 13px;
+  border:1px solid #419cff;
+  border-radius:22px;
+  color:white;
+  background:linear-gradient(
+    180deg,#2589f8,#074ca7
+  );
+  box-shadow:
+    inset 0 1px 2px #ffffff55,
+    0 3px 8px #0003;
+  font-size:13px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+header nav a:hover {
+  color:white;
+  background:#0c66d8;
+}
+
+/* Relógio Brasil */
+header #zixRelogio {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  margin:0;
+  padding:5px 9px;
+  border:2px solid #f7d534;
+  border-radius:13px;
+  background:linear-gradient(
+    145deg,#16b748,#006b31
+  );
+  box-shadow:
+    inset 0 2px 3px #ffffff60,
+    inset 0 -3px 4px #003d25,
+    0 4px 10px #0004;
+}
+
+header .zixFlag {
+  font-size:25px;
+  filter:drop-shadow(1px 3px 2px #002d17);
+}
+
+header .zixClockDisplay {
+  color:white;
+  font-size:10px;
+}
+
+header #zixHora {
+  color:#ffdf00;
+  font-size:17px;
+}
+
+/* Controles */
+header .zz-controls {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin:0;
+}
+
+header .actions {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+/* Inverte visualmente a posição */
+header #postBtn {
+  order:1;
+  background:linear-gradient(
+    180deg,#329cff,#0755cf
+  );
+  color:white;
+  border:1px solid #419cff;
+}
+
+header #loginBtn {
+  order:2;
+  background:linear-gradient(
+    180deg,#fff,#e9f3ff
+  );
+  color:#1256ac;
+  border:1px solid #a6caff;
+}
+
+header .actions button {
+  border-radius:22px;
+  min-height:40px;
+  padding:9px 15px;
+  font-weight:850;
+  white-space:nowrap;
+}
+
+/* Área de busca */
+.hero {
+  min-height:0;
+  padding:44px 0 55px;
+  background:linear-gradient(
+    125deg,#e9f4ff,#fff 70%,#e0eeff
+  );
+  color:#153a68;
+}
+
+.hero h1 {
+  color:#1263df;
+  text-shadow:none;
+  font-size:clamp(29px,4vw,48px);
+}
+
+.hero p {
+  color:#526a83;
+}
+
+.hero .eyebrow {
+  color:#1263df;
+}
+
+.hero .search {
+  display:flex;
+  align-items:stretch;
+  max-width:1050px;
+  gap:10px;
+  padding:13px;
+  margin-top:28px;
+  background:white;
+  border:1px solid #c9def9;
+  border-radius:18px;
+  box-shadow:0 9px 25px #0c5bb51a;
+}
+
+.hero .search input {
+  min-height:45px;
+  border:1px solid #dce8f7;
+  border-radius:10px;
+  background:#f5f9ff;
+}
+
+.hero .search button {
+  min-width:130px;
+  border-radius:11px;
+}
+
+/* Categorias e anúncios */
+.content {
+  background:transparent;
+  padding-top:35px;
+}
+
+.content h2 {
+  color:var(--zz-text,#17345b);
+}
+
+.categories {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:13px;
+  margin:20px 0 38px;
+}
+
+.category {
+  min-width:0;
+  min-height:105px;
+  padding:16px 9px;
+  background:var(--zz-panel,#fff);
+  color:var(--zz-text,#17345b);
+  border:1px solid #d5e4f8;
+  border-radius:16px;
+  box-shadow:0 4px 12px #103a7510;
+}
+
+.category b {
+  font-size:30px;
+  margin-bottom:7px;
+}
+
+.cards {
+  display:grid;
+  grid-template-columns:
+    repeat(4,minmax(0,1fr));
+  gap:16px;
+}
+
+.card {
+  min-width:0;
+  background:var(--zz-panel,#fff);
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.card .cover {
+  width:100%;
+  height:185px;
+  object-fit:cover;
+}
+
+/* Desktop */
+@media(min-width:1100px) {
+  header .top {
+    justify-content:center;
+  }
+
+  header .brand {
+    margin-right:auto;
+  }
+
+  header .actions {
+    margin-left:auto;
+  }
+}
+
+/* Tablets */
+@media(min-width:601px) and (max-width:1099px) {
+  header .top {
+    justify-content:center;
+  }
+
+  .categories {
+    grid-template-columns:
+      repeat(4,minmax(0,1fr));
+  }
+
+  .cards {
+    grid-template-columns:
+      repeat(3,minmax(0,1fr));
+  }
+}
+
+/* Celulares */
+@media(max-width:600px) {
+  header .top {
+    display:grid;
+    grid-template-columns:
+      minmax(0,1fr) auto;
+    gap:10px;
+    padding:12px 14px;
+  }
+
+  header .brand {
+    grid-column:1;
+    grid-row:1;
+    font-size:25px;
+    min-width:0;
+  }
+
+  header #zixRelogio {
+    grid-column:2;
+    grid-row:1;
+    padding:4px 7px;
+  }
+
+  header .zixFlag {
+    font-size:20px;
+  }
+
+  header #zixHora {
+    font-size:13px;
+  }
+
+  header .zixClockDisplay {
+    font-size:9px;
+  }
+
+  header nav {
+    grid-column:1/-1;
+    grid-row:2;
+    display:flex;
+    justify-content:flex-start;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    max-width:100%;
+    padding:4px 0 7px;
+    scrollbar-width:thin;
+  }
+
+  header nav a {
+    flex-shrink:0;
+    min-height:35px;
+    padding:7px 11px;
+    font-size:12px;
+  }
+
+  header .zz-controls {
+    grid-column:1;
+    grid-row:3;
+  }
+
+  header .actions {
+    grid-column:2;
+    grid-row:3;
+    justify-content:flex-end;
+  }
+
+  header .actions button {
+    min-height:35px;
+    padding:7px 10px;
+    font-size:12px;
+  }
+
+  .hero {
+    padding:28px 0 38px;
+  }
+
+  .hero h1 {
+    font-size:clamp(27px,7vw,36px);
+  }
+
+  .hero p {
+    font-size:15px;
+  }
+
+  .hero .search {
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    padding:12px;
+    margin-top:22px;
+  }
+
+  .hero .search input {
+    width:100%;
+    min-height:45px;
+  }
+
+  .hero .search button {
+    width:100%;
+    min-height:44px;
+  }
+
+  .categories {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin:17px 0 30px;
+  }
+
+  .category {
+    min-height:92px;
+    padding:13px 8px;
+  }
+
+  .category b {
+    font-size:27px;
+  }
+
+  .cards {
+    grid-template-columns:
+      repeat(2,minmax(0,1fr));
+    gap:10px;
+  }
+
+  .card .cover,
+  .card .placeholder {
+    height:135px;
+  }
+
+  .cardbody {
+    padding:11px;
+  }
+}
+
+/* Telas muito pequenas */
+@media(max-width:360px) {
+  header .brand {
+    font-size:21px;
+  }
+
+  header .actions {
+    gap:4px;
+  }
+
+  header .actions button {
+    padding:6px 8px;
+    font-size:11px;
+  }
+}
+
+/* ZIX RESPONSIVO V2 FIM */
