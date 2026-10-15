@@ -40,3 +40,6 @@ header{box-shadow:0 3px 22px #0001}
 
 /* ZixLima nova versao */
 html,body{min-height:100%;}body{display:flex;flex-direction:column;min-height:100dvh}main{flex:1}footer{margin-top:auto}.category.active{background:#e8f1ff;border:2px solid #1461da}.notice[hidden]{display:none}.empty{grid-column:1/-1}.zz-whats{bottom:20px}button:disabled{opacity:.55;cursor:wait}
+
+/* Filtro de tipos de aluguel ZixLima */
+.rental-filter{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:-22px 0 32px;padding:16px;border-radius:12px;background:var(--zz-panel,#fff);border:1px solid var(--zz-border,#dde5ef)}.rental-filter[hidden]{display:none}.rental-filter select{padding:12px;border-radius:9px;border:1px solid #cbd5e1;max-width:100%}
