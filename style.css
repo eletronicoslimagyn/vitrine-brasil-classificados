@@ -37,3 +37,6 @@ header{box-shadow:0 3px 22px #0001}
 
 /* ZZIXBR ALUGUEIS */
 .zz-rental-fields{background:#eff6ff;border:1px solid #b8d6f8;border-radius:13px;padding:14px;margin:14px 0;color:#20324a}.zz-rental-fields[hidden]{display:none!important}.zz-rental-fields h3{margin:0 0 10px}.zz-rental-fields p{font-size:12px;color:#465b75}body[data-zz-theme="dark"] .zz-rental-fields{background:#20334a;color:#f1f5fa;border-color:#456383}body[data-zz-theme="dark"] .zz-rental-fields p{color:#c1cde0}
+
+/* ZIXLIMA-RODAPE-MOBILE-FIX */
+html{min-height:100%;background:#102c52}body{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}body>header,body>footer{flex-shrink:0}body>main{flex:1 0 auto}body>footer{margin-top:auto}body>dialog{flex-shrink:0}
