@@ -349,7 +349,7 @@ document.addEventListener('click', async function(event) {
   const botao = event.target.closest('button');
   if (!botao) return;
 
-  if (!botao.textContent.trim().includes('Aplicar alteração')) return;
+  if (botao.id !== 'zixAplicarPrazo') return;
   if (zixLiberado) {
     zixLiberado = false;
     return;
