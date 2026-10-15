@@ -78,7 +78,15 @@ Baixar código completo ZIP
 <p><small>Este backup não inclui os dados armazenados no Supabase.</small></p>
 </div>
 
-<div class="card" id="zixFinanceiro"><h2>💳 Planos, descontos e prazos</h2><p>Configurações salvas no Supabase. Somente administradores autorizados podem modificar.</p><label><input type="checkbox" id="zixCobrar" style="width:auto"> Ativar cobrança dos planos</label><p><small>Desativado: anúncios podem ser enviados gratuitamente para moderação. Ativado: exige crédito concedido pelo Admin após confirmar o Pix.</small></p><h3>Promoções</h3><label>Aplicar a<select id="zixPlanoAlvo"><option value="todos">Todos os planos pagos</option><option value="avulso">Avulso</option><option value="iniciante">Iniciante</option><option value="negocio">Negócio</option><option value="profissional">Profissional</option></select></label><label>Desconto (%)<input id="zixDesconto" type="number" min="0" max="100" value="0"></label><button id="zixSalvarFinanceiro" class="ok">Salvar cobrança e promoção</button><p id="zixFinanceiroMsg" role="status"></p><section id="zixDiscountExtra" style="border-top:1px solid #ddd;margin-top:18px;padding-top:12px"><h3>Desconto individual por plano</h3><p><small>Configure descontos diferentes para cada plano. Salve somente depois de aplicar o SQL no Supabase.</small></p><label>Plano<select id="zixDiscountPlan"><option value="boasvindas">Boas-vindas</option><option value="avulso">Avulso</option><option value="iniciante">Iniciante</option><option value="negocio">Negócio</option><option value="profissional">Profissional</option></select></label><label>Desconto (%)<input id="zixDiscountPercent" type="number" min="0" max="100" value="0"></label><label><input id="zixDiscountEnabled" type="checkbox" style="width:auto"> Ativar desconto deste plano</label><button id="zixDiscountSave" type="button">Salvar desconto individual</button><p id="zixDiscountMsg" role="status"></p></section><h3>Conceder créditos após confirmar Pix</h3><label>ID do usuário (UUID)<input id="zixClienteId" placeholder="UUID do usuário"></label><label>Plano<select id="zixConcederPlano"><option value="boasvindas">Boas-vindas — 1 anúncio, 7 dias</option><option value="avulso">Avulso — 1 anúncio, 7 dias</option><option value="iniciante">Iniciante — 5 anúncios, 30 dias</option><option value="negocio">Negócio — 15 anúncios, 30 dias</option><option value="profissional">Profissional — 40 anúncios, 30 dias</option></select></label><button id="zixConceder" class="ok">Confirmar e conceder créditos</button><p id="zixCreditoMsg" role="status"></p><h3>Controle individual de vencimento</h3><label>ID do anúncio<input id="zixAnuncioId" placeholder="UUID do anúncio"></label><label>Ação<select id="zixAcao"><option value="extend">Adicionar dias</option><option value="pause">Pausar</option><option value="resume">Retomar</option><option value="renew">Renovar prazo</option><option value="block">Bloquear</option><option value="release">Liberar</option></select></label><label>Dias<input id="zixDias" type="number" min="1" max="365" value="30"></label><label>Motivo<input id="zixMotivo" maxlength="200" placeholder="Motivo da alteração"></label><button id="zixAplicarPrazo">Aplicar alteração</button><p id="zixPrazoMsg" role="status"></p></div>
+<div class="card" id="zixFinanceiro"><h2>💳 Planos, descontos e prazos</h2><p>Configurações salvas no Supabase. Somente administradores autorizados podem modificar.</p><label><input type="checkbox" id="zixCobrar" style="width:auto"> Ativar cobrança dos planos</label><p><small>Desativado: anúncios podem ser enviados gratuitamente para moderação. Ativado: exige crédito concedido pelo Admin após confirmar o Pix.</small></p><h3>Promoções</h3><label>Aplicar a<select id="zixPlanoAlvo"><option value="todos">Todos os planos pagos</option><option value="avulso">Avulso</option><option value="iniciante">Iniciante</option><option value="negocio">Negócio</option><option value="profissional">Profissional</option></select></label><label>Desconto (%)<input id="zixDesconto" type="number" min="0" max="100" value="0"></label><button id="zixSalvarFinanceiro" class="ok">Salvar cobrança e promoção</button><p id="zixFinanceiroMsg" role="status"></p><section id="zixDiscountExtra" style="border-top:1px solid #ddd;margin-top:18px;padding-top:12px"><h3>Desconto individual por plano</h3><p><small>Configure descontos diferentes para cada plano. Salve somente depois de aplicar o SQL no Supabase.</small></p><label>Plano<select id="zixDiscountPlan"><option value="boasvindas">Boas-vindas</option><option value="avulso">Avulso</option><option value="iniciante">Iniciante</option><option value="negocio">Negócio</option><option value="profissional">Profissional</option></select></label><label>Desconto (%)<input id="zixDiscountPercent" type="number" min="0" max="100" value="0"></label><label><input id="zixDiscountEnabled" type="checkbox" style="width:auto"> Ativar desconto deste plano</label><button id="zixDiscountSave" type="button">Salvar desconto individual</button><p id="zixDiscountMsg" role="status"></p></section>
+<div id="zixPrecoFinal" style="background:#f0fdf4;border:1px solid #86efac;border-radius:12px;padding:16px;margin:18px 0">
+<h3>Calculadora de preços promocionais</h3>
+<p><small>Prévia dos valores. O preço efetivamente cobrado deve ser validado no servidor.</small></p>
+<div id="zixPrecoIndividual"></div>
+<hr>
+<div id="zixPrecoGeral"></div>
+</div>
+<h3>Conceder créditos após confirmar Pix</h3><label>ID do usuário (UUID)<input id="zixClienteId" placeholder="UUID do usuário"></label><label>Plano<select id="zixConcederPlano"><option value="boasvindas">Boas-vindas — 1 anúncio, 7 dias</option><option value="avulso">Avulso — 1 anúncio, 7 dias</option><option value="iniciante">Iniciante — 5 anúncios, 30 dias</option><option value="negocio">Negócio — 15 anúncios, 30 dias</option><option value="profissional">Profissional — 40 anúncios, 30 dias</option></select></label><button id="zixConceder" class="ok">Confirmar e conceder créditos</button><p id="zixCreditoMsg" role="status"></p><h3>Controle individual de vencimento</h3><label>ID do anúncio<input id="zixAnuncioId" placeholder="UUID do anúncio"></label><label>Ação<select id="zixAcao"><option value="extend">Adicionar dias</option><option value="pause">Pausar</option><option value="resume">Retomar</option><option value="renew">Renovar prazo</option><option value="block">Bloquear</option><option value="release">Liberar</option></select></label><label>Dias<input id="zixDias" type="number" min="1" max="365" value="30"></label><label>Motivo<input id="zixMotivo" maxlength="200" placeholder="Motivo da alteração"></label><button id="zixAplicarPrazo">Aplicar alteração</button><p id="zixPrazoMsg" role="status"></p></div>
 <div class="card">
 <h2>Moderação de anúncios</h2>
 <button id="atualizar">Atualizar lista</button>
@@ -188,5 +196,83 @@ async function carregar(){
 $('atualizar').onclick=carregar;
 verificar();
 </script>
-<script type="module" src="admin-personalizacao.js"></script><script type="module" src="admin-perfil.js"></script><script type="module" src="zix-planos-admin.js?v=1"></script></body>
+<script type="module" src="admin-personalizacao.js"></script><script type="module" src="admin-perfil.js"></script><script type="module" src="zix-planos-admin.js?v=1"></script>
+<script>
+(function(){
+  const precos = {
+    boasvindas: 0,
+    avulso: 3.95,
+    iniciante: 14.95,
+    negocio: 34.95,
+    profissional: 64.95
+  };
+
+  const nomes = {
+    boasvindas: "Boas-vindas",
+    avulso: "Avulso",
+    iniciante: "Iniciante",
+    negocio: "Negócio",
+    profissional: "Profissional"
+  };
+
+  const $ = id => document.getElementById(id);
+  const moeda = n => n.toLocaleString("pt-BR", {
+    style: "currency", currency: "BRL"
+  });
+
+  function resumo(plano, desconto, ativo) {
+    const original = precos[plano] ?? 0;
+    const pct = ativo ? Math.min(100, Math.max(0, desconto)) : 0;
+    const final = Math.round(original * (100 - pct)) / 100;
+    const economia = Math.round((original - final) * 100) / 100;
+
+    return nomes[plano] + "\n" +
+      "Preço original: " + moeda(original) + "\n" +
+      "Desconto: " + pct + "%\n" +
+      "Economia: " + moeda(economia) + "\n" +
+      "PREÇO FINAL: " + moeda(final);
+  }
+
+  function atualizar() {
+    const plano = $("zixDiscountPlan").value;
+    const pct = Number($("zixDiscountPercent").value) || 0;
+    const ativo = $("zixDiscountEnabled").checked;
+
+    $("zixPrecoIndividual").textContent =
+      "DESCONTO INDIVIDUAL\n" + resumo(plano, pct, ativo);
+
+    const alvo = $("zixPlanoAlvo").value;
+    const geral = Number($("zixDesconto").value) || 0;
+    const planos = Object.keys(precos).filter(
+      p => p !== "boasvindas" && (
+        alvo === "todos" || alvo === "all" ||
+        alvo === "all_paid" || alvo === p
+      )
+    );
+
+    $("zixPrecoGeral").textContent =
+      "PROMOÇÃO GERAL\n" +
+      (planos.length
+        ? planos.map(p => resumo(p, geral, true)).join("\n\n")
+        : "Selecione um plano para visualizar.");
+
+    $("zixPrecoIndividual").style.whiteSpace = "pre-line";
+    $("zixPrecoGeral").style.whiteSpace = "pre-line";
+  }
+
+  [
+    "zixDiscountPlan",
+    "zixDiscountPercent",
+    "zixDiscountEnabled",
+    "zixPlanoAlvo",
+    "zixDesconto"
+  ].forEach(id => {
+    $(id).addEventListener("input", atualizar);
+    $(id).addEventListener("change", atualizar);
+  });
+
+  atualizar();
+})();
+</script>
+</body>
 </html>
