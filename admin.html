@@ -412,5 +412,81 @@ document.addEventListener('click', async function(event) {
   }
 }, true);
 </script>
+
+<!-- ZIXLIMA-CONSULTA-PRAZO-V2 -->
+<script type="module">
+import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
+import {SUPABASE_URL,SUPABASE_ANON_KEY} from './config.js';
+
+const db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+const $=id=>document.getElementById(id);
+const campo=$('zixAnuncioId');
+const botao=$('zixAplicarPrazo');
+
+if(campo&&botao){
+ const consultar=document.createElement('button');
+ consultar.type='button';
+ consultar.textContent='Consultar vencimento';
+ consultar.style.background='#1263df';
+
+ const resultado=document.createElement('div');
+ resultado.style.cssText='padding:12px;margin:10px 0;border-radius:8px;background:#eff6ff;white-space:pre-line;overflow-wrap:anywhere';
+ resultado.setAttribute('role','status');
+
+ botao.insertAdjacentElement('afterend',consultar);
+ consultar.insertAdjacentElement('afterend',resultado);
+
+ async function verificar(){
+  resultado.textContent='Consultando Supabase...';
+  try{
+   const {data:{user},error:authError}=await db.auth.getUser();
+   if(authError||!user)throw Error('Entre como administrador.');
+
+   const {data:admin,error:adminError}=await db.from('admins')
+    .select('user_id').eq('user_id',user.id).maybeSingle();
+   if(adminError||!admin)throw Error('Acesso não autorizado.');
+
+   const codigo=campo.value.trim();
+   if(!codigo)throw Error('Informe o código ZIX ou UUID.');
+
+   let query=db.from('listings')
+    .select('id,zix_code,title,status,zix_expires_at');
+
+   if(/^ZIX-[0-9]+$/i.test(codigo)){
+    query=query.eq('zix_code',codigo.toUpperCase());
+   }else{
+    if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(codigo))
+     throw Error('Código inválido.');
+    query=query.eq('id',codigo);
+   }
+
+   const {data,error}=await query.maybeSingle();
+   if(error)throw error;
+   if(!data)throw Error('Anúncio não encontrado.');
+
+   let texto='Anúncio: '+(data.zix_code||data.id)
+    +'\nTítulo: '+data.title
+    +'\nStatus: '+data.status;
+
+   if(data.zix_expires_at){
+    const fim=new Date(data.zix_expires_at);
+    const restante=fim.getTime()-Date.now();
+    const dias=Math.max(0,Math.ceil(restante/86400000));
+    texto+='\nVencimento: '+fim.toLocaleString('pt-BR')
+      +'\nDias restantes: '+dias
+      +'\nSituação do prazo: '+(restante>0?'Dentro do prazo':'Vencido');
+   }else{
+    texto+='\nVencimento: não definido';
+   }
+   resultado.textContent=texto;
+  }catch(e){
+   resultado.textContent='Consulta: '+e.message;
+  }
+ }
+
+ consultar.addEventListener('click',verificar);
+}
+</script>
+
 </body>
 </html>
