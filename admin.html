@@ -335,5 +335,82 @@ document.getElementById('zixBuscarCodigo').onclick=async()=>{
 };
 </script>
 
+
+<script type="module">
+/* ZIXLIMA-CORRECAO-BONUS-CODIGO */
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from './config.js';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+const zixDB = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let zixLiberado = false;
+let zixProcessando = false;
+
+document.addEventListener('click', async function(event) {
+  const botao = event.target.closest('button');
+  if (!botao) return;
+
+  if (!botao.textContent.trim().includes('Aplicar alteração')) return;
+  if (zixLiberado) {
+    zixLiberado = false;
+    return;
+  }
+
+  const campo = document.getElementById('zixAnuncioId');
+  if (!campo) return;
+
+  const codigo = campo.value.trim().toUpperCase();
+  if (!/^ZIX-[0-9]+$/.test(codigo)) return;
+
+  event.preventDefault();
+  event.stopImmediatePropagation();
+
+  if (zixProcessando) return;
+  zixProcessando = true;
+
+  const textoOriginal = botao.textContent;
+  botao.disabled = true;
+  botao.textContent = 'Localizando anúncio...';
+
+  try {
+    const { data: sessao, error: erroSessao } =
+      await zixDB.auth.getUser();
+
+    if (erroSessao || !sessao.user) {
+      throw new Error('Entre novamente como administrador.');
+    }
+
+    const { data, error } = await zixDB
+      .from('listings')
+      .select('id,zix_code')
+      .eq('zix_code', codigo)
+      .maybeSingle();
+
+    if (error) throw error;
+
+    if (!data) {
+      throw new Error(
+        'Anúncio não encontrado ou sem permissão de consulta: ' + codigo
+      );
+    }
+
+    campo.value = data.id;
+    campo.dispatchEvent(new Event('input', { bubbles: true }));
+    campo.dispatchEvent(new Event('change', { bubbles: true }));
+
+    zixLiberado = true;
+    botao.disabled = false;
+    botao.textContent = textoOriginal;
+    botao.click();
+
+  } catch (erro) {
+    alert('Não foi possível aplicar a alteração: ' + erro.message);
+  } finally {
+    zixProcessando = false;
+    zixLiberado = false;
+    botao.disabled = false;
+    botao.textContent = textoOriginal;
+  }
+}, true);
+</script>
 </body>
 </html>
