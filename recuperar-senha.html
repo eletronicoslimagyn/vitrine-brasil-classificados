@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+ content="width=device-width,initial-scale=1">
+<title>Recuperar senha | Vitrine Brasil</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f5f9;
+font-family:Arial,sans-serif;color:#172033}
+header{background:#125bd3;color:white;
+text-align:center;padding:25px}
+main{max-width:500px;margin:35px auto;
+padding:15px}
+.card{background:white;padding:25px;
+border-radius:14px}
+input,button{width:100%;padding:14px;
+margin:9px 0;border-radius:8px}
+input{border:1px solid #ccc}
+button{border:0;background:#125bd3;
+color:white;font-weight:bold}
+a{color:#125bd3}
+#trocar{display:none}
+</style>
+</head>
+<body>
+<header><h2>Vitrine Brasil</h2>
+<p>Recuperacao de acesso</p></header>
+<main><div class="card">
+<h2>Recuperar senha</h2>
+<div id="solicitar">
+<p>Informe seu e-mail cadastrado.</p>
+<input id="email" type="email"
+ placeholder="Seu e-mail">
+<button id="enviar">Enviar recuperacao</button>
+</div>
+<div id="trocar">
+<p>Digite sua nova senha.</p>
+<input id="senha" type="password"
+ placeholder="Nova senha" minlength="8">
+<button id="salvar">Salvar nova senha</button>
+</div>
+<p id="msg" role="status"></p>
+<p><a href="./admin.html">
+Voltar ao painel</a></p>
+</div></main>
+<script type="module">
+import {createClient} from
+'https://esm.sh/@supabase/supabase-js@2';
+import {SUPABASE_URL,SUPABASE_ANON_KEY}
+from './config.js';
+
+const db=createClient(
+ SUPABASE_URL,SUPABASE_ANON_KEY
+);
+const $=id=>document.getElementById(id);
+let autorizado=false;
+
+function mostrarTroca(){
+ autorizado=true;
+ $('solicitar').style.display='none';
+ $('trocar').style.display='block';
+ $('msg').textContent='Informe a nova senha.';
+}
+
+db.auth.onAuthStateChange((evento)=>{
+ if(evento==='PASSWORD_RECOVERY'){
+  mostrarTroca();
+ }
+});
+
+const params=new URLSearchParams(location.search);
+const hash=new URLSearchParams(
+ location.hash.replace(/^#/,'')
+);
+const erro=params.get('error_description') ||
+ hash.get('error_description');
+
+if(erro){
+ $('msg').textContent=erro;
+}
+
+$('enviar').onclick=async()=>{
+ const email=$('email').value.trim();
+ if(!email){
+  $('msg').textContent='Informe seu e-mail.';
+  return;
+ }
+ $('enviar').disabled=true;
+ try{
+  const {error}=await db.auth.resetPasswordForEmail(
+   email,{
+    redirectTo:new URL(
+     './recuperar-senha.html',
+     location.href
+    ).href
+   }
+  );
+  $('msg').textContent=error
+   ? error.message
+   : 'Se a conta existir, verifique seu e-mail.';
+ }catch(e){
+  $('msg').textContent=e.message;
+ }
+ $('enviar').disabled=false;
+};
+
+$('salvar').onclick=async()=>{
+ if(!autorizado){
+  $('msg').textContent=
+   'Abra primeiro o link de recuperacao.';
+  return;
+ }
+ const senha=$('senha').value;
+ if(senha.length<8){
+  $('msg').textContent=
+   'Use pelo menos 8 caracteres.';
+  return;
+ }
+ $('salvar').disabled=true;
+ try{
+  const {error}=await db.auth.updateUser({
+   password:senha
+  });
+  if(error){
+   $('msg').textContent=error.message;
+  }else{
+   $('msg').textContent=
+    'Senha alterada. Volte ao painel.';
+   $('trocar').style.display='none';
+   await db.auth.signOut();
+  }
+ }catch(e){
+  $('msg').textContent=e.message;
+ }
+ $('salvar').disabled=false;
+};
+</script>
+</body>
+</html>
