@@ -34,3 +34,6 @@ header{box-shadow:0 3px 22px #0001}
 .zz-palette.open{display:block}
 .zz-palette button{display:block;width:100%;padding:10px;text-align:left;border:0;background:transparent;color:inherit;cursor:pointer}
 @media(max-width:540px){.zz-controls button{width:31px;height:34px}.zz-whats{bottom:calc(125px + env(safe-area-inset-bottom,0px));right:16px}}
+
+/* ZZIXBR ALUGUEIS */
+.zz-rental-fields{background:#eff6ff;border:1px solid #b8d6f8;border-radius:13px;padding:14px;margin:14px 0;color:#20324a}.zz-rental-fields[hidden]{display:none!important}.zz-rental-fields h3{margin:0 0 10px}.zz-rental-fields p{font-size:12px;color:#465b75}body[data-zz-theme="dark"] .zz-rental-fields{background:#20334a;color:#f1f5fa;border-color:#456383}body[data-zz-theme="dark"] .zz-rental-fields p{color:#c1cde0}
