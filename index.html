@@ -273,4 +273,60 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 
+
+<style id="zixOlhosSenha">
+.zixSenhaVisivel {
+  position:relative;
+  display:block;
+}
+.zixSenhaVisivel input {
+  padding-right:48px !important;
+  box-sizing:border-box;
+}
+.zixSenhaOlho {
+  position:absolute;
+  right:8px;
+  top:50%;
+  transform:translateY(-50%);
+  background:transparent;
+  border:0;
+  padding:8px;
+  cursor:pointer;
+  font-size:21px;
+  line-height:1;
+  z-index:2;
+}
+</style>
+<script id="zixOlhosScript">
+document.addEventListener('DOMContentLoaded',()=>{
+  ['password','zixNovaSenha','zixConfirmaSenha'].forEach(id=>{
+    const input=document.getElementById(id);
+    if(!input || input.parentElement.classList.contains('zixSenhaVisivel'))
+      return;
+
+    const caixa=document.createElement('span');
+    caixa.className='zixSenhaVisivel';
+    input.parentNode.insertBefore(caixa,input);
+    caixa.appendChild(input);
+
+    const olho=document.createElement('button');
+    olho.type='button';
+    olho.className='zixSenhaOlho';
+    olho.textContent='👁';
+    olho.setAttribute('aria-label','Mostrar senha');
+    olho.setAttribute('aria-pressed','false');
+
+    olho.addEventListener('click',()=>{
+      const mostrar=input.type==='password';
+      input.type=mostrar?'text':'password';
+      olho.textContent=mostrar?'🙈':'👁';
+      olho.setAttribute('aria-label',
+        mostrar?'Ocultar senha':'Mostrar senha');
+      olho.setAttribute('aria-pressed',String(mostrar));
+    });
+
+    caixa.appendChild(olho);
+  });
+});
+</script>
 </body></html>
