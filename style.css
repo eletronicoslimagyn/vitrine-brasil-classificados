@@ -966,3 +966,254 @@ header #zixHora{font-size:14px}
 @media(min-width:520px) and (max-width:700px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.card .cover,.card .placeholder{aspect-ratio:4/3}}
 @media(max-width:370px){header .brand{font-size:20px}header .zix-brasil{width:34px;font-size:23px}header nav a{font-size:11px;padding:7px 9px}}
 /* ZIX VISUAL V4 FIM */
+
+
+/* ZIX ALINHAMENTO V5 INICIO */
+
+header {
+  background:linear-gradient(120deg,#08254b,#153f70)!important;
+  border-bottom:3px solid #e8c42e;
+}
+
+header .top {
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto auto;
+  align-items:center;
+  gap:12px;
+  padding:14px 18px;
+  max-width:1350px;
+  margin:auto;
+}
+
+header .brand {
+  grid-column:1;
+  grid-row:1;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:white!important;
+  font-size:clamp(24px,3vw,38px);
+  font-weight:900;
+  white-space:nowrap;
+}
+
+header .brand #siteBrand {
+  color:white!important;
+}
+
+header nav {
+  grid-column:1/-1;
+  grid-row:2;
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:9px;
+  min-width:0;
+  max-width:100%;
+  overflow:visible;
+}
+
+header nav a {
+  flex-shrink:0;
+  border-radius:22px;
+  padding:9px 14px;
+  background:linear-gradient(#3199ff,#0759c5);
+  color:white!important;
+  font-weight:750;
+}
+
+header #zixRelogio {
+  display:inline-flex;
+  flex-shrink:0;
+  margin:0!important;
+  max-width:100%;
+}
+
+header .zz-controls {
+  grid-column:2;
+  grid-row:1;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin:0!important;
+}
+
+header .zz-controls button {
+  display:grid;
+  place-items:center;
+  width:40px;
+  height:40px;
+  border-radius:12px;
+}
+
+header .actions {
+  grid-column:3;
+  grid-row:1;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  margin:0!important;
+}
+
+header .actions button {
+  min-height:40px;
+  padding:9px 15px;
+  border-radius:24px;
+  white-space:nowrap;
+  font-weight:800;
+}
+
+header #postBtn {
+  order:1;
+  background:linear-gradient(#39a0ff,#0757cb)!important;
+  color:white!important;
+}
+
+header #loginBtn {
+  order:2;
+  background:white!important;
+  color:#0757cb!important;
+}
+
+/* Bandeira com acabamento */
+header .brand {
+  text-shadow:0 2px 5px #0004;
+}
+
+header .zix-brasil {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  border-radius:9px;
+  box-shadow:0 3px 9px #0005;
+}
+
+/* Conteudo e categorias */
+.hero .wrap,
+.content,
+main .wrap {
+  max-width:1300px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.categories {
+  display:grid;
+  gap:14px;
+}
+
+.category {
+  min-width:0;
+  border-radius:17px;
+}
+
+/* Fotos e cartoes maiores */
+.cards {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+  align-items:stretch;
+}
+
+.card {
+  min-width:0;
+  width:100%;
+  overflow:hidden;
+  border-radius:18px;
+}
+
+.card .cover,
+.card .placeholder {
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  max-height:none;
+}
+
+.card .placeholder {
+  display:grid;
+  place-items:center;
+}
+
+.cardbody {
+  padding:16px;
+}
+
+@media(max-width:900px) {
+  .cards {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:700px) {
+  header .top {
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-rows:auto auto auto;
+    padding:12px;
+    gap:10px;
+  }
+
+  header .brand {
+    grid-column:1;
+    grid-row:1;
+    font-size:clamp(20px,5vw,28px);
+    min-width:0;
+  }
+
+  header .zz-controls {
+    grid-column:2;
+    grid-row:1;
+    justify-self:end;
+  }
+
+  header .zz-controls button {
+    width:34px;
+    height:34px;
+  }
+
+  header .actions {
+    grid-column:1/-1;
+    grid-row:2;
+    justify-content:flex-end;
+  }
+
+  header .actions button {
+    min-height:37px;
+    padding:8px 12px;
+    font-size:12px;
+  }
+
+  header nav {
+    grid-column:1/-1;
+    grid-row:3;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:7px;
+  }
+
+  header nav a {
+    padding:7px 10px;
+    font-size:12px;
+  }
+
+  .cards {
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .card .cover,
+  .card .placeholder {
+    aspect-ratio:16/10;
+  }
+
+  .categories {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+/* ZIX ALINHAMENTO V5 FIM */
