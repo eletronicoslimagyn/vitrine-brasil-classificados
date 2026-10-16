@@ -1,0 +1,152 @@
+/* ZixLima ELITE v1 — visual complementar. Não alterar a imagem OG nem os scripts da aplicação. */
+body.zix-elite-active {
+  --elite-deep:#081426;
+  --elite-night:#0c203b;
+  --elite-teal:#0aa967;
+  --elite-green:#27d67f;
+  --elite-yellow:#ffe04a;
+  --elite-line:#284465;
+}
+body.zix-elite-active header {
+  background:linear-gradient(110deg,#061321,#0b2642 70%,#10243a);
+  color:#f9fbff;
+  border-bottom:1px solid rgba(55,228,166,.28);
+  box-shadow:0 5px 20px #06101f2c;
+}
+body.zix-elite-active header .top{max-width:1240px;gap:14px;min-height:77px}
+body.zix-elite-active header nav a,
+body.zix-elite-active header .brand{color:#f8fcff}
+body.zix-elite-active header nav a:hover,
+body.zix-elite-active header nav a:focus-visible{color:#ffe35c}
+body.zix-elite-active header .brand {letter-spacing:-.8px;font-size:clamp(22px,2.5vw,34px)}
+body.zix-elite-active header #siteBrand {
+  background:linear-gradient(120deg,#ffffff 3%,#f7f9ff 43%,#d8ff37 54%,#10ce6f 94%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 1px #0005);
+}
+body.zix-elite-active .actions .primary,
+body.zix-elite-active #postBtn {
+  background:linear-gradient(115deg,#f9d43b,#f9ee83);
+  color:#0e2337;border-color:#ffe36b;box-shadow:0 3px 10px #0002;
+}
+body.zix-elite-active header .ghost,
+body.zix-elite-active header .zz-controls button {
+  background:#153250;color:#fff;border:1px solid #3a5576;border-radius:11px;
+}
+body.zix-elite-active .hero {
+  padding:23px 15px 30px;
+  min-height:0;
+  display:block;
+  background:radial-gradient(circle at 80% 8%,#174771,#091d37 43%,#06121e 100%) !important;
+  color:#fff;
+}
+body.zix-elite-active #zixElite {
+  max-width:1160px;margin:0 auto;
+  background:#081728;border-radius:22px;overflow:hidden;
+  border:1px solid #2d547c;
+  box-shadow:0 18px 48px #0006,0 0 0 1px #0ab67122;
+}
+body.zix-elite-active #zixElite img {
+  display:block;width:100%;height:min(36vw,390px);min-height:210px;
+  object-fit:cover;object-position:center 24%;
+  background:#081728;
+}
+body.zix-elite-active .zix-elite-points {
+  display:flex;justify-content:space-around;align-items:center;gap:9px;
+  padding:15px 18px;background:linear-gradient(100deg,#071320,#0c2b45);
+  border-top:1px solid #164569;
+}
+body.zix-elite-active .zix-elite-points span {
+  display:inline-flex;gap:7px;align-items:center;color:#eff8ff;
+  font-weight:750;font-size:clamp(10px,1.35vw,14px);text-align:center;
+}
+body.zix-elite-active .hero > .wrap {
+  max-width:1160px;margin:19px auto 0;padding:24px 27px 26px;
+  background:linear-gradient(110deg,#0a1b2f,#0d2b45);
+  border:1px solid #284864;border-radius:19px;
+  box-shadow:0 12px 32px #0003;
+}
+body.zix-elite-active .hero h1 {font-size:clamp(25px,3vw,40px);margin:10px 0 8px;max-width:100%}
+body.zix-elite-active .hero .eyebrow {color:var(--elite-yellow);font-size:11px;letter-spacing:2px}
+body.zix-elite-active .hero p {color:#d3e7f7;font-size:16px}
+body.zix-elite-active .hero .search {
+  max-width:100%;border:1px solid #b5d8e7;background:#fff;
+  box-shadow:0 9px 24px #0003;margin-top:19px;
+}
+body.zix-elite-active .hero .search .primary {
+  background:linear-gradient(120deg,#0b754f,#10b36e);
+  border-color:#0b8558;color:#fff;min-width:110px;
+}
+body.zix-elite-active .content {padding-top:32px}
+body.zix-elite-active .content h2,
+body.zix-elite-active #zixPlanos h2 {font-weight:850;letter-spacing:-.6px}
+body.zix-elite-active .category {
+  border-radius:16px;border-color:var(--zz-border,#d7e4ef);
+  box-shadow:0 6px 19px #07152b10;
+}
+body.zix-elite-active #categories .category {border-bottom:4px solid #087ee6;min-height:122px}
+body.zix-elite-active #categories .category:nth-child(5n+2){border-bottom-color:#d91c38}
+body.zix-elite-active #categories .category:nth-child(5n+3){border-bottom-color:#10a86b}
+body.zix-elite-active #categories .category:nth-child(5n+4){border-bottom-color:#f69c12}
+body.zix-elite-active #categories .category:nth-child(5n+5){border-bottom-color:#7354e8}
+body.zix-elite-active #categories .category:hover {box-shadow:0 13px 30px #06172b22}
+body.zix-elite-active .card {
+  border-radius:16px;box-shadow:0 8px 21px #07152b14;
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+body.zix-elite-active .card:hover {transform:translateY(-3px);box-shadow:0 13px 25px #07152b24}
+body.zix-elite-active .cover {object-position:center}
+body.zix-elite-active #zixPlanos {
+  background:linear-gradient(145deg,#0b1c31,#142e4b);
+  color:#fff;border-radius:22px;margin:18px auto 38px;
+  padding:26px 24px !important;
+  box-shadow:0 12px 32px #08192b33;
+}
+body.zix-elite-active #zixPlanos h2 {color:#f9fbff}
+body.zix-elite-active #zixModo {color:#d4e6f5}
+body.zix-elite-active #zixPlanCards {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));
+  gap:13px;margin:20px 0 12px;
+}
+body.zix-elite-active #zixPlanCards .category {
+  background:linear-gradient(150deg,#f9fbff,#e9f3f5);
+  color:#16344a;border-color:#c1d4e7;
+  box-shadow:0 9px 19px #0003;
+}
+body.zix-elite-active #zixPlanCards .category strong {font-size:17px}
+body.zix-elite-active #zixPlanCards .category b {color:#09744e;font-size:25px;margin-top:8px}
+body.zix-elite-active footer {background:#071424;color:#e5f4fb;border-top:3px solid #13895c}
+body.zix-elite-active footer a {color:#e2f8ee}
+body.zix-elite-active .zz-whats {box-shadow:0 6px 25px #0c493b60,0 0 0 3px #e7ffed}
+body.zix-elite-active :is(button,a,input,select,textarea):focus-visible {outline:3px solid #fedb42;outline-offset:3px}
+@media(max-width:850px){
+  body.zix-elite-active header .top{gap:9px}
+  body.zix-elite-active header .brand{font-size:clamp(19px,4vw,27px)}
+  body.zix-elite-active #zixElite img{height:38vw;min-height:190px}
+}
+@media(max-width:600px){
+  body.zix-elite-active header .top{flex-wrap:wrap;justify-content:space-between;min-height:64px;padding:10px 12px}
+  body.zix-elite-active header .brand{font-size:23px}
+  body.zix-elite-active .hero{padding:10px 10px 24px}
+  body.zix-elite-active #zixElite{border-radius:15px}
+  body.zix-elite-active #zixElite img{height:auto;min-height:0;object-fit:contain;object-position:center}
+  body.zix-elite-active .zix-elite-points{padding:11px 8px;flex-wrap:wrap;gap:10px}
+  body.zix-elite-active .zix-elite-points span{font-size:11px}
+  body.zix-elite-active .hero>.wrap{padding:19px 15px;margin-top:13px;border-radius:14px}
+  body.zix-elite-active .hero h1{font-size:clamp(24px,6vw,33px)}
+  body.zix-elite-active .hero p{font-size:14px}
+  body.zix-elite-active .hero .search{padding:11px;gap:7px}
+  body.zix-elite-active #categories .category{min-height:95px}
+  body.zix-elite-active #zixPlanos{margin:8px 10px 25px;padding:19px 14px !important}
+  body.zix-elite-active #zixPlanCards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  body.zix-elite-active #zixPlanCards .category{min-width:0 !important;padding:12px !important}
+  body.zix-elite-active #zixPlanCards .category b{font-size:20px}
+}
+@media(max-width:380px){
+  body.zix-elite-active #zixPlanCards{grid-template-columns:1fr}
+  body.zix-elite-active .zix-elite-points span{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  body.zix-elite-active .card,body.zix-elite-active .category{transition:none}
+}
