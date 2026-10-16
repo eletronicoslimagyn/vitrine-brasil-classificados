@@ -150,3 +150,65 @@ body.zix-elite-active :is(button,a,input,select,textarea):focus-visible {outline
 @media(prefers-reduced-motion:reduce){
   body.zix-elite-active .card,body.zix-elite-active .category{transition:none}
 }
+
+
+
+/* === ZIXLIMA | AUMENTAR LETRAS DOS ÍCONES/BOTÕES === */
+.topbar button,
+.topbar a,
+.top-actions button,
+.top-actions a,
+.header-actions button,
+.header-actions a,
+.menu-principal button,
+.menu-principal a,
+nav button,
+nav a,
+.btn,
+.icon-btn,
+.action-btn {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.2px !important;
+}
+
+.topbar .btn,
+.top-actions .btn,
+.header-actions .btn,
+.menu-principal .btn,
+nav .btn {
+  min-height: 48px !important;
+  padding: 10px 16px !important;
+}
+
+.topbar button span,
+.topbar a span,
+.top-actions button span,
+.top-actions a span,
+.header-actions button span,
+.header-actions a span,
+.menu-principal button span,
+.menu-principal a span,
+nav button span,
+nav a span {
+  font-size: 18px !important;
+  font-weight: 800 !important;
+}
+
+/* Botões principais do menu */
+.topbar nav a,
+.topbar nav button,
+.menu-principal a,
+.menu-principal button {
+  font-size: 19px !important;
+  font-weight: 800 !important;
+}
+
+/* Botões superiores: Cadastre-se, Anunciar, Sair */
+.header-actions a,
+.header-actions button,
+.top-actions a,
+.top-actions button {
+  font-size: 17px !important;
+  font-weight: 800 !important;
+}
