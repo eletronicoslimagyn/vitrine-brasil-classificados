@@ -45,6 +45,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <a class="btn" href="./index.html">Abrir site</a>
 </div>
 
+<div class="card" id="zixEmailAdminCard">
+<h2>✉️ Alterar e-mail do administrador</h2>
+<p><small>Altere o e-mail de acesso administrativo pelo Supabase Auth. A confirmação pode ser exigida nos endereços antigo e novo.</small></p>
+<label>E-mail atual<input id="zixEmailAdminAtual" type="email" readonly></label>
+<label>Novo e-mail<input id="zixEmailAdminNovo" type="email" maxlength="254" placeholder="novo@email.com"></label>
+<label>Confirmar novo e-mail<input id="zixEmailAdminConfirmar" type="email" maxlength="254" placeholder="Repita o novo e-mail"></label>
+<button id="zixEmailAdminEnviar" type="button">Solicitar alteração de e-mail</button>
+<p id="zixEmailAdminStatus" role="status" aria-live="polite"></p>
+<p><small>O endereço atual continua válido até a confirmação. Nunca compartilhe links de confirmação.</small></p>
+</div>
+
 <div class="card" id="zzixbrPerfil">
 <h2>👤 Meu perfil administrativo</h2>
 <p><small>Informações privadas da sua conta, salvas no Supabase.</small></p>
@@ -581,6 +592,48 @@ salvar.addEventListener('click', async () => {
   } finally {
     salvar.disabled = false;
   }
+});
+</script>
+
+<script type="module" id="zixEmailAdminScript">
+import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
+import {SUPABASE_URL,SUPABASE_ANON_KEY} from './config.js';
+const btn=document.getElementById('zixEmailAdminEnviar');
+const atual=document.getElementById('zixEmailAdminAtual');
+const novo=document.getElementById('zixEmailAdminNovo');
+const confirmar=document.getElementById('zixEmailAdminConfirmar');
+const status=document.getElementById('zixEmailAdminStatus');
+const db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+async function validarAdmin(){
+ const {data:{user},error}=await db.auth.getUser();
+ if(error||!user)throw new Error('Sessão expirada. Entre novamente como administrador.');
+ const {data:admin,error:erro}=await db.from('admins').select('user_id').eq('user_id',user.id).maybeSingle();
+ if(erro||!admin)throw new Error('Esta conta não possui permissão administrativa.');
+ atual.value=user.email||'';
+ return user;
+}
+const painel=document.getElementById('painel');
+const observer=new MutationObserver(()=>{
+ if(painel.style.display==='block') validarAdmin().catch(e=>{status.textContent=e.message;});
+});
+observer.observe(painel,{attributes:true,attributeFilter:['style']});
+if(painel.style.display==='block')validarAdmin().catch(()=>{});
+btn.addEventListener('click',async()=>{
+ status.style.color='#b91c1c';status.textContent='';
+ const email=novo.value.trim().toLowerCase();
+ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||email.length>254){status.textContent='Digite um e-mail válido.';return;}
+ if(email!==confirmar.value.trim().toLowerCase()){status.textContent='Os e-mails não coincidem.';return;}
+ btn.disabled=true;
+ try{
+  const user=await validarAdmin();
+  if(email===user.email?.toLowerCase())throw new Error('Este e-mail já está cadastrado.');
+  const {error}=await db.auth.updateUser({email},{emailRedirectTo:'https://zixlima.com.br/admin.html'});
+  if(error)throw error;
+  novo.value='';confirmar.value='';
+  status.style.color='#15803d';
+  status.textContent='Solicitação enviada. Verifique as mensagens de confirmação nos endereços exigidos pelo Supabase.';
+ }catch(e){status.textContent='Falha ao solicitar alteração: '+e.message;}
+ finally{btn.disabled=false;}
 });
 </script>
 
