@@ -52,6 +52,33 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <label>Telefone<input id="zzPerfilFone" maxlength="30"></label>
 <label>Cidade<input id="zzPerfilCidade" maxlength="80"></label>
 <button id="zzSalvarPerfil" class="ok">Salvar meu perfil</button>
+<section id="zixAlterarSenhaAdmin" style="margin-top:22px;padding-top:16px;border-top:1px solid #ddd">
+  <h3>🔐 Segurança da conta</h3>
+  <p style="font-size:13px;color:#555">Defina uma nova senha para sua conta administrativa.</p>
+
+  <label>Nova senha
+    <input id="zixSenhaAdminNova" type="password" minlength="8"
+           autocomplete="new-password" placeholder="Mínimo de 8 caracteres">
+  </label>
+
+  <label>Confirmar nova senha
+    <input id="zixSenhaAdminConfirma" type="password" minlength="8"
+           autocomplete="new-password" placeholder="Repita a nova senha">
+  </label>
+
+  <label style="display:flex;align-items:center;gap:8px;margin:12px 0">
+    <input id="zixSenhaAdminMostrar" type="checkbox" style="width:auto">
+    👁 Mostrar senhas
+  </label>
+
+  <button id="zixSenhaAdminSalvar" type="button"
+          style="background:#1765d1;color:white;border:0;border-radius:6px;padding:12px 18px;cursor:pointer">
+    Redefinir minha senha
+  </button>
+
+  <p id="zixSenhaAdminMensagem" role="status" aria-live="polite"></p>
+</section>
+
 <p id="zzPerfilMensagem" role="status"></p>
 </div>
 <div class="card" id="zzixbrConfig">
@@ -490,6 +517,71 @@ if(campo&&botao){
 
  consultar.addEventListener('click',verificar);
 }
+</script>
+
+
+<script type="module" id="zixSenhaAdminScript">
+import {createClient} from 'https://esm.sh/@supabase/supabase-js@2';
+import {SUPABASE_URL,SUPABASE_ANON_KEY} from './config.js';
+
+const dbSenha = createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+const campoNova = document.getElementById('zixSenhaAdminNova');
+const campoConfirma = document.getElementById('zixSenhaAdminConfirma');
+const mostrar = document.getElementById('zixSenhaAdminMostrar');
+const salvar = document.getElementById('zixSenhaAdminSalvar');
+const mensagem = document.getElementById('zixSenhaAdminMensagem');
+
+mostrar.addEventListener('change', () => {
+  const tipo = mostrar.checked ? 'text' : 'password';
+  campoNova.type = tipo;
+  campoConfirma.type = tipo;
+});
+
+salvar.addEventListener('click', async () => {
+  mensagem.textContent = '';
+
+  const senha = campoNova.value;
+  const confirmacao = campoConfirma.value;
+
+  if (senha.length < 8) {
+    mensagem.textContent = 'A senha precisa ter pelo menos 8 caracteres.';
+    return;
+  }
+
+  if (senha !== confirmacao) {
+    mensagem.textContent = 'As senhas não coincidem.';
+    return;
+  }
+
+  salvar.disabled = true;
+  mensagem.textContent = 'Verificando sua conta...';
+
+  try {
+    const {data, error: erroUsuario} = await dbSenha.auth.getUser();
+
+    if (erroUsuario || !data.user) {
+      throw new Error('Sessão expirada. Entre novamente na sua conta.');
+    }
+
+    const {error} = await dbSenha.auth.updateUser({password:senha});
+
+    if (error) throw error;
+
+    campoNova.value = '';
+    campoConfirma.value = '';
+    mostrar.checked = false;
+    campoNova.type = 'password';
+    campoConfirma.type = 'password';
+
+    mensagem.style.color = 'green';
+    mensagem.textContent = 'Senha atualizada com sucesso!';
+  } catch (erro) {
+    mensagem.style.color = '#b91c1c';
+    mensagem.textContent = 'Não foi possível alterar a senha: ' + erro.message;
+  } finally {
+    salvar.disabled = false;
+  }
+});
 </script>
 
 </body>
