@@ -22,6 +22,14 @@ small{color:#64748b}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #f59e0b;outline-offset:2px}
 @media(max-width:600px){main{padding:10px}.card{padding:14px;margin:12px 0}button,.btn{max-width:100%;white-space:normal;overflow-wrap:anywhere}input,select{min-width:0}pre,#zixBuscaResultado,#zixPrazoMsg{overflow-wrap:anywhere;white-space:pre-wrap}}
 </style>
+<style id="zixEditorPlanosCss">
+.zix-plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px 14px}
+.zix-plan-grid label{font-size:14px;font-weight:600}
+.zix-check{display:block;margin:10px 0;font-weight:600}
+.zix-check input{width:auto;margin-right:8px}
+.zix-plano-linha{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-bottom:1px solid #eee;padding:8px 0}
+#zixPlanEditMsg{white-space:pre-wrap;overflow-wrap:anywhere}
+</style>
 </head>
 <body>
 <header>
@@ -119,6 +127,33 @@ Baixar código completo ZIP
 </a>
 <p><small>Este backup não inclui os dados armazenados no Supabase.</small></p>
 </div>
+
+<section class="card" id="zixPlanEditorCard">
+<h2>🧩 Construtor de planos e promoções</h2>
+<p><small>Crie ou modifique os mesmos balões de planos exibidos no rodapé do site. O código do plano não pode ser alterado depois de criado, para preservar o histórico dos créditos.</small></p>
+<div id="zixPlanEditList"></div>
+<div style="display:flex;flex-wrap:wrap;gap:8px"><button type="button" id="zixPlanNew">➕ Novo plano</button><button type="button" id="zixPlanRefresh">🔄 Atualizar lista</button></div>
+<h3 id="zixPlanEditTitle">Criar novo plano</h3>
+<form id="zixPlanEditForm">
+<label>Código identificador (sem espaços)<input name="id" required maxlength="40" pattern="[a-z][a-z0-9_]{2,39}" placeholder="ex.: premium_2026"></label>
+<label>Nome que aparece no balão<input name="name" required minlength="3" maxlength="60" placeholder="Ex.: Destaque Nacional"></label>
+<label>Descrição promocional<input name="description" maxlength="200" placeholder="Ex.: Mais visibilidade para seus anúncios"></label>
+<div class="zix-plan-grid">
+<label>Preço normal (R$)<input name="price" type="number" required min="0" max="999999999" step="0.01"></label>
+<label>Quantidade de anúncios<input name="ad_count" type="number" required min="1" max="10000" step="1"></label>
+<label>Validade (dias)<input name="days" type="number" required min="1" max="3650" step="1"></label>
+<label>Desconto (%)<input name="discount_percent" type="number" required min="0" max="100" step="1" value="0"></label>
+<label>Início da promoção (opcional)<input name="promo_start" type="datetime-local"></label>
+<label>Fim da promoção (opcional)<input name="promo_end" type="datetime-local"></label>
+<label>Ordem na página<input name="sort_order" type="number" required value="100" step="1"></label>
+</div>
+<label class="zix-check"><input name="visible" type="checkbox" checked> Mostrar este plano ao público</label>
+<label class="zix-check"><input name="featured" type="checkbox"> Destacar o balão</label>
+<button class="ok" type="submit">💾 Salvar plano</button>
+</form>
+<p id="zixPlanEditMsg" role="status"></p>
+<p><small>Os controles anteriores de cobrança e descontos gerais continuam disponíveis logo abaixo. Um desconto geral maior pode prevalecer sobre o desconto configurado individualmente.</small></p>
+</section>
 
 <div class="card" id="zixFinanceiro"><h2>💳 Planos, descontos e prazos</h2><p>Configurações salvas no Supabase. Somente administradores autorizados podem modificar.</p><label><input type="checkbox" id="zixCobrar" style="width:auto"> Ativar cobrança dos planos</label><p><small>Desativado: anúncios podem ser enviados gratuitamente para moderação. Ativado: exige crédito concedido pelo Admin após confirmar o Pix.</small></p><h3>Promoções</h3><label>Aplicar a<select id="zixPlanoAlvo"><option value="todos">Todos os planos pagos</option><option value="avulso">Avulso</option><option value="iniciante">Iniciante</option><option value="negocio">Negócio</option><option value="profissional">Profissional</option></select></label><label>Desconto (%)<input id="zixDesconto" type="number" min="0" max="100" value="0"></label><button id="zixSalvarFinanceiro" class="ok">Salvar cobrança e promoção</button><p id="zixFinanceiroMsg" role="status"></p><section id="zixDiscountExtra" style="border-top:1px solid #ddd;margin-top:18px;padding-top:12px"><h3>Desconto individual por plano</h3><p><small>Configure descontos diferentes para cada plano. Salve somente depois de aplicar o SQL no Supabase.</small></p><label>Plano<select id="zixDiscountPlan"><option value="boasvindas">Boas-vindas</option><option value="avulso">Avulso</option><option value="iniciante">Iniciante</option><option value="negocio">Negócio</option><option value="profissional">Profissional</option></select></label><label>Desconto (%)<input id="zixDiscountPercent" type="number" min="0" max="100" value="0"></label><label><input id="zixDiscountEnabled" type="checkbox" style="width:auto"> Ativar desconto deste plano</label><button id="zixDiscountSave" type="button">Salvar desconto individual</button><p id="zixDiscountMsg" role="status"></p></section>
 
@@ -637,5 +672,6 @@ btn.addEventListener('click',async()=>{
 });
 </script>
 
+<script type="module" src="zix-planos-editor-admin.js?v=1"></script>
 </body>
 </html>
