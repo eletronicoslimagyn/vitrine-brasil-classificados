@@ -1,0 +1,118 @@
+/* ZixLima — acabamento final responsivo. Apenas visual, sem alteracoes nos dados. */
+body.zix-elite-active header {
+  background:linear-gradient(112deg,#05214c 0%,#074e89 57%,#082a57 100%) !important;
+  border-bottom:4px solid #f7d43c !important;
+}
+body.zix-elite-active header .top {
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto !important;
+  grid-template-rows:auto auto!important;
+  gap:9px 12px!important;
+  padding:10px 16px 9px!important;
+  max-width:1300px!important;
+  min-height:0!important;
+}
+body.zix-elite-active header .brand {
+  grid-column:1!important;grid-row:1!important;
+  display:flex!important;align-items:center!important;gap:7px!important;
+  font-size:clamp(30px,4.2vw,53px)!important;
+  font-weight:950!important;letter-spacing:-1.5px!important;
+  white-space:nowrap;min-width:0!important;
+}
+body.zix-elite-active header #siteBrand {
+  background:linear-gradient(105deg,#fff 0%,#fff 37%,#c8ff34 58%,#09cb68 92%)!important;
+  -webkit-background-clip:text!important;background-clip:text!important;
+  -webkit-text-fill-color:transparent!important;
+  filter:drop-shadow(0 2px 3px #001326)!important;
+}
+body.zix-elite-active header .zz-controls {
+  grid-column:2!important;grid-row:1!important;
+  display:flex!important;align-items:center!important;justify-content:flex-end!important;
+  gap:7px!important;min-width:0!important;margin:0!important;
+}
+body.zix-elite-active header #zixRelogio {
+  position:static!important;top:auto!important;right:auto!important;left:auto!important;
+  display:inline-flex!important;align-items:center!important;gap:6px!important;
+  margin:0!important;padding:5px 8px!important;
+  min-width:0!important;max-width:none!important;
+  border:2px solid #ffe238!important;border-radius:11px!important;
+  background:linear-gradient(125deg,#067749,#04432f)!important;
+  box-shadow:inset 0 1px 5px #ffffff33,0 2px 9px #001c2966!important;
+  z-index:auto!important;
+}
+body.zix-elite-active header .zixFlag {font-size:18px!important;line-height:1!important}
+body.zix-elite-active header .zixClockDisplay {font-size:9px!important;line-height:1.1!important;color:#fff!important}
+body.zix-elite-active header #zixHora {font-size:clamp(12px,1.6vw,18px)!important;white-space:nowrap;color:#ffe74c!important;letter-spacing:0!important}
+body.zix-elite-active header .zz-controls #zzThemeToggle {
+  width:38px!important;min-width:38px!important;height:38px!important;border-radius:12px!important;
+}
+body.zix-elite-active header .actions {
+  grid-column:1/-1!important;grid-row:2!important;
+  display:flex!important;align-items:center!important;justify-content:flex-end!important;
+  gap:7px!important;min-width:0!important;margin:0!important;
+}
+body.zix-elite-active header .actions #zzPaletteToggle {
+  width:40px!important;height:40px!important;min-width:40px!important;
+  display:grid!important;place-items:center!important;padding:0!important;
+  border:1px solid #4ca9fa!important;border-radius:11px!important;
+  background:#fff!important;color:#153761!important;font-size:21px!important;
+}
+body.zix-elite-active header .actions button:not(#zzPaletteToggle),
+body.zix-elite-active header #zixCadastroTopo {
+  font-size:clamp(12px,1.4vw,17px)!important;
+  font-weight:850!important;line-height:1.1!important;
+  min-height:38px!important;
+}
+body.zix-elite-active header nav {
+  grid-column:1/-1!important;grid-row:3!important;
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  width:100%!important;max-width:none!important;gap:7px!important;margin:0!important;
+}
+body.zix-elite-active header nav a {
+  font-size:clamp(13px,1.65vw,19px)!important;line-height:1.15!important;
+  font-weight:850!important;min-height:46px!important;
+  padding:8px 4px!important;white-space:normal!important;
+  text-align:center!important;
+}
+body.zix-elite-active .hero {
+  padding:0 0 20px!important;margin:0!important;
+  background:linear-gradient(115deg,#062344,#0b3c6b)!important;
+  min-height:0!important;
+}
+body.zix-elite-active #zixElite {
+  margin:0 auto!important;max-width:1300px!important;
+  border-radius:0 0 18px 18px!important;
+  border-top:0!important;
+}
+body.zix-elite-active #zixElite img {
+  width:100%!important;height:auto!important;min-height:0!important;
+  object-fit:contain!important;object-position:center!important;
+}
+body.zix-elite-active .hero>.wrap {margin:12px auto 0!important}
+body.zix-elite-active .hero h1 {color:#298dff!important;font-weight:950!important;line-height:1.12!important}
+@media(max-width:620px){
+  body.zix-elite-active header .top{padding:9px 9px 7px!important;gap:8px 5px!important}
+  body.zix-elite-active header .brand {font-size:clamp(25px,6.6vw,39px)!important;gap:5px!important}
+  body.zix-elite-active header .zix-brasil {width:38px!important;height:35px!important;font-size:25px!important}
+  body.zix-elite-active header .zz-controls {gap:4px!important}
+  body.zix-elite-active header .zz-controls #zzThemeToggle {width:30px!important;min-width:30px!important;height:33px!important;font-size:16px!important}
+  body.zix-elite-active header #zixRelogio {padding:4px 5px!important;gap:3px!important;border-radius:9px!important}
+  body.zix-elite-active header .zixFlag {font-size:13px!important}
+  body.zix-elite-active header .zixClockDisplay {font-size:8px!important}
+  body.zix-elite-active header #zixHora {font-size:12px!important}
+  body.zix-elite-active header .actions {gap:5px!important;flex-wrap:wrap!important}
+  body.zix-elite-active header .actions #zzPaletteToggle {width:34px!important;min-width:34px!important;height:34px!important;font-size:18px!important}
+  body.zix-elite-active header .actions button:not(#zzPaletteToggle),
+  body.zix-elite-active header #zixCadastroTopo {font-size:12px!important;min-height:34px!important;padding:5px 7px!important}
+  body.zix-elite-active header nav{gap:5px!important}
+  body.zix-elite-active header nav a{font-size:clamp(12px,3.2vw,15px)!important;min-height:44px!important;padding:7px 2px!important}
+  body.zix-elite-active .hero {padding:0 0 18px!important}
+  body.zix-elite-active #zixElite {border-radius:0 0 12px 12px!important}
+  body.zix-elite-active .zix-elite-points{padding:8px 5px!important}
+  body.zix-elite-active .hero>.wrap{margin:10px auto 0!important}
+}
+@media(max-width:370px){
+ body.zix-elite-active header .brand{font-size:24px!important}
+ body.zix-elite-active header .zix-brasil{width:31px!important;height:31px!important;font-size:21px!important}
+ body.zix-elite-active header #zixRelogio .zixFlag{display:none!important}
+}
