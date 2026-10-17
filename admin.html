@@ -198,7 +198,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 }
 .zix-preview-duo{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-columns:1fr;
   gap:12px;
   margin-top:8px;
 }
@@ -271,7 +271,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
  }
  .zix-brand-preview-wide .zix-preview-duo {
    display:grid;
-   grid-template-columns:repeat(2,minmax(0,1fr));
+   grid-template-columns:1fr;
  }
  .zix-brand-preview-wide .zix-preview-card {
    min-width:0;
@@ -394,7 +394,21 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 }
 
 </style>
-</head>
+<style>\n
+/* zix-preview-vertical-v7 */
+.zix-preview-duo{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:14px !important;
+  max-width:420px;
+}
+.zix-preview-duo .zix-preview-card{
+  width:100%;
+}
+.zix-brand-preview-wide{
+  overflow:hidden;
+}
+\n</style>\n</head>
 <body>
 <header>
 <h1>ZixLima</h1>
