@@ -42,8 +42,9 @@ a{color:#125bd3}
 <button id="salvar">Salvar nova senha</button>
 </div>
 <p id="msg" role="status"></p>
-<p><a href="./admin.html">
-Voltar ao painel</a></p>
+<p><a href="https://zixlima.com.br/"
+id="voltarPagina">
+Voltar para a página</a></p>
 </div></main>
 <script type="module">
 import {createClient} from
@@ -127,7 +128,7 @@ $('salvar').onclick=async()=>{
    $('msg').textContent=error.message;
   }else{
    $('msg').textContent=
-    'Senha alterada. Volte ao painel.';
+    'Senha alterada. Volte para a página.';
    $('trocar').style.display='none';
    await db.auth.signOut();
   }
