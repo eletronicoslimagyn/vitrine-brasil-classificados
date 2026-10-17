@@ -36,6 +36,8 @@
   ];
 
   let current = {...defaults};
+  let pendingLogo = '';
+  let pendingSlogan = '';
   const savedText = {nome:'ZixLima', slogan:'ZixLima Anúncie Aqui'};
 
   function msg(t, ok=false){
@@ -221,13 +223,18 @@ function renderPreview(){
       if(!el) return;
       if(src){
         el.src = src;
-        el.style.display = '';
+        el.style.display = 'block';
+        el.style.objectFit = 'contain';
+        el.style.maxWidth = '100%';
+        el.style.maxHeight = '100%';
+        el.style.minWidth = '0';
+        el.style.flexShrink = '1';
       }else{
         el.removeAttribute('src');
         el.style.display = 'none';
       }
-      if(w != null) el.style.width = w + 'px';
-      if(h != null) el.style.height = h + 'px';
+      if(w != null) el.style.width = Math.max(1, Number(w)||1) + 'px';
+      if(h != null) el.style.height = Math.max(1, Number(h)||1) + 'px';
     }
 
     function applyNameStyle(el, fontSize){
@@ -271,14 +278,14 @@ function renderPreview(){
     applySloganStyle($('zzMiniSloganTextD'), Math.max(18, c.sloganTextSd), c.sloganX, c.sloganY);
 
     // imagens logo
-    const logoSrc = current.logoPath || '';
+    const logoSrc = pendingLogo || current.logoPath || '';
     setImg('zzTopLogoImg', logoSrc, c.logoWd, c.logoHd);
     setImg('zzMobileLogoImg', logoSrc, c.logoWm, c.logoHm);
     setImg('zzMiniLogoM', logoSrc, c.logoWm, c.logoHm);
     setImg('zzMiniLogoD', logoSrc, c.logoWd, c.logoHd);
 
     // imagens slogan
-    const sloganSrc = current.sloganPath || '';
+    const sloganSrc = pendingSlogan || current.sloganPath || '';
     setImg('zzTopSloganImg', sloganSrc, c.sloganWd, c.sloganHd);
     setImg('zzMobileSloganImg', sloganSrc, Math.max(72, c.sloganWm), Math.max(32, c.sloganHm));
     setImg('zzMiniSloganImgM', sloganSrc, c.sloganWm, c.sloganHm);
@@ -430,8 +437,8 @@ function renderPreview(){
       if(!f) return;
       const dataUrl = await fileToDataURL(f);
       showPreviewImage('zzLogoPreviewBox', dataUrl);
-      $('zzMiniLogo').src = dataUrl;
-      $('zzMiniLogo').style.display = 'block';
+      pendingLogo = dataUrl;
+      renderPreview();
     });
 
     sloganInput?.addEventListener('change', async e => {
@@ -439,8 +446,8 @@ function renderPreview(){
       if(!f) return;
       const dataUrl = await fileToDataURL(f);
       showPreviewImage('zzSloganPreviewBox', dataUrl);
-      $('zzMiniSloganImg').src = dataUrl;
-      $('zzMiniSloganImg').style.display = 'block';
+      pendingSlogan = dataUrl;
+      renderPreview();
     });
   }
 
@@ -453,12 +460,15 @@ function renderPreview(){
 
   function restoreDefaults(){
     current = {...defaults, logoPath:'', sloganPath:''};
+    pendingLogo = '';
+    pendingSlogan = '';
     $('zzLogoFile').value = '';
     $('zzSloganFile').value = '';
     $('zzLogoPreviewBox').textContent = 'Sem logo selecionado';
     $('zzSloganPreviewBox').textContent = 'Sem imagem do slogan';
-    $('zzMiniLogo').style.display = 'none';
-    $('zzMiniSloganImg').style.display = 'none';
+    ['zzMiniLogoM','zzMiniLogoD','zzMiniSloganImgM','zzMiniSloganImgD'].forEach(id=>{
+      const img=$(id); if(img){img.removeAttribute('src');img.style.display='none';}
+    });
     fill(current);
     $('zzTextoMarca').value='ZixLima';
     $('zzTextoSlogan').value='ZixLima Anúncie Aqui';
@@ -495,14 +505,9 @@ function renderPreview(){
       if(!r.ok) throw new Error('sem arquivo');
       const data = await r.json();
       fill(data);
-      if(data.logoPath){
-        $('zzMiniLogo').src = data.logoPath + '?ts=' + Date.now();
-        $('zzMiniLogo').style.display = 'block';
-      }
-      if(data.sloganPath){
-        $('zzMiniSloganImg').src = data.sloganPath + '?ts=' + Date.now();
-        $('zzMiniSloganImg').style.display = 'block';
-      }
+      pendingLogo = '';
+      pendingSlogan = '';
+      renderPreview();
     }catch{
       fill(defaults);
     }
