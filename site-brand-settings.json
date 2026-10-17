@@ -24,11 +24,11 @@
   "nameColor": "original",
   "nameLed": "none",
   "nameGlow": 6,
-  "sloganColor": "black",
+  "sloganColor": "original",
   "sloganLed": "cycle",
   "sloganGlow": 20,
-  "sloganX": -23,
-  "sloganY": 22,
-  "sloganImgX": -10,
-  "sloganImgY": 10
+  "sloganX": -100,
+  "sloganY": 19,
+  "sloganImgX": -11,
+  "sloganImgY": -9
 }
