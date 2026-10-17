@@ -133,6 +133,108 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 @media(max-width:600px){
   .zix-two-btns button{width:100%}
 }
+
+/* zix-preview-v3 */
+.zix-preview-top3{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin:0 0 14px;
+}
+.zix-preview-card{
+  border:1px solid #cfe0ff;
+  border-radius:16px;
+  padding:12px;
+  background:linear-gradient(180deg,#1670ff,#0a52cb);
+  color:#fff;
+  box-shadow:0 6px 18px #0b3c8a20;
+}
+.zix-preview-card h5{
+  margin:0 0 4px;
+  font-size:15px;
+  font-weight:800;
+}
+.zix-preview-card p{
+  margin:0 0 10px;
+  font-size:13px;
+  opacity:.95;
+}
+.zix-preview-shot{
+  background:#ffffff14;
+  border-radius:14px;
+  padding:10px;
+  min-height:92px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.zix-preview-shot .zix-shot-bar{
+  width:100%;
+  border-radius:14px;
+  background:linear-gradient(135deg,#041f56,#1670ff);
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:70px;
+}
+.zix-preview-shot .zix-shot-box{
+  width:100%;
+  border-radius:14px;
+  background:#fff;
+  padding:10px;
+  color:#17325f;
+}
+.zix-preview-shot .zix-shot-title{
+  font-weight:900;
+  line-height:1.05;
+}
+.zix-preview-shot img{
+  object-fit:contain;
+  border-radius:10px;
+  background:#ffffff20;
+  flex-shrink:0;
+}
+.zix-preview-duo{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:8px;
+}
+.zix-preview-duo .zix-preview-card{
+  background:linear-gradient(180deg,#ffffff,#f6faff);
+  color:#17325f;
+  border:1px solid #d9e6ff;
+  box-shadow:none;
+}
+.zix-preview-duo .zix-preview-card h5{
+  color:#0b53c8;
+}
+.zix-preview-duo .zix-preview-shot{
+  background:#eef5ff;
+}
+.zix-preview-duo .zix-preview-shot .zix-shot-bar{
+  min-height:92px;
+}
+.zix-preview-duo .zix-preview-shot .zix-shot-box{
+  min-height:92px;
+}
+.zix-quick-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+.zix-quick-actions button{
+  margin:0;
+}
+@media(max-width:900px){
+  .zix-preview-top3,.zix-preview-duo{
+    grid-template-columns:1fr;
+  }
+}
+
 /* zix-preview-v2 */
 .zix-brand-grid>.zix-brand-preview-wide{grid-column:1/-1;min-width:0}
 .zix-brand-preview-wide .zix-mini-top{width:100%;max-width:100%;overflow:hidden;min-width:0}
@@ -363,29 +465,93 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
   </div>
 
-  <div class="zix-brand-box zix-brand-preview-wide">
-    <h4>Prévia rápida</h4>
-    <p class="zix-help">Prévia flexível: apague um texto para mostrar apenas a imagem correspondente. As alterações só vão ao site quando você salvar.</p>
-    <div class="zix-mini-top">
-      <div class="zix-mini-brand" id="zzMiniBrand">
-        <img id="zzMiniLogo" alt="Prévia do logo" style="width:56px;height:56px;display:none">
-        <div class="zix-mini-name" id="zzMiniName" style="font-size:36px">ZixLima</div>
-      </div>
-      <div class="zix-mini-hero">
-        <div class="zix-mini-slogan" id="zzMiniSlogan">
-          <img id="zzMiniSloganImg" alt="Prévia do slogan" style="width:36px;height:36px;display:none">
-          <span id="zzMiniSloganText">ZixLima Anúncie Aqui</span>
+  
+<div class="zix-brand-box zix-brand-preview-wide">
+  <h4>Prévia rápida</h4>
+  <p class="zix-help">Confira em tempo real como ficará o seu anúncio. As alterações são aplicadas automaticamente.</p>
+
+  <div class="zix-preview-top3">
+    <div class="zix-preview-card">
+      <h5>🖥️ Prévia - Logo (canto superior esquerdo)</h5>
+      <p>Visualize e ajuste o logo do painel superior.</p>
+      <div class="zix-preview-shot">
+        <div class="zix-shot-bar">
+          <img id="zzTopLogoImg" alt="Logo do topo" style="width:84px;height:84px;display:none">
+          <div class="zix-shot-title" id="zzTopLogoText" style="font-size:32px">ZixLima</div>
         </div>
       </div>
     </div>
 
-    <div class="zix-two-btns">
-      <button type="button" id="zzAplicarMarcaPreview">Aplicar prévia</button>
-      <button type="button" id="zzRestaurarMarca">Restaurar padrão</button>
-      <button type="button" id="zzSalvarMarcaGithub" class="ok">Salvar marca visual no GitHub</button>
+    <div class="zix-preview-card">
+      <h5>🖥️ Prévia - Slogan superior direito</h5>
+      <p>Visualize e ajuste o anúncio do topo.</p>
+      <div class="zix-preview-shot">
+        <div class="zix-shot-box" style="display:flex;align-items:center;gap:10px">
+          <img id="zzTopSloganImg" alt="Slogan do topo" style="width:180px;height:72px;display:none">
+          <div class="zix-shot-title" id="zzTopSloganText" style="font-size:20px">ZixLima Anúncie Aqui</div>
+        </div>
+      </div>
     </div>
-    <p id="zzMarcaMensagem" role="status" style="white-space:pre-wrap;overflow-wrap:anywhere"></p>
+
+    <div class="zix-preview-card">
+      <h5>📱 Prévia - Mobile (celular)</h5>
+      <p>Visualize o cabeçalho no celular.</p>
+      <div class="zix-preview-shot">
+        <div class="zix-shot-bar">
+          <div style="font-size:24px;line-height:1">☰</div>
+          <img id="zzMobileLogoImg" alt="Logo mobile" style="width:52px;height:52px;display:none">
+          <div class="zix-shot-title" id="zzMobileLogoText" style="font-size:22px">ZixLima</div>
+          <img id="zzMobileSloganImg" alt="Slogan mobile" style="width:110px;height:48px;display:none;margin-left:auto">
+        </div>
+      </div>
+    </div>
   </div>
+
+  <div class="zix-preview-duo">
+    <div class="zix-preview-card">
+      <h5>📱 Prévia celular</h5>
+      <p>Visualização aproximada em celular (versão mobile).</p>
+      <div class="zix-preview-shot">
+        <div class="zix-shot-bar" style="flex-direction:column;align-items:stretch">
+          <div style="display:flex;align-items:center;gap:10px">
+            <img id="zzMiniLogoM" alt="Prévia do logo mobile" style="width:56px;height:56px;display:none">
+            <div class="zix-shot-title" id="zzMiniNameM" style="font-size:36px;color:#fff">ZixLima</div>
+          </div>
+          <div class="zix-shot-box" style="display:flex;align-items:center;gap:10px">
+            <img id="zzMiniSloganImgM" alt="Prévia do slogan mobile" style="width:36px;height:36px;display:none">
+            <span id="zzMiniSloganTextM" style="font-size:24px;font-weight:800">ZixLima Anúncie Aqui</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zix-preview-card">
+      <h5>🖥️ Prévia desktop</h5>
+      <p>Visualização aproximada em computador (versão desktop).</p>
+      <div class="zix-preview-shot">
+        <div class="zix-shot-bar" style="flex-direction:column;align-items:stretch">
+          <div style="display:flex;align-items:center;gap:12px">
+            <img id="zzMiniLogoD" alt="Prévia do logo desktop" style="width:84px;height:84px;display:none">
+            <div class="zix-shot-title" id="zzMiniNameD" style="font-size:52px;color:#fff">ZixLima</div>
+          </div>
+          <div class="zix-shot-box" style="display:flex;align-items:center;gap:10px">
+            <img id="zzMiniSloganImgD" alt="Prévia do slogan desktop" style="width:52px;height:52px;display:none">
+            <span id="zzMiniSloganTextD" style="font-size:30px;font-weight:800">ZixLima Anúncie Aqui</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="zix-quick-actions">
+    <button type="button" id="zzAplicarMarcaPreview">Aplicar prévia</button>
+    <button type="button" id="zzRestaurarMarca">Restaurar padrão</button>
+    <button type="button" id="zzSalvarMarcaGithub" class="ok">Salvar marca visual no GitHub</button>
+  </div>
+
+  <p id="zzMarcaMensagem" role="status" style="white-space:pre-wrap;overflow-wrap:anywhere"></p>
+</div>
+
 </div>
 <!-- ZIX_MARCA_EDITOR_END -->
 

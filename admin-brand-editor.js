@@ -204,52 +204,97 @@
     }
   }
 
-  function renderPreview(){
+  
+function renderPreview(){
     const c = collect();
 
-    const miniName = $('zzMiniName');
-    miniName.textContent = $('zzTextoMarca')?.value?.trim() ?? 'ZixLima';
-    miniName.style.fontSize = Math.min(c.nameSm, Math.max(16, ($('zzMiniBrand').clientWidth || 400)/4)) + 'px';
-    miniName.style.transform = `translateY(${c.nameY}px) scaleX(${c.nameSx/100}) scaleY(${c.nameSy/100})`;
-    miniName.style.letterSpacing = c.nameLs + 'px';
-    aplicarLed(
-      miniName,
-      c.nameColor,
-      c.nameGlowColor,
-      c.nameLightEffect,
-      c.nameLightIntensity
-    );
-    previewLed(miniName,c.nameColor,c.nameLed,c.nameGlow);
+    const nameText = ($('zzTextoMarca')?.value?.trim() || 'ZixLima');
+    const sloganTextValue = ($('zzTextoSlogan')?.value?.trim() || 'ZixLima Anúncie Aqui');
 
-    const sloganText = $('zzMiniSloganText');
-    sloganText.textContent = $('zzTextoSlogan')?.value?.trim() ?? 'ZixLima Anúncie Aqui';
-    const modoDesktop = window.matchMedia('(min-width: 701px)').matches;
-    sloganText.style.fontSize = Math.min((modoDesktop ? c.sloganTextSd : c.sloganTextSm), Math.max(14, ($('zzMiniSlogan').clientWidth || 400)/9)) + 'px';
-    sloganText.style.lineHeight = '1.15';
-    sloganText.style.overflowWrap = 'break-word';
-    aplicarLed(
-      sloganText,
-      c.sloganColor,
-      c.sloganGlowColor,
-      c.sloganLightEffect,
-      c.sloganLightIntensity
-    );
-    sloganText.style.transform = `translate(${c.sloganX}px,${c.sloganY}px)`;
-    previewLed(sloganText,c.sloganColor,c.sloganLed,c.sloganGlow);
+    function setText(id, txt){
+      const el = $(id);
+      if(el) el.textContent = txt;
+    }
 
-    const logo = $('zzMiniLogo');
-    logo.style.width = Math.min(c.logoWm, ($('zzMiniBrand').clientWidth || 400)*.85) + 'px';
-    logo.style.height = c.logoHm + 'px';
-    const logoDesktop = window.matchMedia('(min-width: 701px)').matches;
-    const logoX = logoDesktop ? c.logoXd : c.logoXm;
-    const logoY = logoDesktop ? c.logoYd : c.logoYm;
-    logo.style.transform = `translate(${logoX}px,${logoY}px)`;
+    function setImg(id, src, w, h){
+      const el = $(id);
+      if(!el) return;
+      if(src){
+        el.src = src;
+        el.style.display = '';
+      }else{
+        el.removeAttribute('src');
+        el.style.display = 'none';
+      }
+      if(w != null) el.style.width = w + 'px';
+      if(h != null) el.style.height = h + 'px';
+    }
 
-    const slog = $('zzMiniSloganImg');
-    slog.style.width = Math.min(c.sloganWm, ($('zzMiniSlogan').clientWidth || 400)*.85) + 'px';
-    slog.style.height = c.sloganHm + 'px';
-    slog.style.transform = `translate(${c.sloganImgX}px,${c.sloganImgY}px)`;
+    function applyNameStyle(el, fontSize){
+      if(!el) return;
+      el.style.fontSize = fontSize + 'px';
+      el.style.transform = `translateY(${c.nameY}px) scaleX(${c.nameSx/100}) scaleY(${c.nameSy/100})`;
+      el.style.letterSpacing = c.nameLs + 'px';
+      aplicarLed(el, c.nameColor, c.nameGlowColor, c.nameLightEffect, c.nameLightIntensity);
+      previewLed(el, c.nameColor, c.nameLed, c.nameGlow);
+    }
+
+    function applySloganStyle(el, fontSize, tx=0, ty=0){
+      if(!el) return;
+      el.style.fontSize = fontSize + 'px';
+      el.style.lineHeight = '1.15';
+      el.style.overflowWrap = 'break-word';
+      el.style.transform = `translate(${tx}px,${ty}px)`;
+      aplicarLed(el, c.sloganColor, c.sloganGlowColor, c.sloganLightEffect, c.sloganLightIntensity);
+      previewLed(el, c.sloganColor, c.sloganLed, c.sloganGlow);
+    }
+
+    // textos
+    [
+      'zzTopLogoText','zzMobileLogoText',
+      'zzMiniNameM','zzMiniNameD'
+    ].forEach(id => setText(id, nameText));
+
+    [
+      'zzTopSloganText','zzMiniSloganTextM','zzMiniSloganTextD'
+    ].forEach(id => setText(id, sloganTextValue));
+
+    // estilos nome
+    applyNameStyle($('zzTopLogoText'), Math.max(20, c.nameSd));
+    applyNameStyle($('zzMobileLogoText'), Math.max(16, c.nameSm));
+    applyNameStyle($('zzMiniNameM'), Math.max(18, c.nameSm));
+    applyNameStyle($('zzMiniNameD'), Math.max(24, c.nameSd));
+
+    // estilos slogan
+    applySloganStyle($('zzTopSloganText'), Math.max(18, c.sloganTextSd), c.sloganX, c.sloganY);
+    applySloganStyle($('zzMiniSloganTextM'), Math.max(16, c.sloganTextSm), c.sloganX, c.sloganY);
+    applySloganStyle($('zzMiniSloganTextD'), Math.max(18, c.sloganTextSd), c.sloganX, c.sloganY);
+
+    // imagens logo
+    const logoSrc = current.logoPath || '';
+    setImg('zzTopLogoImg', logoSrc, c.logoWd, c.logoHd);
+    setImg('zzMobileLogoImg', logoSrc, c.logoWm, c.logoHm);
+    setImg('zzMiniLogoM', logoSrc, c.logoWm, c.logoHm);
+    setImg('zzMiniLogoD', logoSrc, c.logoWd, c.logoHd);
+
+    // imagens slogan
+    const sloganSrc = current.sloganPath || '';
+    setImg('zzTopSloganImg', sloganSrc, c.sloganWd, c.sloganHd);
+    setImg('zzMobileSloganImg', sloganSrc, Math.max(72, c.sloganWm), Math.max(32, c.sloganHm));
+    setImg('zzMiniSloganImgM', sloganSrc, c.sloganWm, c.sloganHm);
+    setImg('zzMiniSloganImgD', sloganSrc, c.sloganWd, c.sloganHd);
+
+    // deslocamentos imagem slogan
+    const tsi = $('zzTopSloganImg');
+    if(tsi) tsi.style.transform = `translate(${c.sloganImgX}px,${c.sloganImgY}px)`;
+    const msi = $('zzMobileSloganImg');
+    if(msi) msi.style.transform = `translate(${c.sloganImgX}px,${c.sloganImgY}px)`;
+    const sm = $('zzMiniSloganImgM');
+    if(sm) sm.style.transform = `translate(${c.sloganImgX}px,${c.sloganImgY}px)`;
+    const sd = $('zzMiniSloganImgD');
+    if(sd) sd.style.transform = `translate(${c.sloganImgX}px,${c.sloganImgY}px)`;
   }
+
 
   async function request(path, opts={}){
     const token = $('zzToken')?.value?.trim();
