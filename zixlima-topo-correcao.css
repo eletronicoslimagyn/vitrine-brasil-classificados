@@ -1,0 +1,89 @@
+/* ZIXLIMA v20261016e | cabecalho real, preservando modulos existentes */
+body.zix-elite-active header .top { align-items:center!important; }
+body.zix-elite-active header .brand{
+  font-size:clamp(36px,4.8vw,65px)!important;
+  gap:10px!important;
+  min-width:0!important;
+}
+body.zix-elite-active header .zix-brasil{
+  width:clamp(53px,5vw,76px)!important;
+  height:clamp(51px,4.8vw,71px)!important;
+  font-size:clamp(32px,3.5vw,47px)!important;
+  flex-shrink:0!important;
+}
+body.zix-elite-active header .zz-controls{
+  display:flex!important;flex-wrap:nowrap!important;
+  align-items:center!important;justify-content:flex-end!important;gap:7px!important;
+}
+body.zix-elite-active header #zzPaletteToggle,
+body.zix-elite-active header #zzThemeToggle{
+  display:inline-grid!important;place-items:center!important;
+  width:46px!important;min-width:46px!important;height:46px!important;
+  padding:0!important;font-size:24px!important;
+  background:#fff!important;color:#183c69!important;
+  border:1px solid #6ac3ff!important;border-radius:14px!important;
+  box-shadow:0 2px 10px #001c3760!important;
+}
+body.zix-elite-active header #zixRelogio{
+  display:inline-flex!important;min-width:0!important;
+  padding:7px 11px!important;gap:6px!important;
+  border-radius:14px!important;
+}
+body.zix-elite-active header #zixRelogio .zixFlag{font-size:23px!important}
+body.zix-elite-active header #zixRelogio .zixClockDisplay{font-size:11px!important}
+body.zix-elite-active header #zixRelogio #zixHora{font-size:21px!important}
+body.zix-elite-active header .zz-palette{
+  top:calc(100% - 2px)!important;right:12px!important;
+  min-width:175px!important;z-index:999!important;
+}
+/* Destaca a escolha original da paleta. O JS original usa data-zz-color e persiste zz-color. */
+body[data-zz-theme="light"][data-zz-color="blue"] { --zz-page:#f0f5ff; }
+body[data-zz-theme="light"][data-zz-color="green"] { --zz-page:#d9f5e7; }
+body[data-zz-theme="light"][data-zz-color="sand"] { --zz-page:#fff0ce; }
+body[data-zz-theme="light"][data-zz-color="purple"] { --zz-page:#ebe5ff; }
+body[data-zz-theme="light"] .content{background:var(--zz-page,#f0f5ff)!important}
+@media(max-width:700px){
+  body.zix-elite-active header .top{
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:auto auto auto auto!important;
+    padding:9px 10px 7px!important;gap:7px!important;
+  }
+  body.zix-elite-active header .brand{
+    grid-column:1/-1!important;grid-row:1!important;
+    justify-self:start!important;
+    font-size:clamp(34px,9vw,49px)!important;
+  }
+  body.zix-elite-active header .zix-brasil{
+    width:52px!important;height:50px!important;font-size:34px!important;
+  }
+  body.zix-elite-active header .zz-controls{
+    grid-column:1/-1!important;grid-row:2!important;justify-self:end!important;
+    gap:7px!important;
+  }
+  body.zix-elite-active header #zzPaletteToggle,
+  body.zix-elite-active header #zzThemeToggle{
+    width:42px!important;min-width:42px!important;height:42px!important;font-size:23px!important;
+  }
+  body.zix-elite-active header #zixRelogio{
+    padding:5px 9px!important;gap:5px!important;
+  }
+  body.zix-elite-active header #zixRelogio .zixFlag{font-size:19px!important}
+  body.zix-elite-active header #zixRelogio .zixClockDisplay{font-size:10px!important}
+  body.zix-elite-active header #zixRelogio #zixHora{font-size:19px!important}
+  body.zix-elite-active header .actions{
+    grid-column:1/-1!important;grid-row:3!important;
+    justify-self:end!important;justify-content:flex-end!important;
+    flex-wrap:wrap!important;
+  }
+  body.zix-elite-active header nav{
+    grid-column:1/-1!important;grid-row:4!important;
+  }
+  body.zix-elite-active header .zz-palette{top:calc(100% - 2px)!important}
+}
+@media(max-width:375px){
+  body.zix-elite-active header .brand{font-size:33px!important}
+  body.zix-elite-active header .zix-brasil{width:48px!important;height:47px!important;font-size:30px!important}
+  body.zix-elite-active header #zzPaletteToggle,
+  body.zix-elite-active header #zzThemeToggle{width:39px!important;min-width:39px!important;height:39px!important}
+  body.zix-elite-active header #zixRelogio #zixHora{font-size:17px!important}
+}
