@@ -1,0 +1,13 @@
+/* Direcional local; não altera o layout vertical */
+.zix-directional{margin-top:12px;padding:12px;border:1px solid #c8daf7;border-radius:12px;background:#f3f8ff;color:#183254;font-size:13px;max-width:100%;box-sizing:border-box}
+.zix-directional .zix-quick-caption{font-size:14px;font-weight:800;margin-bottom:8px}
+.zix-directional label{display:block;margin:5px 0;font-weight:600}
+.zix-directional select,.zix-directional input{width:100%;max-width:100%;box-sizing:border-box;margin:4px 0 6px;padding:8px;font-size:14px;border:1px solid #cbd5e1;border-radius:8px;background:white}
+.zix-directional label[hidden]{display:none}
+.zix-q-direction{display:grid;justify-items:center;gap:4px;margin:5px auto}
+.zix-q-direction>div{display:flex;gap:45px}
+.zix-directional button{background:#1765d1;border-radius:8px;color:white;font-size:16px;min-width:44px;min-height:38px;margin:0;padding:5px 10px}
+.zix-q-scale{display:flex;align-items:center;justify-content:center;gap:14px;margin:8px 0}
+.zix-q-readout{display:block;text-align:center}
+.zix-preview-duo{grid-template-columns:1fr!important;max-width:520px!important}
+.zix-preview-duo .zix-shot-bar,.zix-preview-duo .zix-shot-box{min-width:0}
