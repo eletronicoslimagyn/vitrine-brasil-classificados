@@ -66,6 +66,78 @@ header #zixRelogio {
 <link rel="stylesheet" href="./zixlima-marca-v3.css?v=final-20261016">
 <link rel="stylesheet" href="./zixlima-marca-premium.css?v=20261017">
 <link rel="stylesheet" href="./zixlima-marca-definitiva.css?v=20261017b"><link rel="stylesheet" href="./zixlima-topo-compacto.css?v=20261017c">
+<style>
+
+/* ZIXLIMA_DESKTOP_PREMIUM_INICIO */
+@media screen and (min-width: 800px) {
+  html { font-size: 17px; }
+  body { font-size: 1rem; }
+  :is(header,.site-header,.topbar,.top-bar,.header-top,.cabecalho) {
+    box-sizing: border-box;
+  }
+  :is(header,.site-header,.topbar,.top-bar,.cabecalho) :is(.brand,.logo,.site-logo,.brand-name,.site-name) {
+    max-width: 100%;
+  }
+  :is(header,.site-header,.topbar,.top-bar,.cabecalho) :is(.brand-name,.site-name,.logo-text) {
+    font-size: clamp(1.6rem,2.5vw,2.6rem) !important;
+    line-height: 1.15;
+  }
+  :is(.header-actions,.top-actions,.nav-actions,.top-buttons) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  :is(.header-actions,.top-actions,.nav-actions,.top-buttons) :is(button,.btn,a) {
+    min-height: 42px;
+    font-size: 0.92rem;
+  }
+  :is(.main-nav,.nav-links,.menu-principal,.nav-menu) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 10px;
+  }
+  :is(.main-nav,.nav-links,.menu-principal,.nav-menu) > :is(a,button,.btn) {
+    flex: 1 1 145px;
+    min-height: 50px;
+    font-size: 1rem;
+  }
+  :is(.hero,.hero-section,.hero-content,.intro,.search-section,.search-box,.search-panel) {
+    box-sizing: border-box;
+  }
+  :is(.hero,.hero-section,.hero-content,.intro) :is(h1,.hero-title) {
+    font-size: clamp(2rem,3.3vw,3.6rem);
+    line-height: 1.14;
+  }
+  :is(.hero,.hero-section,.hero-content,.intro) p {
+    font-size: clamp(1rem,1.35vw,1.22rem);
+    line-height: 1.5;
+  }
+  :is(.search-box,.search-form,.search-panel,.busca-box,.search-fields) :is(input,select,button) {
+    min-height: 49px;
+    font-size: 1rem;
+  }
+  :is(.category-grid,.categories-grid,.categorias-grid,.grid-categories) {
+    gap: 16px;
+  }
+  :is(.category-card,.categoria-card,.cat-card) {
+    min-height: 116px;
+    padding: 16px;
+    box-sizing: border-box;
+  }
+  :is(.category-card,.categoria-card,.cat-card) :is(span,p,strong,h3) {
+    font-size: 1rem;
+  }
+  :is(.banner,.banner-principal,.hero-banner,.main-banner) img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+/* ZIXLIMA_DESKTOP_PREMIUM_FIM */
+
+</style>
 </head><body class="zix-elite-active"><header><div class="wrap top"><a class="brand" href="#inicio"><span class="zix-brasil" aria-hidden="true">🇧🇷</span> <span id="siteBrand">ZixLima</span></a><nav><a href="#inicio">Início</a><a href="#anuncios">Anúncios</a><a href="#meus">Meus anúncios</a><a href="admin.html">Admin</a></nav><div class="zz-controls"><button type="button" id="zzPaletteToggle" title="Cor de fundo" aria-label="Cor de fundo">🎨</button><button type="button" id="zzThemeToggle" title="Modo escuro" aria-label="Modo escuro">🌙</button><div id="zixRelogio" aria-label="Data e hora do Brasil">
     <span class="zixFlag">🇧🇷</span>
     <span class="zixClockDisplay">
