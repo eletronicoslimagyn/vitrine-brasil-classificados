@@ -156,6 +156,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .zix-token-wrap #zzTokenEye{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:44px;height:42px;margin:0;padding:0;border:0;background:transparent;border-radius:8px;font-size:22px;cursor:pointer}
 .zix-token-wrap #zzTokenEye:focus-visible{outline:3px solid #f59e0b}
 </style>
+<link rel="stylesheet" href="./site-brand-live.css?v=editor-led-posicao-1">
 </head>
 <body>
 <header>
@@ -274,6 +275,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <label>Escala vertical (%)<input id="zzNameSy" type="number" min="50" max="250" value="100"></label>
     <label>Posição vertical do nome (px)<input id="zzNameY" type="number" min="-50" max="80" value="0"></label>
     <label>Espaçamento entre letras (px)<input id="zzNameLs" type="number" min="-8" max="12" value="-1"></label>
+    <h4>🎨 Cor e luz do nome</h4>
+    <label>Cor da letra<select id="zzNameColor"><option value="original">Original</option><option value="white">Branco</option><option value="green">Verde LED</option><option value="yellow">Amarelo</option><option value="gold">Dourado</option><option value="silver">Prateado</option><option value="blue">Azul</option><option value="red">Vermelho</option><option value="black">Preto</option></select></label>
+    <label>Efeito luminoso<select id="zzNameLed"><option value="none">Sem luz</option><option value="steady">Luz fixa</option><option value="pulse">LED pulsante</option><option value="cycle">LED em movimento de cores</option></select></label>
+    <label>Intensidade do LED (0 a 20)<input id="zzNameGlow" type="number" min="0" max="20" value="6"></label>
+
   </div>
 
   <div class="zix-brand-box">
@@ -299,6 +305,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <label>Altura no celular (px)<input id="zzSloganHm" type="number" min="20" max="240" value="36"></label>
     <label>Largura no desktop (px)<input id="zzSloganWd" type="number" min="20" max="300" value="52"></label>
     <label>Altura no desktop (px)<input id="zzSloganHd" type="number" min="20" max="300" value="52"></label>
+    <h4>🎨 Cor e luz do slogan</h4>
+    <label>Cor da letra<select id="zzSloganColor"><option value="original">Original</option><option value="white">Branco</option><option value="green">Verde LED</option><option value="yellow">Amarelo</option><option value="gold">Dourado</option><option value="silver">Prateado</option><option value="blue">Azul</option><option value="red">Vermelho</option><option value="black">Preto</option></select></label>
+    <label>Efeito luminoso<select id="zzSloganLed"><option value="none">Sem luz</option><option value="steady">Luz fixa</option><option value="pulse">LED pulsante</option><option value="cycle">LED em movimento de cores</option></select></label>
+    <label>Intensidade do LED (0 a 20)<input id="zzSloganGlow" type="number" min="0" max="20" value="6"></label>
+    <h4>↔ ↕ Ajuste de posição (px)</h4>
+    <p class="zix-help">Valor negativo move para esquerda/cima. Positivo move para direita/baixo. Texto e foto têm controles independentes.</p>
+    <label>Texto: esquerda/direita<input id="zzSloganX" type="number" min="-300" max="300" value="0"></label>
+    <label>Texto: cima/baixo<input id="zzSloganY" type="number" min="-300" max="300" value="0"></label>
+    <label>Imagem: esquerda/direita<input id="zzSloganImgX" type="number" min="-300" max="300" value="0"></label>
+    <label>Imagem: cima/baixo<input id="zzSloganImgY" type="number" min="-300" max="300" value="0"></label>
+
   </div>
 
   <div class="zix-brand-box zix-brand-preview-wide">

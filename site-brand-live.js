@@ -38,6 +38,30 @@
     setNumVar('--zz-slogan-wd', c.sloganWd);
     setNumVar('--zz-slogan-hd', c.sloganHd);
 
+
+    const palette={original:'',white:'#ffffff',green:'#5dff62',yellow:'#ffef53',gold:'#ffd058',silver:'#e1eaf5',blue:'#49b9ff',red:'#ff6262',black:'#111827'};
+    function led(el,color,mode,glow){
+      if(!el)return;
+      const hex=palette[color]||'';
+      if(hex){
+        el.style.setProperty('color',hex,'important');
+        el.style.setProperty('-webkit-text-fill-color',hex,'important');
+        el.style.setProperty('background-image','none','important');
+      }
+      el.style.setProperty('--zz-led-shine',hex||'#66ff77');
+      el.style.setProperty('--zz-led-blur',Math.max(0,Math.min(20,Number(glow)||0))+'px');
+      el.classList.toggle('zz-led-steady',mode==='steady');
+      el.classList.toggle('zz-led-pulse',mode==='pulse');
+      el.classList.toggle('zz-led-cycle',mode==='cycle');
+    }
+    led(document.getElementById('siteBrand'),c.nameColor,c.nameLed,c.nameGlow);
+    led(document.getElementById('siteHero'),c.sloganColor,c.sloganLed,c.sloganGlow);
+    const bound=n=>Math.max(-300,Math.min(300,Number(n)||0));
+    root.setProperty('--zz-slogan-x',bound(c.sloganX)+'px');
+    root.setProperty('--zz-slogan-y',bound(c.sloganY)+'px');
+    root.setProperty('--zz-slogan-img-x',bound(c.sloganImgX)+'px');
+    root.setProperty('--zz-slogan-img-y',bound(c.sloganImgY)+'px');
+
     const brand = document.querySelector('header .top > a.brand');
     if(brand && c.logoPath){
       let img = document.getElementById('zzCustomBrandLogo');

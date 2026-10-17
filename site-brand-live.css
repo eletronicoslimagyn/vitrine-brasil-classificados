@@ -96,3 +96,18 @@ body.zz-has-slogan-icon #zzSloganIcon{
 #siteBrand:empty,#siteHero:empty{display:none!important}
 .zz-siteHeroTitleWrap{min-width:0;max-width:100%}
 #siteHero{white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;min-width:0}
+
+/* Editor LED e posicao ZixLima. Respeita preferencia de movimento reduzido. */
+:root{--zz-slogan-x:0px;--zz-slogan-y:0px;--zz-slogan-img-x:0px;--zz-slogan-img-y:0px}
+#siteHero{transform:translate(var(--zz-slogan-x),var(--zz-slogan-y))!important}
+#zzSloganIcon{transform:translate(var(--zz-slogan-img-x),var(--zz-slogan-img-y))!important}
+#siteBrand.zz-led-steady,#siteHero.zz-led-steady,
+#siteBrand.zz-led-pulse,#siteHero.zz-led-pulse,
+#siteBrand.zz-led-cycle,#siteHero.zz-led-cycle{
+ text-shadow:0 0 var(--zz-led-blur,6px) var(--zz-led-shine,#66ff77),0 0 13px var(--zz-led-shine,#66ff77)!important;
+}
+.zz-led-pulse{animation:zzLedPulse 2.6s ease-in-out infinite!important}
+.zz-led-cycle{animation:zzLedCycle 5s linear infinite!important}
+@keyframes zzLedPulse{0%,100%{filter:brightness(1);text-shadow:0 0 3px var(--zz-led-shine,#66ff77)}50%{filter:brightness(1.3);text-shadow:0 0 16px var(--zz-led-shine,#66ff77),0 0 26px var(--zz-led-shine,#66ff77)}}
+@keyframes zzLedCycle{0%,100%{text-shadow:0 0 12px #41ff60,0 0 19px #41ff60}33%{text-shadow:0 0 12px #fbe34f,0 0 19px #fbe34f}66%{text-shadow:0 0 12px #dfe9f6,0 0 19px #dfe9f6}}
+@media(prefers-reduced-motion:reduce){.zz-led-pulse,.zz-led-cycle{animation:none!important}}

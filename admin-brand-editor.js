@@ -19,13 +19,18 @@
     sloganWm: 36,
     sloganHm: 36,
     sloganWd: 52,
-    sloganHd: 52
+    sloganHd: 52,
+    nameColor: "original", nameLed: "none", nameGlow: 6,
+    sloganColor: "original", sloganLed: "none", sloganGlow: 6,
+    sloganX: 0, sloganY: 0, sloganImgX: 0, sloganImgY: 0
   };
 
   const ids = [
     'zzLogoWm','zzLogoHm','zzLogoWd','zzLogoHd',
     'zzNameSm','zzNameSd','zzNameSx','zzNameSy','zzNameY','zzNameLs',
-    'zzSloganTextSm','zzSloganTextSd','zzSloganWm','zzSloganHm','zzSloganWd','zzSloganHd'
+    'zzSloganTextSm','zzSloganTextSd','zzSloganWm','zzSloganHm','zzSloganWd','zzSloganHd',
+    'zzNameGlow','zzSloganGlow','zzSloganX','zzSloganY','zzSloganImgX','zzSloganImgY',
+    'zzNameColor','zzNameLed','zzSloganColor','zzSloganLed'
   ];
 
   let current = {...defaults};
@@ -62,7 +67,10 @@
       sloganWm: val('zzSloganWm',36),
       sloganHm: val('zzSloganHm',36),
       sloganWd: val('zzSloganWd',52),
-      sloganHd: val('zzSloganHd',52)
+      sloganHd: val('zzSloganHd',52),
+      nameColor: $('zzNameColor').value, nameLed: $('zzNameLed').value, nameGlow: val('zzNameGlow',6),
+      sloganColor: $('zzSloganColor').value, sloganLed: $('zzSloganLed').value, sloganGlow: val('zzSloganGlow',6),
+      sloganX: val('zzSloganX'), sloganY: val('zzSloganY'), sloganImgX: val('zzSloganImgX'), sloganImgY: val('zzSloganImgY')
     };
   }
 
@@ -84,6 +92,7 @@
     $('zzSloganHm').value = current.sloganHm;
     $('zzSloganWd').value = current.sloganWd;
     $('zzSloganHd').value = current.sloganHd;
+    for(const [key,id] of Object.entries({nameColor:'zzNameColor',nameLed:'zzNameLed',nameGlow:'zzNameGlow',sloganColor:'zzSloganColor',sloganLed:'zzSloganLed',sloganGlow:'zzSloganGlow',sloganX:'zzSloganX',sloganY:'zzSloganY',sloganImgX:'zzSloganImgX',sloganImgY:'zzSloganImgY'})){ $(id).value=current[key]; }
     renderPreview();
     if(current.logoPath) showPreviewImage('zzLogoPreviewBox', current.logoPath);
     if(current.sloganPath) showPreviewImage('zzSloganPreviewBox', current.sloganPath);
@@ -107,6 +116,21 @@
     box.appendChild(img);
   }
 
+
+  const colors = {original:'',white:'#ffffff',green:'#5dff62',yellow:'#ffef53',gold:'#ffd058',silver:'#e1eaf5',blue:'#49b9ff',red:'#ff6262',black:'#111827'};
+  function previewLed(el,color,mode,intensity){
+    const hex=colors[color]||'';
+    el.style.color=hex||'';
+    el.style.webkitTextFillColor=hex||'';
+    el.style.backgroundImage=hex?'none':'';
+    el.style.setProperty('--zz-led-shine',hex||'#66ff77');
+    el.style.setProperty('--zz-led-blur',Math.max(0,Math.min(20,Number(intensity)||0))+'px');
+    el.classList.toggle('zz-led-steady',mode==='steady');
+    el.classList.toggle('zz-led-pulse',mode==='pulse');
+    el.classList.toggle('zz-led-cycle',mode==='cycle');
+    el.style.textShadow=mode==='none'?'none':'';
+  }
+
   function renderPreview(){
     const c = collect();
 
@@ -115,6 +139,7 @@
     miniName.style.fontSize = Math.min(c.nameSm, Math.max(16, ($('zzMiniBrand').clientWidth || 400)/4)) + 'px';
     miniName.style.transform = `translateY(${c.nameY}px) scaleX(${c.nameSx/100}) scaleY(${c.nameSy/100})`;
     miniName.style.letterSpacing = c.nameLs + 'px';
+    previewLed(miniName,c.nameColor,c.nameLed,c.nameGlow);
 
     const sloganText = $('zzMiniSloganText');
     sloganText.textContent = $('zzTextoSlogan')?.value?.trim() ?? 'ZixLima Anúncie Aqui';
@@ -122,6 +147,8 @@
     sloganText.style.fontSize = Math.min((modoDesktop ? c.sloganTextSd : c.sloganTextSm), Math.max(14, ($('zzMiniSlogan').clientWidth || 400)/9)) + 'px';
     sloganText.style.lineHeight = '1.15';
     sloganText.style.overflowWrap = 'break-word';
+    sloganText.style.transform = `translate(${c.sloganX}px,${c.sloganY}px)`;
+    previewLed(sloganText,c.sloganColor,c.sloganLed,c.sloganGlow);
 
     const logo = $('zzMiniLogo');
     logo.style.width = Math.min(c.logoWm, ($('zzMiniBrand').clientWidth || 400)*.85) + 'px';
@@ -130,6 +157,7 @@
     const slog = $('zzMiniSloganImg');
     slog.style.width = Math.min(c.sloganWm, ($('zzMiniSlogan').clientWidth || 400)*.85) + 'px';
     slog.style.height = c.sloganHm + 'px';
+    slog.style.transform = `translate(${c.sloganImgX}px,${c.sloganImgY}px)`;
   }
 
   async function request(path, opts={}){
