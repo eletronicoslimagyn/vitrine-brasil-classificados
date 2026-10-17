@@ -5,14 +5,14 @@
   "logoHm": 90,
   "logoWd": 350,
   "logoHd": 250,
-  "nameSm": 100,
-  "nameSd": 100,
+  "nameSm": 80,
+  "nameSd": 150,
   "nameSx": 100,
-  "nameSy": 100,
+  "nameSy": 150,
   "nameY": 0,
   "nameLs": -1,
-  "sloganWm": 185,
-  "sloganHm": 85,
-  "sloganWd": 400,
-  "sloganHd": 300
+  "sloganWm": 100,
+  "sloganHm": 60,
+  "sloganWd": 300,
+  "sloganHd": 250
 }
