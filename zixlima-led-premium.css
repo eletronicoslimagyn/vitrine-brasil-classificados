@@ -1,0 +1,167 @@
+/* ZIXLIMA LED PREMIUM 2026 */
+
+/* Neon do nome */
+body.zix-elite-active header .top>a.brand>#siteBrand {
+  filter:drop-shadow(0 0 3px #18dfff);
+  text-shadow:
+    0 1px 1px #00214d,
+    0 0 5px #00cfff,
+    0 0 9px #0de65b,
+    0 0 13px #e4e637 !important;
+  animation:zixNeon 4s ease-in-out infinite;
+}
+
+/* Neon da bandeira à esquerda */
+body.zix-elite-active header .top>a.brand>.zix-brasil {
+  box-shadow:
+    0 0 5px #00ff88,
+    0 0 11px #00df72,
+    inset 0 0 4px #dfff62 !important;
+  animation:zixFlagLed 4s ease-in-out infinite;
+}
+
+@keyframes zixNeon {
+  0%,100% {filter:drop-shadow(0 0 2px #00ddff)}
+  50% {filter:drop-shadow(0 0 7px #70ff44)}
+}
+
+@keyframes zixFlagLed {
+  0%,100% {
+    box-shadow:0 0 5px #00ff88,0 0 10px #00dd66;
+  }
+  50% {
+    box-shadow:0 0 8px #ffff42,0 0 14px #02f2a0;
+  }
+}
+
+/* Relógio brasileiro compacto */
+body.zix-elite-active header #zixRelogio {
+  position:relative !important;
+  isolation:isolate !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  box-sizing:border-box !important;
+  min-width:0 !important;
+  width:112px !important;
+  height:39px !important;
+  min-height:0 !important;
+  padding:4px 6px !important;
+  margin:0 !important;
+  gap:4px !important;
+  border:0 !important;
+  border-radius:22px !important;
+  background:transparent !important;
+  overflow:hidden !important;
+  box-shadow:0 0 6px #00ff88aa !important;
+}
+
+/* LED circulando a borda */
+body.zix-elite-active header #zixRelogio::before {
+  content:"" !important;
+  position:absolute !important;
+  inset:-85px !important;
+  width:auto !important;
+  height:auto !important;
+  transform:none;
+  background:conic-gradient(
+    #00ff7b,#fff500,#00dfff,#00ff7b,
+    #ffe600,#00ff7b
+  ) !important;
+  border:0 !important;
+  clip-path:none !important;
+  opacity:1 !important;
+  z-index:-2 !important;
+  animation:zixGiroLED 5s linear infinite;
+}
+
+/* Interior verde brasileiro */
+body.zix-elite-active header #zixRelogio::after {
+  content:"" !important;
+  position:absolute !important;
+  inset:2px !important;
+  width:auto !important;
+  height:auto !important;
+  left:2px !important;
+  top:2px !important;
+  transform:none !important;
+  border-radius:20px !important;
+  background:linear-gradient(
+    135deg,#003a28,#006b40,#062e35
+  ) !important;
+  opacity:1 !important;
+  z-index:-1 !important;
+}
+
+@keyframes zixGiroLED {
+  to {transform:rotate(360deg)}
+}
+
+/* Bandeira do Brasil dentro do relógio */
+body.zix-elite-active header #zixRelogio>.zixFlag {
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  position:relative !important;
+  font-size:21px !important;
+  line-height:1 !important;
+  flex-shrink:0 !important;
+  z-index:1 !important;
+}
+
+/* Data e horário digital */
+body.zix-elite-active header #zixRelogio .zixClockDisplay {
+  position:relative !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:1px !important;
+  font-size:8px !important;
+  line-height:1.1 !important;
+  color:#fff !important;
+  z-index:1 !important;
+}
+
+body.zix-elite-active header #zixRelogio #zixHora {
+  font:900 13px/1.1 monospace !important;
+  color:#faff43 !important;
+  letter-spacing:0 !important;
+  text-shadow:0 0 5px #b3ff00 !important;
+}
+
+/* Evita sobreposição no celular */
+@media(max-width:700px) {
+  body.zix-elite-active header .top>.zz-controls>#zixRelogio {
+    grid-column:3 !important;
+    grid-row:1 !important;
+    justify-self:end !important;
+    width:106px !important;
+    height:36px !important;
+    min-height:0 !important;
+    padding:3px 4px !important;
+    gap:3px !important;
+  }
+  body.zix-elite-active header #zixRelogio>.zixFlag {
+    font-size:19px !important;
+  }
+  body.zix-elite-active header #zixRelogio #zixHora {
+    font-size:12px !important;
+  }
+}
+
+@media(max-width:375px) {
+  body.zix-elite-active header .top>.zz-controls>#zixRelogio {
+    width:101px !important;
+    height:35px !important;
+  }
+}
+
+/* Acessibilidade */
+@media(prefers-reduced-motion:reduce) {
+  body.zix-elite-active header #zixRelogio::before,
+  body.zix-elite-active header .top>a.brand>#siteBrand,
+  body.zix-elite-active header .top>a.brand>.zix-brasil {
+    animation:none !important;
+  }
+}
