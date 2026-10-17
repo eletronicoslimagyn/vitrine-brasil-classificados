@@ -174,3 +174,14 @@ body.zix-elite-active header .top>a.brand>.zix-brasil {
 body.zix-elite-active header .top>a.brand>#siteBrand {
     font-size: 30px !important;
 }
+
+/* Ajuste definitivo de tamanho ZixLima */
+body.zix-elite-active header .top, header .top {
+    grid-template-columns: 65px minmax(0,1fr) auto !important;
+}
+body.zix-elite-active header .top>a.brand>.zix-brasil, header .top .zix-brasil, .zix-brasil {
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+}
