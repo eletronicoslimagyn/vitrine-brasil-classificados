@@ -1,3 +1,59 @@
+function zzColorMap(nome){
+  const mapa = {
+    'preto':'#111111',
+    'branco':'#ffffff',
+    'prateado':'#d9dee7',
+    'dourado':'#f6c84c',
+    'verde':'#16a34a',
+    'verde-led':'#7dff61',
+    'amarelo':'#ffd800',
+    'azul':'#4db3ff',
+    'vermelho':'#ff4d4d'
+  };
+  return mapa[nome] || nome || '#ffffff';
+}
+function zzApplyLed(el, corTexto, corLed, efeito, intensidade){
+  if(!el) return;
+  const txt = zzColorMap(corTexto);
+  const led = zzColorMap(corLed);
+  const i = Math.max(0, Math.min(20, Number(intensidade || 0)));
+
+  el.style.color = txt;
+  el.style.textShadow = 'none';
+  el.style.animation = 'none';
+  el.style.backgroundImage = 'none';
+  el.style.webkitTextFillColor = '';
+  el.style.backgroundClip = '';
+  el.style.webkitBackgroundClip = '';
+
+  if(!efeito || efeito === 'sem-luz') return;
+
+  const sombra =
+    `0 0 ${Math.max(2,i)}px ${led},
+     0 0 ${Math.max(4,i*2)}px ${led},
+     0 0 ${Math.max(6,i*3)}px ${led}`;
+
+  if(efeito === 'luz-fixa'){
+    el.style.textShadow = sombra;
+    return;
+  }
+
+  if(efeito === 'led-pulsante'){
+    el.style.textShadow = sombra;
+    el.style.animation = 'zzPulseGlow 1.3s ease-in-out infinite';
+    return;
+  }
+
+  if(efeito === 'led-movimento'){
+    el.style.textShadow = sombra;
+    el.style.backgroundImage = `linear-gradient(90deg, ${txt}, ${led}, ${txt})`;
+    el.style.backgroundSize = '200% auto';
+    el.style.webkitBackgroundClip = 'text';
+    el.style.backgroundClip = 'text';
+    el.style.webkitTextFillColor = 'transparent';
+    el.style.animation = 'zzMoveGlow 2s linear infinite';
+  }
+}
 (async () => {
   try{
     const r = await fetch('./site-brand-settings.json?ts=' + Date.now(), {cache:'no-store'});
@@ -61,6 +117,16 @@
     root.setProperty('--zz-slogan-y',bound(c.sloganY)+'px');
     root.setProperty('--zz-slogan-img-x',bound(c.sloganImgX)+'px');
     root.setProperty('--zz-slogan-img-y',bound(c.sloganImgY)+'px');
+
+    const siteBrand = document.getElementById('siteBrand');
+    if(siteBrand){
+      zzApplyLed(siteBrand, c.nameColor, c.nameGlowColor, c.nameLightEffect, c.nameLightIntensity);
+    }
+
+    const heroText = document.getElementById('siteHero');
+    if(heroText){
+      zzApplyLed(heroText, c.sloganColor, c.sloganGlowColor, c.sloganLightEffect, c.sloganLightIntensity);
+    }
 
     const brand = document.querySelector('header .top > a.brand');
     if(brand && c.logoPath){

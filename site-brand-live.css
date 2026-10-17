@@ -111,3 +111,12 @@ body.zz-has-slogan-icon #zzSloganIcon{
 @keyframes zzLedPulse{0%,100%{filter:brightness(1);text-shadow:0 0 3px var(--zz-led-shine,#66ff77)}50%{filter:brightness(1.3);text-shadow:0 0 16px var(--zz-led-shine,#66ff77),0 0 26px var(--zz-led-shine,#66ff77)}}
 @keyframes zzLedCycle{0%,100%{text-shadow:0 0 12px #41ff60,0 0 19px #41ff60}33%{text-shadow:0 0 12px #fbe34f,0 0 19px #fbe34f}66%{text-shadow:0 0 12px #dfe9f6,0 0 19px #dfe9f6}}
 @media(prefers-reduced-motion:reduce){.zz-led-pulse,.zz-led-cycle{animation:none!important}}
+
+@keyframes zzPulseGlow{
+  0%,100%{opacity:1;filter:brightness(1)}
+  50%{opacity:.85;filter:brightness(1.18)}
+}
+@keyframes zzMoveGlow{
+  0%{background-position:0% 50%}
+  100%{background-position:200% 50%}
+}

@@ -28,7 +28,7 @@
   const ids = [
     'zzLogoWm','zzLogoHm','zzLogoWd','zzLogoHd',
     'zzNameSm','zzNameSd','zzNameSx','zzNameSy','zzNameY','zzNameLs',
-    'zzSloganTextSm','zzSloganTextSd','zzSloganWm','zzSloganHm','zzSloganWd','zzSloganHd',
+    'zzSloganTextSm','zzSloganTextSd','zzSloganWm','zzSloganHm','zzSloganWd','zzSloganHd','zzNameColor','zzNameGlowColor','zzNameLightEffect','zzNameLightIntensity','zzSloganColor','zzSloganGlowColor','zzSloganLightEffect','zzSloganLightIntensity',
     'zzNameGlow','zzSloganGlow','zzSloganX','zzSloganY','zzSloganImgX','zzSloganImgY',
     'zzNameColor','zzNameLed','zzSloganColor','zzSloganLed'
   ];
@@ -92,6 +92,14 @@
     $('zzSloganHm').value = current.sloganHm;
     $('zzSloganWd').value = current.sloganWd;
     $('zzSloganHd').value = current.sloganHd;
+    if($('zzNameColor')) $('zzNameColor').value = current.nameColor || 'verde-led';
+    if($('zzNameGlowColor')) $('zzNameGlowColor').value = current.nameGlowColor || 'prateado';
+    if($('zzNameLightEffect')) $('zzNameLightEffect').value = current.nameLightEffect || 'led-pulsante';
+    if($('zzNameLightIntensity')) $('zzNameLightIntensity').value = current.nameLightIntensity ?? 10;
+    if($('zzSloganColor')) $('zzSloganColor').value = current.sloganColor || 'verde-led';
+    if($('zzSloganGlowColor')) $('zzSloganGlowColor').value = current.sloganGlowColor || 'prateado';
+    if($('zzSloganLightEffect')) $('zzSloganLightEffect').value = current.sloganLightEffect || 'led-movimento';
+    if($('zzSloganLightIntensity')) $('zzSloganLightIntensity').value = current.sloganLightIntensity ?? 10;
     for(const [key,id] of Object.entries({nameColor:'zzNameColor',nameLed:'zzNameLed',nameGlow:'zzNameGlow',sloganColor:'zzSloganColor',sloganLed:'zzSloganLed',sloganGlow:'zzSloganGlow',sloganX:'zzSloganX',sloganY:'zzSloganY',sloganImgX:'zzSloganImgX',sloganImgY:'zzSloganImgY'})){ $(id).value=current[key]; }
     renderPreview();
     if(current.logoPath) showPreviewImage('zzLogoPreviewBox', current.logoPath);
@@ -131,6 +139,64 @@
     el.style.textShadow=mode==='none'?'none':'';
   }
 
+
+  function colorMap(nome){
+    const mapa = {
+      'preto':'#111111',
+      'branco':'#ffffff',
+      'prateado':'#d9dee7',
+      'dourado':'#f6c84c',
+      'verde':'#16a34a',
+      'verde-led':'#7dff61',
+      'amarelo':'#ffd800',
+      'azul':'#4db3ff',
+      'vermelho':'#ff4d4d'
+    };
+    return mapa[nome] || nome || '#ffffff';
+  }
+
+  function aplicarLed(el, corTexto, corLed, efeito, intensidade){
+    const txt = colorMap(corTexto);
+    const led = colorMap(corLed);
+    const i = Math.max(0, Math.min(20, Number(intensidade || 0)));
+    el.style.color = txt;
+    el.style.textShadow = 'none';
+    el.style.animation = 'none';
+    el.style.backgroundImage = 'none';
+    el.style.webkitTextFillColor = '';
+    el.style.backgroundClip = '';
+    el.style.webkitBackgroundClip = '';
+
+    if(!efeito || efeito === 'sem-luz') return;
+
+    const brilho = Math.max(2, i);
+    const sombra =
+      `0 0 ${brilho}px ${led},
+       0 0 ${brilho*2}px ${led},
+       0 0 ${brilho*3}px ${led}`;
+
+    if(efeito === 'luz-fixa'){
+      el.style.textShadow = sombra;
+      return;
+    }
+
+    if(efeito === 'led-pulsante'){
+      el.style.textShadow = sombra;
+      el.style.animation = 'zzPulseGlow 1.3s ease-in-out infinite';
+      return;
+    }
+
+    if(efeito === 'led-movimento'){
+      el.style.textShadow = sombra;
+      el.style.backgroundImage = `linear-gradient(90deg, ${txt}, ${led}, ${txt})`;
+      el.style.backgroundSize = '200% auto';
+      el.style.webkitBackgroundClip = 'text';
+      el.style.backgroundClip = 'text';
+      el.style.webkitTextFillColor = 'transparent';
+      el.style.animation = 'zzMoveGlow 2s linear infinite';
+    }
+  }
+
   function renderPreview(){
     const c = collect();
 
@@ -139,6 +205,13 @@
     miniName.style.fontSize = Math.min(c.nameSm, Math.max(16, ($('zzMiniBrand').clientWidth || 400)/4)) + 'px';
     miniName.style.transform = `translateY(${c.nameY}px) scaleX(${c.nameSx/100}) scaleY(${c.nameSy/100})`;
     miniName.style.letterSpacing = c.nameLs + 'px';
+    aplicarLed(
+      miniName,
+      c.nameColor,
+      c.nameGlowColor,
+      c.nameLightEffect,
+      c.nameLightIntensity
+    );
     previewLed(miniName,c.nameColor,c.nameLed,c.nameGlow);
 
     const sloganText = $('zzMiniSloganText');
@@ -147,6 +220,13 @@
     sloganText.style.fontSize = Math.min((modoDesktop ? c.sloganTextSd : c.sloganTextSm), Math.max(14, ($('zzMiniSlogan').clientWidth || 400)/9)) + 'px';
     sloganText.style.lineHeight = '1.15';
     sloganText.style.overflowWrap = 'break-word';
+    aplicarLed(
+      sloganText,
+      c.sloganColor,
+      c.sloganGlowColor,
+      c.sloganLightEffect,
+      c.sloganLightIntensity
+    );
     sloganText.style.transform = `translate(${c.sloganX}px,${c.sloganY}px)`;
     previewLed(sloganText,c.sloganColor,c.sloganLed,c.sloganGlow);
 

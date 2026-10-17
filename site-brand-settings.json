@@ -16,5 +16,7 @@
   "sloganWm": 80,
   "sloganHm": 60,
   "sloganWd": 350,
-  "sloganHd": 200
+  "sloganHd": 200,
+  "nameGlowColor": "prateado",
+  "sloganGlowColor": "prateado"
 }
