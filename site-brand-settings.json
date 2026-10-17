@@ -1,10 +1,10 @@
 {
   "logoPath": "./assets/zixlima-logo-topo-custom.png",
   "sloganPath": "./assets/zixlima-slogan-icone-custom.png",
-  "logoWm": 100,
-  "logoHm": 80,
-  "logoWd": 400,
-  "logoHd": 250,
+  "logoWm": 120,
+  "logoHm": 65,
+  "logoWd": 800,
+  "logoHd": 200,
   "nameSm": 80,
   "nameSd": 80,
   "nameSx": 100,
@@ -16,5 +16,5 @@
   "sloganWm": 80,
   "sloganHm": 60,
   "sloganWd": 400,
-  "sloganHd": 250
+  "sloganHd": 200
 }
