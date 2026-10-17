@@ -217,10 +217,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <p id="zzPerfilMensagem" role="status"></p>
 </div>
 <div class="card" id="zzixbrConfig">
-<h2>✨ Personalizar o site ZixLima</h2>
-<p><small>Altere a identidade e os contatos do site. Clique em Publicar no GitHub para disponibilizar as mudanças.</small></p>
-<label>Nome do site<input id="zzNome" maxlength="60"></label>
-<label>Frase de impacto<input id="zzSlogan" maxlength="160"></label>
+<h2>📞 Contatos do site</h2>
+<p><small>Edite os contatos públicos. Os textos da marca ficam nas duas áreas de edição logo abaixo.</small></p>
+<input id="zzNome" type="hidden" value="ZixLima">
+<input id="zzSlogan" type="hidden" value="ZixLima Anúncie Aqui">
 <label>E-mail de suporte<input id="zzEmail" type="email" maxlength="150"></label>
 <label>WhatsApp com DDI e DDD<input id="zzWhatsapp" inputmode="numeric" maxlength="16"></label>
 
@@ -246,6 +246,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   </div>
 
   <div class="zix-brand-box">
+    <h4>✏️ Texto superior: nome da empresa</h4>
+    <label>Escrita que aparece no topo esquerdo
+      <input id="zzTextoMarca" maxlength="60" value="ZixLima" placeholder="Nome da empresa">
+    </label>
     <h4>Nome da empresa</h4>
     <p class="zix-help">Ajuste o tamanho e a proporção do nome ZixLima no painel superior esquerdo.</p>
 
@@ -258,6 +262,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   </div>
 
   <div class="zix-brand-box">
+    <h4>✏️ Texto do balão de anúncio</h4>
+    <label>Escrita do slogan principal
+      <input id="zzTextoSlogan" maxlength="160" value="ZixLima Anúncie Aqui" placeholder="Frase do anúncio">
+    </label>
     <h4>Ícone / foto do slogan</h4>
     <p class="zix-help">Adicione uma foto ou ícone ao lado do slogan principal do anúncio.</p>
 
@@ -276,7 +284,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
   <div class="zix-brand-box">
     <h4>Prévia rápida</h4>
-    <p class="zix-help">Veja uma simulação do topo com o logo e do slogan com a foto.</p>
+    <p class="zix-help">Veja os textos, os logos e as medidas antes de salvar.</p>
     <div class="zix-mini-top">
       <div class="zix-mini-brand" id="zzMiniBrand">
         <img id="zzMiniLogo" alt="Prévia do logo" style="width:56px;height:56px;display:none">

@@ -27,6 +27,7 @@
   ];
 
   let current = {...defaults};
+  const savedText = {nome:'ZixLima', slogan:'ZixLima Anúncie Aqui'};
 
   function msg(t, ok=false){
     const el = $('zzMarcaMensagem');
@@ -104,13 +105,13 @@
     const c = collect();
 
     const miniName = $('zzMiniName');
-    miniName.textContent = $('zzNome')?.value?.trim() || 'ZixLima';
+    miniName.textContent = $('zzTextoMarca')?.value?.trim() || 'ZixLima';
     miniName.style.fontSize = c.nameSm + 'px';
     miniName.style.transform = `translateY(${c.nameY}px) scaleX(${c.nameSx/100}) scaleY(${c.nameSy/100})`;
     miniName.style.letterSpacing = c.nameLs + 'px';
 
     const sloganText = $('zzMiniSloganText');
-    sloganText.textContent = $('zzSlogan')?.value?.trim() || 'ZixLima Anúncie Aqui';
+    sloganText.textContent = $('zzTextoSlogan')?.value?.trim() || 'ZixLima Anúncie Aqui';
 
     const logo = $('zzMiniLogo');
     logo.style.width = c.logoWm + 'px';
@@ -219,6 +220,19 @@
       settings.logoPath = current.logoPath || '';
       settings.sloganPath = current.sloganPath || '';
 
+      // Mesma fonte de textos da página principal; preserva contatos públicos atuais.
+      const nome = $('zzTextoMarca').value.trim();
+      const slogan = $('zzTextoSlogan').value.trim();
+      if(!nome || nome.length>60 || !slogan || slogan.length>160){
+        throw new Error('Preencha os dois textos (nome até 60, slogan até 160 caracteres).');
+      }
+      const existing = await request('/contents/site-settings.json');
+      const bytes = Uint8Array.from(atob(existing.content.replace(/\s/g,'')), ch=>ch.charCodeAt(0));
+      const siteSettings = JSON.parse(new TextDecoder().decode(bytes));
+      siteSettings.nome = nome;
+      siteSettings.slogan = slogan;
+      await putTextFile('site-settings.json', JSON.stringify(siteSettings,null,2)+'\n', 'Atualizar textos da marca pelo Admin');
+      // Mantém o editor de medidas/fotos no arquivo visual já existente.
       await putTextFile(
         'site-brand-settings.json',
         JSON.stringify(settings, null, 2) + '\n',
@@ -258,8 +272,8 @@
 
   function setupPreview(){
     ids.forEach(id => $(id)?.addEventListener('input', renderPreview));
-    $('zzNome')?.addEventListener('input', renderPreview);
-    $('zzSlogan')?.addEventListener('input', renderPreview);
+    $('zzTextoMarca')?.addEventListener('input', renderPreview);
+    $('zzTextoSlogan')?.addEventListener('input', renderPreview);
     $('zzAplicarMarcaPreview')?.addEventListener('click', renderPreview);
   }
 
@@ -272,7 +286,10 @@
     $('zzMiniLogo').style.display = 'none';
     $('zzMiniSloganImg').style.display = 'none';
     fill(current);
-    msg('Medidas padrão restauradas.', true);
+    $('zzTextoMarca').value='ZixLima';
+    $('zzTextoSlogan').value='ZixLima Anúncie Aqui';
+    renderPreview();
+    msg('Medidas e textos padrão restaurados na prévia. Clique em salvar para publicar.', true);
   }
 
   function setupPasswordEye(){
@@ -323,6 +340,13 @@
     setupFilePreviews();
     setupPreview();
     $('zzRestaurarMarca')?.addEventListener('click', restoreDefaults);
+    fetch('./site-settings.json?ts='+Date.now(),{cache:'no-store'})
+      .then(r=>r.ok?r.json():Promise.reject(new Error('Arquivo de textos ausente')))
+      .then(c=>{
+        if(typeof c.nome==='string') $('zzTextoMarca').value=c.nome;
+        if(typeof c.slogan==='string') $('zzTextoSlogan').value=c.slogan;
+        renderPreview();
+      }).catch(()=>{});
     $('zzSalvarMarcaGithub')?.addEventListener('click', saveVisualBrand);
     loadSaved();
   });
