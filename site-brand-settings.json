@@ -16,10 +16,10 @@
   "nameY": 0,
   "nameLs": -1,
   "sloganTextSm": 16,
-  "sloganTextSd": 30,
-  "sloganWm": 80,
-  "sloganHm": 40,
-  "sloganWd": 300,
+  "sloganTextSd": 21,
+  "sloganWm": 90,
+  "sloganHm": 60,
+  "sloganWd": 500,
   "sloganHd": 200,
   "nameColor": "original",
   "nameLed": "none",
@@ -27,8 +27,8 @@
   "sloganColor": "original",
   "sloganLed": "cycle",
   "sloganGlow": 20,
-  "sloganX": -100,
+  "sloganX": -107,
   "sloganY": 21,
-  "sloganImgX": -11,
-  "sloganImgY": -9
+  "sloganImgX": -6,
+  "sloganImgY": -14
 }
