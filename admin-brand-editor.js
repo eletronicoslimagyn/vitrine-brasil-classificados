@@ -318,7 +318,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    if(!$('zzMarcaEditorCard')) return;
+    if(!$('zzixbrConfig')) return;
     setupPasswordEye();
     setupFilePreviews();
     setupPreview();
