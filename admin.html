@@ -135,6 +135,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 }
 </style>
 
+<style id="zix-css-olhinho-token">
+.zix-token-wrap{position:relative;margin-bottom:8px}
+.zix-token-wrap input{box-sizing:border-box;width:100%;padding-right:56px}
+.zix-token-wrap #zzTokenEye{position:absolute;right:5px;top:50%;transform:translateY(-50%);width:44px;height:42px;margin:0;padding:0;border:0;background:transparent;border-radius:8px;font-size:22px;cursor:pointer}
+.zix-token-wrap #zzTokenEye:focus-visible{outline:3px solid #f59e0b}
+</style>
 </head>
 <body>
 <header>
@@ -296,7 +302,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 
 <h3>🔐 Conexão GitHub</h3>
 <p><small>Token clássico com permissão repo ou token refinado com Contents: Read and write. O token não é salvo no site nem no backup.</small></p>
-<label>Token GitHub<input id="zzToken" type="password" autocomplete="off" spellcheck="false" placeholder="Cole seu token somente para publicar"></label>
+<label for="zzToken">Token GitHub</label>
+<div class="zix-token-wrap">
+  <input id="zzToken" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Cole seu token somente para publicar">
+  <button id="zzTokenEye" type="button" aria-label="Mostrar token" aria-pressed="false" title="Mostrar token">👁️</button>
+</div>
 <button id="zzTestar">Testar conexão</button>
 <button id="zzPublicar" class="ok">Salvar no GitHub</button>
 <button id="zzBaixar">Baixar backup JSON</button>
@@ -862,5 +872,8 @@ btn.addEventListener('click',async()=>{
 <script type="module" src="zix-planos-editor-admin.js?v=1"></script>
 
 <script src="admin-brand-editor.js" defer></script>
+<script id="zix-js-olhinho-token">
+(()=>{const c=document.getElementById('zzToken'),b=document.getElementById('zzTokenEye');if(!c||!b)return;b.addEventListener('click',()=>{const show=c.type==='password';c.type=show?'text':'password';b.textContent=show?'🙈':'👁️';b.setAttribute('aria-label',show?'Ocultar token':'Mostrar token');b.setAttribute('aria-pressed',String(show));b.title=show?'Ocultar token':'Mostrar token';});})();
+</script>
 </body>
 </html>
