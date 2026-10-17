@@ -129,3 +129,102 @@ $('postForm').onsubmit=async e=>{e.preventDefault();if(!db||!user)return;const f
 // UI inicial funciona mesmo quando o provedor de módulos estiver indisponível.
 async function init(){if(!SUPABASE_URL||!SUPABASE_ANON_KEY){await load();return}try{let lib;try{lib=await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm')}catch{lib=await import('https://esm.sh/@supabase/supabase-js@2')}db=lib.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);db.auth.onAuthStateChange((_event,session)=>{user=session?.user||null;authUI()});const {data}=await db.auth.getUser();user=data.user;authUI()}catch(e){msg('Não foi possível iniciar a conexão: '+e.message)}await load()}
 init();
+
+
+/* === ZIXLIMA | REFINO TOPO FINAL === */
+(function(){
+  function txt(el){
+    return ((el.textContent || '') + ' ' + (el.getAttribute('title') || '') + ' ' + (el.getAttribute('aria-label') || '')).toLowerCase();
+  }
+
+  function allButtons(){
+    return Array.from(document.querySelectorAll('button, a, div, span'));
+  }
+
+  function findMoon(){
+    return allButtons().find(el => /🌙|🌜|lua|escuro|dark/.test(txt(el)));
+  }
+
+  function findPalette(){
+    return allButtons().find(el => /🎨|paleta|cor|cores|tema|fundo/.test(txt(el)));
+  }
+
+  function findClock(){
+    return document.querySelector('.clock-box, .clock-widget, .digital-clock, .relogio-br, .clock-pill, #clockBox, #relogioTopo, #topClock');
+  }
+
+  function findRightArea(moon, palette, clock){
+    return (
+      (moon && moon.parentElement) ||
+      (palette && palette.parentElement) ||
+      (clock && clock.parentElement) ||
+      document.querySelector('.top-actions, .header-actions, .actions-right, .header-right, .topbar-right')
+    );
+  }
+
+  function applySavedTheme(){
+    const saved = localStorage.getItem('zix_theme_bg');
+    if(saved){
+      document.body.classList.remove('zix-bg-azul','zix-bg-ciano','zix-bg-brasil');
+      document.body.classList.add(saved);
+    }
+  }
+
+  function bindPalette(palette){
+    if(!palette || palette.dataset.zixBound === '1') return;
+    const themes = ['zix-bg-azul','zix-bg-ciano','zix-bg-brasil'];
+    palette.dataset.zixBound = '1';
+    palette.addEventListener('click', function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+      const atual = themes.find(t => document.body.classList.contains(t)) || 'zix-bg-azul';
+      const idx = themes.indexOf(atual);
+      const prox = themes[(idx + 1) % themes.length];
+      document.body.classList.remove(...themes);
+      document.body.classList.add(prox);
+      localStorage.setItem('zix_theme_bg', prox);
+    });
+  }
+
+  function organizeTop(){
+    applySavedTheme();
+
+    const moon = findMoon();
+    const palette = findPalette();
+    const clock = findClock();
+    const rightArea = findRightArea(moon, palette, clock);
+
+    if(!rightArea) return;
+
+    rightArea.style.display = 'flex';
+    rightArea.style.alignItems = 'center';
+    rightArea.style.gap = '8px';
+    rightArea.style.flexWrap = 'wrap';
+
+    if(palette) bindPalette(palette);
+
+    if(palette && moon){
+      if(clock && clock.parentElement === rightArea){
+        rightArea.insertBefore(palette, clock);
+        rightArea.insertBefore(moon, clock);
+      } else {
+        rightArea.appendChild(palette);
+        rightArea.appendChild(moon);
+      }
+    }
+
+    if(clock && rightArea.contains(clock)){
+      clock.style.order = '99';
+    }
+  }
+
+  function boot(){
+    try { organizeTop(); } catch(e) {}
+  }
+
+  document.addEventListener('DOMContentLoaded', boot);
+  setTimeout(boot, 500);
+  setTimeout(boot, 1500);
+  setTimeout(boot, 3000);
+})();
+
