@@ -1,18 +1,18 @@
 {
   "logoPath": "./assets/zixlima-logo-topo-custom.png",
   "sloganPath": "./assets/zixlima-slogan-icone-custom.png",
-  "logoWm": 60,
-  "logoHm": 60,
-  "logoWd": 84,
-  "logoHd": 84,
-  "nameSm": 50,
-  "nameSd": 72,
+  "logoWm": 150,
+  "logoHm": 90,
+  "logoWd": 350,
+  "logoHd": 250,
+  "nameSm": 100,
+  "nameSd": 100,
   "nameSx": 100,
   "nameSy": 100,
   "nameY": 0,
   "nameLs": -1,
-  "sloganWm": 50,
-  "sloganHm": 50,
-  "sloganWd": 50,
-  "sloganHd": 50
+  "sloganWm": 185,
+  "sloganHm": 85,
+  "sloganWd": 400,
+  "sloganHd": 300
 }
