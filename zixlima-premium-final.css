@@ -1,0 +1,129 @@
+
+/* ZIXLIMA PREMIUM - CABECALHO E PALETA */
+
+/* Marca maior e ligeiramente mais baixa */
+body.zix-elite-active header .top > a.brand {
+  position: relative !important;
+  top: 7px !important;
+  align-items: center !important;
+  gap: 7px !important;
+}
+
+/* Nome */
+body.zix-elite-active header .top > a.brand > #siteBrand {
+  font-size: clamp(30px, 4.4vw, 43px) !important;
+  line-height: 1.06 !important;
+  font-weight: 950 !important;
+  white-space: nowrap !important;
+  letter-spacing: -1px !important;
+}
+
+/* Bandeira em destaque */
+body.zix-elite-active header .top > a.brand > .zix-brasil {
+  width: 53px !important;
+  height: 53px !important;
+  min-width: 53px !important;
+  font-size: 34px !important;
+  border-radius: 12px !important;
+  border: 1px solid #baffcf !important;
+  background: linear-gradient(
+    145deg,#26e65a,#008b3c
+  ) !important;
+  box-shadow:
+    0 4px 9px #0006,
+    inset 0 1px 3px #ffffffaa !important;
+  overflow: hidden !important;
+}
+
+/* Balão original */
+header #zzPalette {
+  width: 170px !important;
+  max-width: calc(100vw - 25px) !important;
+  padding: 11px !important;
+  border-radius: 14px !important;
+  z-index: 250 !important;
+  box-sizing: border-box !important;
+}
+
+header #zzPalette.open {
+  display: block !important;
+}
+
+header #zzPalette button[data-color] {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 32px !important;
+  text-align: left !important;
+  display: block !important;
+  padding: 7px !important;
+  font-size: 12px !important;
+}
+
+/* Lua integrada na paleta */
+header #zzPalette #zzThemeToggle {
+  display: flex !important;
+  position: static !important;
+  width: 100% !important;
+  height: 38px !important;
+  min-width: 0 !important;
+  margin-top: 8px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid #aac6eb !important;
+  border-radius: 9px !important;
+  background: #edf4ff !important;
+  color: #133c6b !important;
+  font-size: 22px !important;
+}
+
+/* Tres cores novas */
+body[data-zz-color="navy"] {
+  --zz-page: #122747 !important;
+}
+body[data-zz-color="black"] {
+  --zz-page: #101115 !important;
+}
+body[data-zz-color="silver"] {
+  --zz-page: #c8cdd4 !important;
+}
+
+/* Cores preservadas no modo escuro */
+body[data-zz-theme="dark"][data-zz-color="navy"] {
+  --zz-page: #122747 !important;
+}
+body[data-zz-theme="dark"][data-zz-color="black"] {
+  --zz-page: #101115 !important;
+}
+body[data-zz-theme="dark"][data-zz-color="silver"] {
+  --zz-page: #c8cdd4 !important;
+}
+
+/* Ajuste para celulares */
+@media(max-width:600px) {
+  body.zix-elite-active header .top > a.brand {
+    top: 8px !important;
+    gap: 5px !important;
+  }
+
+  body.zix-elite-active header .top > a.brand > #siteBrand {
+    font-size: clamp(25px, 7.5vw, 31px) !important;
+  }
+
+  body.zix-elite-active header .top > a.brand > .zix-brasil {
+    width: 47px !important;
+    height: 47px !important;
+    min-width: 47px !important;
+    font-size: 30px !important;
+  }
+}
+
+@media(max-width:370px) {
+  body.zix-elite-active header .top > a.brand > #siteBrand {
+    font-size: 25px !important;
+  }
+  body.zix-elite-active header .top > a.brand > .zix-brasil {
+    width: 43px !important;
+    height: 43px !important;
+    min-width: 43px !important;
+  }
+}
