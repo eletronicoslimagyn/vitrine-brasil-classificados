@@ -3,25 +3,7 @@
 
 body.zix-elite-active header .top{
  display:grid!important;
-python3 -c '
-path = "zixlima-topo-compacto.css"
-with open(path, "r", encoding="utf-8") as f:
-    content = f.read()
-
-# Substitui o grid-template-columns antigo pelo novo de 52px
-content = content.replace("grid-template-columns: 38px minmax(0,1fr) auto!important;", "grid-template-columns: 52px minmax(0,1fr) auto!important;")
-
-# Atualiza os tamanhos da bandeira (.zix-brasil)
-content = content.replace("width: 43px!important;", "width: 52px!important;")
-content = content.replace("height: 43px!important;", "height: 52px!important;")
-content = content.replace("min-width: 43px!important;", "min-width: 52px!important;")
-
-with open(path, "w", encoding="utf-8") as f:
-    f.write(content)
-
-print("[SUCESSO] Arquivo atualizado com os novos tamanhos!")
-'
- grid-template-columns:38px minmax(0,1fr) auto!important;
+grid-template-columns:38px minmax(0,1fr) auto!important;
  grid-template-rows:auto auto auto!important;
  gap:7px 5px!important;
  padding:8px 9px!important;
@@ -38,7 +20,7 @@ body.zix-elite-active header .top>a.brand{
  width:auto!important;
  min-width:0!important;
  max-width:100%!important;
- gap:6px!important margin:0!important;
+ gap:6px!important; margin:0!important;
 }
 
 body.zix-elite-active header .top>a.brand>.zix-brasil{

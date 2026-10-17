@@ -1,0 +1,167 @@
+/* ZIXLIMA - CORRECAO RESPONSIVA FINAL */
+
+/* Celular */
+@media (max-width:700px) {
+
+body.zix-elite-active header .top {
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto !important;
+  grid-template-rows:auto auto auto !important;
+  align-items:center !important;
+  gap:8px 5px !important;
+  padding:11px 9px 8px !important;
+  box-sizing:border-box !important;
+}
+
+/* Marca superior esquerda */
+body.zix-elite-active header .top>a.brand {
+  grid-column:1 !important;
+  grid-row:1 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-self:start !important;
+  position:static !important;
+  transform:none !important;
+  gap:7px !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:0 !important;
+  min-width:0 !important;
+}
+
+/* Bandeira esquerda maior */
+body.zix-elite-active header .top>a.brand>.zix-brasil {
+  display:inline-grid !important;
+  place-items:center !important;
+  width:clamp(50px,14vw,60px) !important;
+  height:clamp(50px,14vw,60px) !important;
+  min-width:clamp(50px,14vw,60px) !important;
+  max-width:none !important;
+  font-size:clamp(31px,9vw,39px) !important;
+  border-radius:13px !important;
+  flex-shrink:0 !important;
+  transform:none !important;
+}
+
+/* Nome maior com LED original */
+body.zix-elite-active header .top>a.brand>#siteBrand {
+  display:inline-block !important;
+  font-size:clamp(32px,8.4vw,38px) !important;
+  line-height:1.08 !important;
+  font-weight:950 !important;
+  letter-spacing:-1px !important;
+  white-space:nowrap !important;
+  transform:none !important;
+  max-width:none !important;
+}
+
+/* Permite distribuir os controles no grid */
+body.zix-elite-active header .top>.zz-controls {
+  display:contents !important;
+}
+
+/* Relogio superior direito */
+body.zix-elite-active header .top>.zz-controls>#zixRelogio {
+  grid-column:2 !important;
+  grid-row:1 !important;
+  justify-self:end !important;
+  align-self:center !important;
+  position:relative !important;
+  width:120px !important;
+  min-width:120px !important;
+  height:43px !important;
+  min-height:43px !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:4px 5px !important;
+  gap:4px !important;
+  box-sizing:border-box !important;
+}
+
+/* Bandeira direita mais visivel */
+body.zix-elite-active header #zixRelogio>.zixFlag {
+  display:inline-flex !important;
+  font-size:25px !important;
+  flex-shrink:0 !important;
+}
+
+/* Numeros do relogio legiveis */
+body.zix-elite-active header #zixRelogio #zixHora {
+  font-size:14px !important;
+  line-height:1.1 !important;
+}
+
+body.zix-elite-active header #zixRelogio .zixClockDisplay {
+  font-size:9px !important;
+}
+
+/* Paleta sozinha, sem lua externa */
+body.zix-elite-active header .top>.zz-controls>#zzPaletteToggle {
+  display:inline-grid !important;
+  grid-column:1 !important;
+  grid-row:2 !important;
+  justify-self:start !important;
+  width:37px !important;
+  min-width:37px !important;
+  height:37px !important;
+  font-size:20px !important;
+  padding:0 !important;
+}
+
+/* Cadastro, anunciar e entrar */
+body.zix-elite-active header .top>.actions {
+  grid-column:2 !important;
+  grid-row:2 !important;
+  justify-self:end !important;
+  display:flex !important;
+  flex-wrap:nowrap !important;
+  align-items:center !important;
+  gap:5px !important;
+  margin:0 !important;
+}
+
+/* Menu inferior do cabecalho */
+body.zix-elite-active header .top>nav {
+  grid-column:1/-1 !important;
+  grid-row:3 !important;
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  width:100% !important;
+  gap:5px !important;
+  margin:0 !important;
+}
+
+/* Protecao contra telas estreitas */
+@media(max-width:390px) {
+  body.zix-elite-active header .top>a.brand>#siteBrand {
+    font-size:29px !important;
+  }
+
+  body.zix-elite-active header .top>a.brand>.zix-brasil {
+    width:49px !important;
+    height:49px !important;
+    min-width:49px !important;
+  }
+
+  body.zix-elite-active header .top>.zz-controls>#zixRelogio {
+    width:109px !important;
+    min-width:109px !important;
+  }
+}
+
+}
+
+/* Desktop: corrigir sem reduzir a marca */
+@media(min-width:701px) {
+  body.zix-elite-active header .top>a.brand>#siteBrand {
+    font-size:clamp(40px,4vw,65px) !important;
+  }
+
+  body.zix-elite-active header .top>a.brand>.zix-brasil {
+    width:clamp(55px,5vw,76px) !important;
+    height:clamp(55px,5vw,76px) !important;
+    min-width:clamp(55px,5vw,76px) !important;
+  }
+}
+
+/* Mantem animacoes existentes */
