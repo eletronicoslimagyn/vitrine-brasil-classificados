@@ -1250,5 +1250,136 @@ btn.addEventListener('click',async()=>{
  else instalar();
 })();
 </script>
+
+<script id="zz-admin-lock-v1">
+(() => {
+  const style = document.createElement('style');
+  style.id = 'zz-admin-lock-style';
+  style.textContent = `
+    .zix-brand-preview-wide{position:relative}
+    .zz-lock-host{position:relative}
+    .zz-lock-shield{
+      display:none;
+      position:absolute;
+      inset:0;
+      z-index:40;
+      background:rgba(255,255,255,.28);
+      backdrop-filter:blur(1.5px);
+      border-radius:18px;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:16px;
+      box-sizing:border-box;
+    }
+    .zz-editor-locked .zz-lock-shield{display:flex}
+    .zz-lock-card{
+      background:#17325f;
+      color:#fff;
+      padding:14px 16px;
+      border-radius:14px;
+      box-shadow:0 8px 22px rgba(0,0,0,.22);
+      font-weight:700;
+      line-height:1.35;
+      max-width:260px;
+    }
+    .zz-lock-card small{
+      display:block;
+      margin-top:6px;
+      font-size:12px;
+      opacity:.95;
+      font-weight:500;
+    }
+    #zzLockAdminToggle{
+      position:absolute;
+      right:14px;
+      bottom:14px;
+      z-index:60;
+      border:0;
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:14px;
+      font-weight:700;
+      color:#fff;
+      background:#17325f;
+      box-shadow:0 6px 18px rgba(0,0,0,.22);
+      cursor:pointer;
+    }
+    #zzLockAdminToggle.zz-locked{
+      background:#0d6a2f;
+    }
+  `;
+  document.head.appendChild(style);
+
+  let vp = document.querySelector('meta[name="viewport"]');
+  if (!vp) {
+    vp = document.createElement('meta');
+    vp.name = 'viewport';
+    document.head.appendChild(vp);
+  }
+  vp.setAttribute('content', 'width=device-width, initial-scale=1');
+
+  const panel = document.querySelector('.zix-brand-preview-wide');
+  const host = document.querySelector('.zix-brand-grid') || panel?.parentElement;
+  if (!panel || !host) return;
+
+  host.classList.add('zz-lock-host');
+
+  const shield = document.createElement('div');
+  shield.className = 'zz-lock-shield';
+  shield.innerHTML = '<div class="zz-lock-card">🔒 Tela travada<small>Toque no cadeado para destravar e voltar a editar.</small></div>';
+  host.appendChild(shield);
+
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.id = 'zzLockAdminToggle';
+  panel.appendChild(btn);
+
+  const KEY = 'zix_admin_editor_locked';
+
+  function locked() {
+    return localStorage.getItem(KEY) === '1';
+  }
+
+  function applyState() {
+    const isLocked = locked();
+    host.classList.toggle('zz-editor-locked', isLocked);
+    btn.classList.toggle('zz-locked', isLocked);
+    btn.textContent = isLocked ? '🔒 Travado' : '🔓 Livre';
+    btn.title = isLocked ? 'Destravar edição' : 'Travar edição';
+    btn.setAttribute('aria-pressed', String(isLocked));
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.setItem(KEY, locked() ? '0' : '1');
+    applyState();
+  });
+
+  let lastTouchEnd = 0;
+
+  document.addEventListener('gesturestart', (e) => {
+    if (locked()) e.preventDefault();
+  }, { passive:false });
+
+  document.addEventListener('touchmove', (e) => {
+    if (locked() && e.touches && e.touches.length > 1) e.preventDefault();
+  }, { passive:false });
+
+  document.addEventListener('touchend', (e) => {
+    if (!locked()) return;
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) e.preventDefault();
+    lastTouchEnd = now;
+  }, { passive:false });
+
+  shield.addEventListener('click', (e) => {
+    e.preventDefault();
+  });
+
+  applyState();
+})();
+</script>
+
 </body>
 </html>
