@@ -250,6 +250,37 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .zix-brand-preview-wide .zix-mini-hero{min-width:0}
 .zix-brand-grid>*{min-width:0}
 @media(max-width:700px){.zix-brand-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* zix-layout-aprovado-v4 */
+@media (min-width:901px) {
+ .zix-brand-grid {
+   display:grid;
+   grid-template-columns:repeat(3,minmax(0,1fr));
+   align-items:start;
+   gap:14px;
+ }
+ .zix-brand-grid > .zix-brand-box:nth-child(3) {
+   grid-column:3;
+   grid-row:1 / span 2;
+   align-self:stretch;
+ }
+ .zix-brand-grid > .zix-brand-preview-wide {
+   grid-column:1 / span 2;
+   grid-row:2;
+   min-width:0;
+ }
+ .zix-brand-preview-wide .zix-preview-duo {
+   display:grid;
+   grid-template-columns:repeat(2,minmax(0,1fr));
+ }
+ .zix-brand-preview-wide .zix-preview-card {
+   min-width:0;
+ }
+ .zix-brand-preview-wide .zix-preview-shot {
+   max-width:100%;
+   overflow:hidden;
+ }
+}
 </style>
 
 <style id="zix-css-olhinho-token">
@@ -469,43 +500,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="zix-brand-box zix-brand-preview-wide">
   <h4>Prévia rápida</h4>
   <p class="zix-help">Confira em tempo real como ficará o seu anúncio. As alterações são aplicadas automaticamente.</p>
-
-  <div class="zix-preview-top3">
-    <div class="zix-preview-card">
-      <h5>🖥️ Prévia - Logo (canto superior esquerdo)</h5>
-      <p>Visualize e ajuste o logo do painel superior.</p>
-      <div class="zix-preview-shot">
-        <div class="zix-shot-bar">
-          <img id="zzTopLogoImg" alt="Logo do topo" style="width:84px;height:84px;display:none">
-          <div class="zix-shot-title" id="zzTopLogoText" style="font-size:32px">ZixLima</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="zix-preview-card">
-      <h5>🖥️ Prévia - Slogan superior direito</h5>
-      <p>Visualize e ajuste o anúncio do topo.</p>
-      <div class="zix-preview-shot">
-        <div class="zix-shot-box" style="display:flex;align-items:center;gap:10px">
-          <img id="zzTopSloganImg" alt="Slogan do topo" style="width:180px;height:72px;display:none">
-          <div class="zix-shot-title" id="zzTopSloganText" style="font-size:20px">ZixLima Anúncie Aqui</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="zix-preview-card">
-      <h5>📱 Prévia - Mobile (celular)</h5>
-      <p>Visualize o cabeçalho no celular.</p>
-      <div class="zix-preview-shot">
-        <div class="zix-shot-bar">
-          <div style="font-size:24px;line-height:1">☰</div>
-          <img id="zzMobileLogoImg" alt="Logo mobile" style="width:52px;height:52px;display:none">
-          <div class="zix-shot-title" id="zzMobileLogoText" style="font-size:22px">ZixLima</div>
-          <img id="zzMobileSloganImg" alt="Slogan mobile" style="width:110px;height:48px;display:none;margin-left:auto">
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="zix-preview-duo">
     <div class="zix-preview-card">
