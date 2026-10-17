@@ -157,6 +157,44 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .zix-token-wrap #zzTokenEye:focus-visible{outline:3px solid #f59e0b}
 </style>
 <link rel="stylesheet" href="./site-brand-live.css?v=editor-led-posicao-1">
+<!-- ZIX_NUMERIC_BUTTONS_V1_START -->
+<style id="zix-numeric-buttons-css">
+/* Controles numericos do editor visual, sem alterar outros formularios */
+.zix-brand-grid .zix-stepper {
+ display:grid;grid-template-columns:38px minmax(0,1fr) 38px;
+ align-items:stretch;gap:0;width:100%;min-width:0;
+ border:1px solid #cbd5e1;border-radius:10px;overflow:hidden;
+ background:#fff;margin-top:5px;
+}
+.zix-brand-grid .zix-stepper input[type="number"] {
+ min-width:0;width:100%!important;max-width:100%!important;
+ border:0!important;border-radius:0!important;margin:0!important;
+ padding:9px 5px!important;text-align:center;
+ background:transparent!important;box-shadow:none!important;
+ appearance:textfield;-moz-appearance:textfield;
+}
+.zix-brand-grid .zix-stepper input::-webkit-inner-spin-button,
+.zix-brand-grid .zix-stepper input::-webkit-outer-spin-button {
+ -webkit-appearance:none;margin:0;
+}
+.zix-brand-grid .zix-stepper button {
+ appearance:none;border:0!important;border-radius:0!important;
+ min-width:38px;width:38px;min-height:42px;
+ margin:0!important;padding:0!important;
+ background:#e7f0ff!important;color:#1157a8!important;
+ font-size:23px!important;font-weight:800!important;line-height:1;
+ display:grid;place-items:center;touch-action:manipulation;
+}
+.zix-brand-grid .zix-stepper button:first-child {border-right:1px solid #cbd5e1!important}
+.zix-brand-grid .zix-stepper button:last-child {border-left:1px solid #cbd5e1!important}
+.zix-brand-grid .zix-stepper button:disabled {opacity:.45}
+.zix-brand-grid .zix-stepper:focus-within {outline:2px solid #e5a516;outline-offset:1px}
+@media(max-width:400px){
+ .zix-brand-grid .zix-stepper{grid-template-columns:34px minmax(0,1fr) 34px}
+ .zix-brand-grid .zix-stepper button{min-width:34px;width:34px}
+}
+</style>
+<!-- ZIX_NUMERIC_BUTTONS_V1_END -->
 </head>
 <body>
 <header>
@@ -925,6 +963,50 @@ btn.addEventListener('click',async()=>{
 <script src="admin-brand-editor.js" defer></script>
 <script id="zix-js-olhinho-token">
 (()=>{const c=document.getElementById('zzToken'),b=document.getElementById('zzTokenEye');if(!c||!b)return;b.addEventListener('click',()=>{const show=c.type==='password';c.type=show?'text':'password';b.textContent=show?'🙈':'👁️';b.setAttribute('aria-label',show?'Ocultar token':'Mostrar token');b.setAttribute('aria-pressed',String(show));b.title=show?'Ocultar token':'Mostrar token';});})();
+</script>
+<script id="zix-numeric-buttons-js">
+(function(){
+ function instalar(){
+  document.querySelectorAll('.zix-brand-grid input[type="number"]').forEach(input=>{
+   if(input.closest('.zix-stepper')) return;
+   const wrap=document.createElement('span');
+   wrap.className='zix-stepper';
+   const menos=document.createElement('button');
+   menos.type='button';menos.textContent='−';
+   menos.setAttribute('aria-label','Diminuir '+(input.id||'valor'));
+   const mais=document.createElement('button');
+   mais.type='button';mais.textContent='+';
+   mais.setAttribute('aria-label','Aumentar '+(input.id||'valor'));
+   input.before(wrap);wrap.append(menos,input,mais);
+   const min=input.min!==''?Number(input.min):-Infinity;
+   const max=input.max!==''?Number(input.max):Infinity;
+   const passo=Number(input.step);
+   const step=Number.isFinite(passo)&&passo>0?passo:1;
+   function limites(){
+    const n=input.value===''?0:Number(input.value);
+    menos.disabled=Number.isFinite(min)&&n<=min;
+    mais.disabled=Number.isFinite(max)&&n>=max;
+   }
+   function mudar(sinal){
+    const atual=Number(input.value);
+    const valor=Number.isFinite(atual)?atual:0;
+    const proximo=Math.max(min,Math.min(max,Number((valor+sinal*step).toFixed(6))));
+    input.value=String(proximo);
+    input.dispatchEvent(new Event('input',{bubbles:true}));
+    input.dispatchEvent(new Event('change',{bubbles:true}));
+    limites();
+   }
+   menos.addEventListener('click',()=>mudar(-1));
+   mais.addEventListener('click',()=>mudar(1));
+   input.addEventListener('input',limites);
+   input.addEventListener('change',limites);
+   // Atualiza o estado após o carregamento de medidas salvas.
+   limites();
+  });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',instalar);
+ else instalar();
+})();
 </script>
 </body>
 </html>
