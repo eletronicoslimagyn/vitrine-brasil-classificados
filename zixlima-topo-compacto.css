@@ -161,36 +161,51 @@ body.zix-elite-active header .top>.actions button{
 }
 }
 
-/* Sobrescrita forçada do tamanho da logo e bandeira */
-body.zix-elite-active header .top {
-    grid-template-columns: 55px minmax(0,1fr) auto !important;
+/* ZIXLIMA_TAMANHOS_RESPONSIVOS_V4 */
+
+/* Celular normal */
+@media(max-width:700px){
+body.zix-elite-active header .top>a.brand>.zix-brasil{
+ width:42px!important;
+ height:42px!important;
+ min-width:42px!important;
+ max-width:42px!important;
+ font-size:27px!important;
+ transform:none!important;
 }
-body.zix-elite-active header .top>a.brand>.zix-brasil {
-    width: 55px !important;
-    height: 55px !important;
-    min-width: 55px !important;
-    font-size: 32px !important;
+body.zix-elite-active header .top>a.brand>#siteBrand{
+ font-size:28px!important;
+ transform:none!important;
 }
-body.zix-elite-active header .top>a.brand>#siteBrand {
-    font-size: 30px !important;
+body.zix-elite-active header .top>.zz-controls>#zzPaletteToggle,
+body.zix-elite-active header .top>.zz-controls>#zzThemeToggle{
+ width:34px!important;
+ min-width:34px!important;
+ height:34px!important;
+ font-size:18px!important;
+}
 }
 
-
-/* Ajuste definitivo de tamanho ZixLima */
-body.zix-elite-active header .top {
-    grid-template-columns: 75px minmax(0,1fr) auto !important;
-    align-items: center !important;
+/* Desktop e modo site para computador */
+@media(min-width:701px){
+body.zix-elite-active header .top>a.brand{
+ display:inline-flex!important;
+ align-items:center!important;
+ gap:12px!important;
+ min-width:0!important;
 }
-body.zix-elite-active header .top>a.brand>.zix-brasil {
-    width: 55px !important;
-    height: 55px !important;
-    min-width: 55px !important;
-    max-width: 55px !important;
-    transform: scale(1.4) !important;
-    transform-origin: left center !important;
+body.zix-elite-active header .top>a.brand>.zix-brasil{
+ width:78px!important;
+ height:78px!important;
+ min-width:78px!important;
+ max-width:78px!important;
+ font-size:49px!important;
+ transform:none!important;
 }
-body.zix-elite-active header .top>a.brand>#siteBrand {
-    font-size: 32px !important;
-    transform: scale(1.2) !important;
-    transform-origin: left center !important;
+body.zix-elite-active header .top>a.brand>#siteBrand{
+ font-size:58px!important;
+ font-weight:900!important;
+ line-height:1.05!important;
+ transform:none!important;
+}
 }
