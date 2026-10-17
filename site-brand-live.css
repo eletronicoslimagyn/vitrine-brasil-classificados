@@ -3,6 +3,8 @@
   --zz-logo-hm:56px;
   --zz-logo-wd:84px;
   --zz-logo-hd:84px;
+  --zz-logo-xm:0px; --zz-logo-ym:0px;
+  --zz-logo-xd:0px; --zz-logo-yd:0px;
   --zz-name-sm:36px;
   --zz-name-sd:72px;
   --zz-name-sx:1;
@@ -62,6 +64,7 @@ body.zz-has-slogan-icon #zzSloganIcon{
   body.zz-has-custom-logo header .top > a.brand > #zzCustomBrandLogo{
     width:var(--zz-logo-wm) !important;
     height:var(--zz-logo-hm) !important;
+    transform:translate(var(--zz-logo-xm),var(--zz-logo-ym)) !important;
   }
   header .top > a.brand > #siteBrand{
     font-size:var(--zz-name-sm) !important;
@@ -79,6 +82,7 @@ body.zz-has-slogan-icon #zzSloganIcon{
   body.zz-has-custom-logo header .top > a.brand > #zzCustomBrandLogo{
     width:var(--zz-logo-wd) !important;
     height:var(--zz-logo-hd) !important;
+    transform:translate(var(--zz-logo-xd),var(--zz-logo-yd)) !important;
   }
   header .top > a.brand > #siteBrand{
     font-size:var(--zz-name-sd) !important;

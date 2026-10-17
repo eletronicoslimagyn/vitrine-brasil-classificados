@@ -8,6 +8,7 @@
     logoHm: 56,
     logoWd: 84,
     logoHd: 84,
+    logoXm: 0, logoYm: 0, logoXd: 0, logoYd: 0,
     nameSm: 36,
     nameSd: 72,
     nameSx: 100,
@@ -27,6 +28,7 @@
 
   const ids = [
     'zzLogoWm','zzLogoHm','zzLogoWd','zzLogoHd',
+    'zzLogoXm','zzLogoYm','zzLogoXd','zzLogoYd',
     'zzNameSm','zzNameSd','zzNameSx','zzNameSy','zzNameY','zzNameLs',
     'zzSloganTextSm','zzSloganTextSd','zzSloganWm','zzSloganHm','zzSloganWd','zzSloganHd','zzNameColor','zzNameGlowColor','zzNameLightEffect','zzNameLightIntensity','zzSloganColor','zzSloganGlowColor','zzSloganLightEffect','zzSloganLightIntensity',
     'zzNameGlow','zzSloganGlow','zzSloganX','zzSloganY','zzSloganImgX','zzSloganImgY',
@@ -56,6 +58,8 @@
       logoHm: val('zzLogoHm',56),
       logoWd: val('zzLogoWd',84),
       logoHd: val('zzLogoHd',84),
+      logoXm: val('zzLogoXm'), logoYm: val('zzLogoYm'),
+      logoXd: val('zzLogoXd'), logoYd: val('zzLogoYd'),
       nameSm: val('zzNameSm',36),
       nameSd: val('zzNameSd',72),
       nameSx: val('zzNameSx',100),
@@ -80,6 +84,9 @@
     $('zzLogoHm').value = current.logoHm;
     $('zzLogoWd').value = current.logoWd;
     $('zzLogoHd').value = current.logoHd;
+    for(const key of ['logoXm','logoYm','logoXd','logoYd']){
+      $('zz'+key[0].toUpperCase()+key.slice(1)).value = current[key] ?? 0;
+    }
     $('zzNameSm').value = current.nameSm;
     $('zzNameSd').value = current.nameSd;
     $('zzNameSx').value = current.nameSx;
@@ -233,6 +240,10 @@
     const logo = $('zzMiniLogo');
     logo.style.width = Math.min(c.logoWm, ($('zzMiniBrand').clientWidth || 400)*.85) + 'px';
     logo.style.height = c.logoHm + 'px';
+    const logoDesktop = window.matchMedia('(min-width: 701px)').matches;
+    const logoX = logoDesktop ? c.logoXd : c.logoXm;
+    const logoY = logoDesktop ? c.logoYd : c.logoYm;
+    logo.style.transform = `translate(${logoX}px,${logoY}px)`;
 
     const slog = $('zzMiniSloganImg');
     slog.style.width = Math.min(c.sloganWm, ($('zzMiniSlogan').clientWidth || 400)*.85) + 'px';

@@ -75,6 +75,11 @@ function zzApplyLed(el, corTexto, corLed, efeito, intensidade){
     setNumVar('--zz-logo-hm', c.logoHm);
     setNumVar('--zz-logo-wd', c.logoWd);
     setNumVar('--zz-logo-hd', c.logoHd);
+    const limite = (v, max) => Math.max(-max,Math.min(max,Number(v)||0));
+    setNumVar('--zz-logo-xm', limite(c.logoXm,300));
+    setNumVar('--zz-logo-ym', limite(c.logoYm,300));
+    setNumVar('--zz-logo-xd', limite(c.logoXd,500));
+    setNumVar('--zz-logo-yd', limite(c.logoYd,500));
     setNumVar('--zz-name-sm', c.nameSm);
     setNumVar('--zz-name-sd', c.nameSd);
     setNumVar('--zz-name-y', c.nameY);
