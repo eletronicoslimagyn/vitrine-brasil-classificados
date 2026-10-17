@@ -91,3 +91,8 @@ body.zz-has-slogan-icon #zzSloganIcon{
     height:var(--zz-slogan-hd) !important;
   }
 }
+
+/* previsualizacao v2: texto vazio sem ocupar area */
+#siteBrand:empty,#siteHero:empty{display:none!important}
+.zz-siteHeroTitleWrap{min-width:0;max-width:100%}
+#siteHero{white-space:normal!important;word-break:normal!important;overflow-wrap:break-word!important;min-width:0}

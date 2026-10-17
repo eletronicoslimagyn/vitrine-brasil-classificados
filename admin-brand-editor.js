@@ -111,24 +111,24 @@
     const c = collect();
 
     const miniName = $('zzMiniName');
-    miniName.textContent = $('zzTextoMarca')?.value?.trim() || 'ZixLima';
-    miniName.style.fontSize = c.nameSm + 'px';
+    miniName.textContent = $('zzTextoMarca')?.value?.trim() ?? 'ZixLima';
+    miniName.style.fontSize = Math.min(c.nameSm, Math.max(16, ($('zzMiniBrand').clientWidth || 400)/4)) + 'px';
     miniName.style.transform = `translateY(${c.nameY}px) scaleX(${c.nameSx/100}) scaleY(${c.nameSy/100})`;
     miniName.style.letterSpacing = c.nameLs + 'px';
 
     const sloganText = $('zzMiniSloganText');
-    sloganText.textContent = $('zzTextoSlogan')?.value?.trim() || 'ZixLima Anúncie Aqui';
+    sloganText.textContent = $('zzTextoSlogan')?.value?.trim() ?? 'ZixLima Anúncie Aqui';
     const modoDesktop = window.matchMedia('(min-width: 701px)').matches;
-    sloganText.style.fontSize = (modoDesktop ? c.sloganTextSd : c.sloganTextSm) + 'px';
+    sloganText.style.fontSize = Math.min((modoDesktop ? c.sloganTextSd : c.sloganTextSm), Math.max(14, ($('zzMiniSlogan').clientWidth || 400)/9)) + 'px';
     sloganText.style.lineHeight = '1.15';
-    sloganText.style.overflowWrap = 'anywhere';
+    sloganText.style.overflowWrap = 'break-word';
 
     const logo = $('zzMiniLogo');
-    logo.style.width = c.logoWm + 'px';
+    logo.style.width = Math.min(c.logoWm, ($('zzMiniBrand').clientWidth || 400)*.85) + 'px';
     logo.style.height = c.logoHm + 'px';
 
     const slog = $('zzMiniSloganImg');
-    slog.style.width = c.sloganWm + 'px';
+    slog.style.width = Math.min(c.sloganWm, ($('zzMiniSlogan').clientWidth || 400)*.85) + 'px';
     slog.style.height = c.sloganHm + 'px';
   }
 
@@ -233,8 +233,8 @@
       // Mesma fonte de textos da página principal; preserva contatos públicos atuais.
       const nome = $('zzTextoMarca').value.trim();
       const slogan = $('zzTextoSlogan').value.trim();
-      if(!nome || nome.length>60 || !slogan || slogan.length>160){
-        throw new Error('Preencha os dois textos (nome até 60, slogan até 160 caracteres).');
+      if(nome.length>60 || slogan.length>160){
+        throw new Error('Nome até 60 e slogan até 160 caracteres.');
       }
       const existing = await request('/contents/site-settings.json');
       const bytes = Uint8Array.from(atob(existing.content.replace(/\s/g,'')), ch=>ch.charCodeAt(0));

@@ -133,6 +133,21 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 @media(max-width:600px){
   .zix-two-btns button{width:100%}
 }
+/* zix-preview-v2 */
+.zix-brand-grid>.zix-brand-preview-wide{grid-column:1/-1;min-width:0}
+.zix-brand-preview-wide .zix-mini-top{width:100%;max-width:100%;overflow:hidden;min-width:0}
+.zix-brand-preview-wide .zix-mini-brand,.zix-brand-preview-wide .zix-mini-slogan{
+  display:flex;flex-wrap:wrap;align-items:center;gap:12px;min-width:0
+}
+.zix-brand-preview-wide .zix-mini-name,.zix-brand-preview-wide #zzMiniSloganText{
+  white-space:normal;overflow-wrap:break-word;word-break:normal;min-width:0;max-width:100%;line-height:1.15
+}
+.zix-brand-preview-wide .zix-mini-brand img,.zix-brand-preview-wide .zix-mini-slogan img{
+  max-width:100%;object-fit:contain;flex-shrink:1
+}
+.zix-brand-preview-wide .zix-mini-hero{min-width:0}
+.zix-brand-grid>*{min-width:0}
+@media(max-width:700px){.zix-brand-grid{grid-template-columns:minmax(0,1fr)}}
 </style>
 
 <style id="zix-css-olhinho-token">
@@ -286,9 +301,9 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
     <label>Altura no desktop (px)<input id="zzSloganHd" type="number" min="20" max="300" value="52"></label>
   </div>
 
-  <div class="zix-brand-box">
+  <div class="zix-brand-box zix-brand-preview-wide">
     <h4>Prévia rápida</h4>
-    <p class="zix-help">Veja os textos, os logos e as medidas antes de salvar.</p>
+    <p class="zix-help">Prévia flexível: apague um texto para mostrar apenas a imagem correspondente. As alterações só vão ao site quando você salvar.</p>
     <div class="zix-mini-top">
       <div class="zix-mini-brand" id="zzMiniBrand">
         <img id="zzMiniLogo" alt="Prévia do logo" style="width:56px;height:56px;display:none">
