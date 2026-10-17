@@ -30,6 +30,111 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .zix-plano-linha{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;border-bottom:1px solid #eee;padding:8px 0}
 #zixPlanEditMsg{white-space:pre-wrap;overflow-wrap:anywhere}
 </style>
+
+<style id="zixMarcaEditorExtraCss">
+.zix-pass-wrap{position:relative}
+.zix-pass-wrap input{padding-right:52px !important}
+.zix-pass-toggle{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  border:0;background:transparent;cursor:pointer;font-size:22px;line-height:1;
+}
+#zzMarcaEditorCard h3{margin:18px 0 10px}
+.zix-brand-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px;
+}
+.zix-brand-box{
+  border:1px solid #d8e1f1;
+  border-radius:14px;
+  padding:14px;
+  background:linear-gradient(180deg,#ffffff,#f8fbff);
+}
+.zix-brand-box h4{
+  margin:0 0 10px;
+  font-size:16px;
+  color:#17325f;
+}
+.zix-help{
+  font-size:12px;
+  color:#64748b;
+  margin:4px 0 10px;
+}
+.zix-preview-area{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+.zix-preview-box{
+  min-height:90px;
+  border:2px dashed #c7d6ee;
+  border-radius:14px;
+  padding:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+  overflow:hidden;
+}
+.zix-preview-box img{
+  max-width:100%;
+  max-height:100px;
+  object-fit:contain;
+}
+.zix-mini-top{
+  width:100%;
+  background:linear-gradient(135deg,#0d58d4,#1e73ff);
+  border-radius:14px;
+  padding:10px 12px;
+  color:#fff;
+  box-shadow:0 4px 16px #0001;
+}
+.zix-mini-brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-height:56px;
+}
+.zix-mini-brand img{
+  object-fit:contain;
+  background:#ffffff18;
+  border-radius:10px;
+}
+.zix-mini-name{
+  font-weight:900;
+  transform-origin:left center;
+  white-space:nowrap;
+}
+.zix-mini-hero{
+  margin-top:10px;
+  background:#fff;
+  border-radius:12px;
+  color:#17325f;
+  padding:10px;
+}
+.zix-mini-slogan{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  color:#1263df;
+}
+.zix-mini-slogan img{
+  object-fit:contain;
+  border-radius:10px;
+}
+.zix-two-btns{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.zix-two-btns button{margin:0}
+@media(max-width:600px){
+  .zix-two-btns button{width:100%}
+}
+</style>
+
 </head>
 <body>
 <header>
@@ -40,7 +145,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <div class="card" id="login">
 <h2>Acesso administrativo</h2>
 <input id="email" type="email" placeholder="E-mail do administrador">
-<input id="senha" type="password" placeholder="Senha">
+
+<div class="zix-pass-wrap">
+  <input id="senha" type="password" placeholder="Senha">
+  <button type="button" id="zzToggleSenhaLogin" class="zix-pass-toggle" title="Ver ou ocultar senha" aria-label="Ver ou ocultar senha">👁️</button>
+</div>
+
 <button id="entrar">Entrar</button><p><a href="./recuperar-senha.html">Esqueci minha senha</a></p>
 <p id="mensagem"></p>
 </div>
@@ -107,6 +217,83 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 <label>Frase de impacto<input id="zzSlogan" maxlength="160"></label>
 <label>E-mail de suporte<input id="zzEmail" type="email" maxlength="150"></label>
 <label>WhatsApp com DDI e DDD<input id="zzWhatsapp" inputmode="numeric" maxlength="16"></label>
+
+<!-- ZIX_MARCA_EDITOR_START -->
+<h3>🖼️ Editor visual da marca e slogan</h3>
+<p><small>Envie uma imagem para o canto superior esquerdo, ajuste o tamanho do nome da empresa e adicione foto/ícone no slogan principal do anúncio.</small></p>
+
+<div class="zix-brand-grid">
+  <div class="zix-brand-box">
+    <h4>Logo superior esquerdo</h4>
+    <p class="zix-help">Você pode enviar a imagem que quiser. Ela aparecerá no canto superior esquerdo do site.</p>
+    <label>Imagem do logo
+      <input id="zzLogoFile" type="file" accept="image/*">
+    </label>
+    <div class="zix-preview-area">
+      <div class="zix-preview-box" id="zzLogoPreviewBox">Sem logo selecionado</div>
+    </div>
+
+    <label>Largura do logo no celular (px)<input id="zzLogoWm" type="number" min="24" max="300" value="56"></label>
+    <label>Altura do logo no celular (px)<input id="zzLogoHm" type="number" min="24" max="300" value="56"></label>
+    <label>Largura do logo no desktop (px)<input id="zzLogoWd" type="number" min="24" max="500" value="84"></label>
+    <label>Altura do logo no desktop (px)<input id="zzLogoHd" type="number" min="24" max="500" value="84"></label>
+  </div>
+
+  <div class="zix-brand-box">
+    <h4>Nome da empresa</h4>
+    <p class="zix-help">Ajuste o tamanho e a proporção do nome ZixLima no painel superior esquerdo.</p>
+
+    <label>Tamanho do nome no celular (px)<input id="zzNameSm" type="number" min="18" max="120" value="36"></label>
+    <label>Tamanho do nome no desktop (px)<input id="zzNameSd" type="number" min="18" max="180" value="72"></label>
+    <label>Escala horizontal (%)<input id="zzNameSx" type="number" min="50" max="250" value="100"></label>
+    <label>Escala vertical (%)<input id="zzNameSy" type="number" min="50" max="250" value="100"></label>
+    <label>Posição vertical do nome (px)<input id="zzNameY" type="number" min="-50" max="80" value="0"></label>
+    <label>Espaçamento entre letras (px)<input id="zzNameLs" type="number" min="-8" max="12" value="-1"></label>
+  </div>
+
+  <div class="zix-brand-box">
+    <h4>Ícone / foto do slogan</h4>
+    <p class="zix-help">Adicione uma foto ou ícone ao lado do slogan principal do anúncio.</p>
+
+    <label>Imagem do slogan
+      <input id="zzSloganFile" type="file" accept="image/*">
+    </label>
+    <div class="zix-preview-area">
+      <div class="zix-preview-box" id="zzSloganPreviewBox">Sem imagem do slogan</div>
+    </div>
+
+    <label>Largura no celular (px)<input id="zzSloganWm" type="number" min="20" max="240" value="36"></label>
+    <label>Altura no celular (px)<input id="zzSloganHm" type="number" min="20" max="240" value="36"></label>
+    <label>Largura no desktop (px)<input id="zzSloganWd" type="number" min="20" max="300" value="52"></label>
+    <label>Altura no desktop (px)<input id="zzSloganHd" type="number" min="20" max="300" value="52"></label>
+  </div>
+
+  <div class="zix-brand-box">
+    <h4>Prévia rápida</h4>
+    <p class="zix-help">Veja uma simulação do topo com o logo e do slogan com a foto.</p>
+    <div class="zix-mini-top">
+      <div class="zix-mini-brand" id="zzMiniBrand">
+        <img id="zzMiniLogo" alt="Prévia do logo" style="width:56px;height:56px;display:none">
+        <div class="zix-mini-name" id="zzMiniName" style="font-size:36px">ZixLima</div>
+      </div>
+      <div class="zix-mini-hero">
+        <div class="zix-mini-slogan" id="zzMiniSlogan">
+          <img id="zzMiniSloganImg" alt="Prévia do slogan" style="width:36px;height:36px;display:none">
+          <span id="zzMiniSloganText">ZixLima Anúncie Aqui</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="zix-two-btns">
+      <button type="button" id="zzAplicarMarcaPreview">Aplicar prévia</button>
+      <button type="button" id="zzRestaurarMarca">Restaurar padrão</button>
+      <button type="button" id="zzSalvarMarcaGithub" class="ok">Salvar marca visual no GitHub</button>
+    </div>
+    <p id="zzMarcaMensagem" role="status" style="white-space:pre-wrap;overflow-wrap:anywhere"></p>
+  </div>
+</div>
+<!-- ZIX_MARCA_EDITOR_END -->
+
 <h3>🔐 Conexão GitHub</h3>
 <p><small>Token clássico com permissão repo ou token refinado com Contents: Read and write. O token não é salvo no site nem no backup.</small></p>
 <label>Token GitHub<input id="zzToken" type="password" autocomplete="off" spellcheck="false" placeholder="Cole seu token somente para publicar"></label>
@@ -673,5 +860,7 @@ btn.addEventListener('click',async()=>{
 </script>
 
 <script type="module" src="zix-planos-editor-admin.js?v=1"></script>
+
+<script src="admin-brand-editor.js" defer></script>
 </body>
 </html>

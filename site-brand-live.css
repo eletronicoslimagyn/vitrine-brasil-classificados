@@ -1,0 +1,89 @@
+:root{
+  --zz-logo-wm:56px;
+  --zz-logo-hm:56px;
+  --zz-logo-wd:84px;
+  --zz-logo-hd:84px;
+  --zz-name-sm:36px;
+  --zz-name-sd:72px;
+  --zz-name-sx:1;
+  --zz-name-sy:1;
+  --zz-name-y:0px;
+  --zz-name-ls:-1px;
+  --zz-slogan-wm:36px;
+  --zz-slogan-hm:36px;
+  --zz-slogan-wd:52px;
+  --zz-slogan-hd:52px;
+}
+
+body.zz-has-custom-logo header .top > a.brand > .zix-brasil{
+  display:none !important;
+}
+
+header .top > a.brand > #zzCustomBrandLogo{
+  display:none;
+  object-fit:contain;
+  background:transparent;
+  flex-shrink:0;
+}
+
+body.zz-has-custom-logo header .top > a.brand > #zzCustomBrandLogo{
+  display:block !important;
+}
+
+header .top > a.brand > #siteBrand{
+  transform-origin:left center;
+}
+
+#siteHero{
+  position:relative;
+}
+
+.zz-siteHeroTitleWrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+#zzSloganIcon{
+  display:none;
+  object-fit:contain;
+  border-radius:10px;
+  flex-shrink:0;
+}
+
+body.zz-has-slogan-icon #zzSloganIcon{
+  display:block;
+}
+
+@media(max-width:700px){
+  body.zz-has-custom-logo header .top > a.brand > #zzCustomBrandLogo{
+    width:var(--zz-logo-wm) !important;
+    height:var(--zz-logo-hm) !important;
+  }
+  header .top > a.brand > #siteBrand{
+    font-size:var(--zz-name-sm) !important;
+    letter-spacing:var(--zz-name-ls) !important;
+    transform:translateY(var(--zz-name-y)) scaleX(var(--zz-name-sx)) scaleY(var(--zz-name-sy)) !important;
+  }
+  body.zz-has-slogan-icon #zzSloganIcon{
+    width:var(--zz-slogan-wm) !important;
+    height:var(--zz-slogan-hm) !important;
+  }
+}
+
+@media(min-width:701px){
+  body.zz-has-custom-logo header .top > a.brand > #zzCustomBrandLogo{
+    width:var(--zz-logo-wd) !important;
+    height:var(--zz-logo-hd) !important;
+  }
+  header .top > a.brand > #siteBrand{
+    font-size:var(--zz-name-sd) !important;
+    letter-spacing:var(--zz-name-ls) !important;
+    transform:translateY(var(--zz-name-y)) scaleX(var(--zz-name-sx)) scaleY(var(--zz-name-sy)) !important;
+  }
+  body.zz-has-slogan-icon #zzSloganIcon{
+    width:var(--zz-slogan-wd) !important;
+    height:var(--zz-slogan-hd) !important;
+  }
+}
