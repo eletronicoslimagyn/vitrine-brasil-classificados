@@ -76,12 +76,14 @@
       sloganHd: val('zzSloganHd',52),
       nameColor: $('zzNameColor').value, nameLed: $('zzNameLed').value, nameGlow: val('zzNameGlow',6),
       sloganColor: $('zzSloganColor').value, sloganLed: $('zzSloganLed').value, sloganGlow: val('zzSloganGlow',6),
-      sloganX: val('zzSloganX'), sloganY: val('zzSloganY'), sloganImgX: val('zzSloganImgX'), sloganImgY: val('zzSloganImgY')
+      sloganX: val('zzSloganX'), sloganY: val('zzSloganY'), sloganImgX: val('zzSloganImgX'), sloganImgY: val('zzSloganImgY'),
+      quick: window.zixQuickData || current.quick || {}
     };
   }
 
   function fill(data={}){
     current = {...defaults, ...data};
+    window.zixQuickData = JSON.parse(JSON.stringify(current.quick || {}));
     $('zzLogoWm').value = current.logoWm;
     $('zzLogoHm').value = current.logoHm;
     $('zzLogoWd').value = current.logoWd;
@@ -113,6 +115,7 @@
     renderPreview();
     if(current.logoPath) showPreviewImage('zzLogoPreviewBox', current.logoPath);
     if(current.sloganPath) showPreviewImage('zzSloganPreviewBox', current.sloganPath);
+    window.zixQuickSync?.();
   }
 
   function fileToDataURL(file){
@@ -300,6 +303,7 @@ function renderPreview(){
     if(sm) sm.style.transform = `translate(${c.sloganImgX}px,${c.sloganImgY}px)`;
     const sd = $('zzMiniSloganImgD');
     if(sd) sd.style.transform = `translate(${c.sloganImgX}px,${c.sloganImgY}px)`;
+    window.zixQuickRender?.();
   }
 
 
