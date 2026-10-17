@@ -328,6 +328,72 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 }
 </style>
 <!-- ZIX_NUMERIC_BUTTONS_V1_END -->
+<style>
+
+/* zix-mini-preview-fix-v6 */
+.zix-preview-duo .zix-shot-bar,
+.zix-preview-duo .zix-shot-box {
+  min-width:0;
+  max-width:100%;
+  overflow:hidden;
+  box-sizing:border-box;
+}
+
+.zix-preview-duo .zix-shot-bar > div,
+.zix-preview-duo .zix-shot-box {
+  min-width:0;
+}
+
+.zix-preview-duo .zix-shot-title,
+.zix-preview-duo [id^="zzMiniSloganText"] {
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  line-height:1.15;
+  transform:none !important;
+}
+
+.zix-preview-duo img {
+  display:block;
+  max-width:45%;
+  max-height:85px;
+  object-fit:contain;
+  flex-shrink:1;
+}
+
+.zix-preview-duo img:not([src]) {
+  display:none;
+}
+
+#zzMiniNameM {
+  font-size:clamp(15px,3vw,28px) !important;
+  color:#fff;
+}
+
+#zzMiniNameD {
+  font-size:clamp(16px,3vw,32px) !important;
+  color:#fff;
+}
+
+#zzMiniSloganTextM,
+#zzMiniSloganTextD {
+  font-size:clamp(13px,2vw,21px) !important;
+}
+
+@media(max-width:900px) {
+  .zix-preview-duo {
+    grid-template-columns:1fr;
+  }
+  #zzMiniNameM,#zzMiniNameD {
+    font-size:clamp(18px,5vw,30px) !important;
+  }
+  #zzMiniSloganTextM,#zzMiniSloganTextD {
+    font-size:clamp(15px,4vw,23px) !important;
+  }
+}
+
+</style>
 </head>
 <body>
 <header>
