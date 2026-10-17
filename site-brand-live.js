@@ -31,6 +31,8 @@
       root.setProperty('--zz-name-sy', String(Number(c.nameSy)/100));
     }
 
+    setNumVar('--zz-slogan-text-sm', c.sloganTextSm);
+    setNumVar('--zz-slogan-text-sd', c.sloganTextSd);
     setNumVar('--zz-slogan-wm', c.sloganWm);
     setNumVar('--zz-slogan-hm', c.sloganHm);
     setNumVar('--zz-slogan-wd', c.sloganWd);

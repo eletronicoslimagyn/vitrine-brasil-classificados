@@ -14,6 +14,8 @@
     nameSy: 100,
     nameY: 0,
     nameLs: -1,
+    sloganTextSm: 24,
+    sloganTextSd: 40,
     sloganWm: 36,
     sloganHm: 36,
     sloganWd: 52,
@@ -23,7 +25,7 @@
   const ids = [
     'zzLogoWm','zzLogoHm','zzLogoWd','zzLogoHd',
     'zzNameSm','zzNameSd','zzNameSx','zzNameSy','zzNameY','zzNameLs',
-    'zzSloganWm','zzSloganHm','zzSloganWd','zzSloganHd'
+    'zzSloganTextSm','zzSloganTextSd','zzSloganWm','zzSloganHm','zzSloganWd','zzSloganHd'
   ];
 
   let current = {...defaults};
@@ -55,6 +57,8 @@
       nameSy: val('zzNameSy',100),
       nameY: val('zzNameY',0),
       nameLs: val('zzNameLs',-1),
+      sloganTextSm: val('zzSloganTextSm',24),
+      sloganTextSd: val('zzSloganTextSd',40),
       sloganWm: val('zzSloganWm',36),
       sloganHm: val('zzSloganHm',36),
       sloganWd: val('zzSloganWd',52),
@@ -74,6 +78,8 @@
     $('zzNameSy').value = current.nameSy;
     $('zzNameY').value = current.nameY;
     $('zzNameLs').value = current.nameLs;
+    $('zzSloganTextSm').value = current.sloganTextSm;
+    $('zzSloganTextSd').value = current.sloganTextSd;
     $('zzSloganWm').value = current.sloganWm;
     $('zzSloganHm').value = current.sloganHm;
     $('zzSloganWd').value = current.sloganWd;
@@ -112,6 +118,10 @@
 
     const sloganText = $('zzMiniSloganText');
     sloganText.textContent = $('zzTextoSlogan')?.value?.trim() || 'ZixLima Anúncie Aqui';
+    const modoDesktop = window.matchMedia('(min-width: 701px)').matches;
+    sloganText.style.fontSize = (modoDesktop ? c.sloganTextSd : c.sloganTextSm) + 'px';
+    sloganText.style.lineHeight = '1.15';
+    sloganText.style.overflowWrap = 'anywhere';
 
     const logo = $('zzMiniLogo');
     logo.style.width = c.logoWm + 'px';

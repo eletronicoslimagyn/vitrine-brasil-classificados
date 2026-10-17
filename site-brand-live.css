@@ -9,6 +9,8 @@
   --zz-name-sy:1;
   --zz-name-y:0px;
   --zz-name-ls:-1px;
+  --zz-slogan-text-sm:24px;
+  --zz-slogan-text-sd:40px;
   --zz-slogan-wm:36px;
   --zz-slogan-hm:36px;
   --zz-slogan-wd:52px;
@@ -66,6 +68,7 @@ body.zz-has-slogan-icon #zzSloganIcon{
     letter-spacing:var(--zz-name-ls) !important;
     transform:translateY(var(--zz-name-y)) scaleX(var(--zz-name-sx)) scaleY(var(--zz-name-sy)) !important;
   }
+  #siteHero{font-size:var(--zz-slogan-text-sm) !important;line-height:1.2 !important;overflow-wrap:anywhere}
   body.zz-has-slogan-icon #zzSloganIcon{
     width:var(--zz-slogan-wm) !important;
     height:var(--zz-slogan-hm) !important;
@@ -82,6 +85,7 @@ body.zz-has-slogan-icon #zzSloganIcon{
     letter-spacing:var(--zz-name-ls) !important;
     transform:translateY(var(--zz-name-y)) scaleX(var(--zz-name-sx)) scaleY(var(--zz-name-sy)) !important;
   }
+  #siteHero{font-size:var(--zz-slogan-text-sd) !important;line-height:1.2 !important;overflow-wrap:anywhere}
   body.zz-has-slogan-icon #zzSloganIcon{
     width:var(--zz-slogan-wd) !important;
     height:var(--zz-slogan-hd) !important;
