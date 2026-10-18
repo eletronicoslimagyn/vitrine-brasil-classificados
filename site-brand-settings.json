@@ -11,7 +11,7 @@
   "logoYd": 8,
   "nameSm": 64,
   "nameSd": 87,
-  "nameSx": 20,
+  "nameSx": 50,
   "nameSy": 20,
   "nameY": 6,
   "nameLs": 6,
@@ -30,5 +30,59 @@
   "sloganX": -11,
   "sloganY": 14,
   "sloganImgX": -5,
-  "sloganImgY": 2
+  "sloganImgY": 2,
+  "quick": {
+    "mobile": {
+      "name": {
+        "x": 15,
+        "y": 0,
+        "size": 0,
+        "color": ""
+      },
+      "slogan": {
+        "x": 0,
+        "y": 15,
+        "size": 0,
+        "color": ""
+      },
+      "logo": {
+        "x": 0,
+        "y": 0,
+        "size": 0,
+        "color": ""
+      },
+      "photo": {
+        "x": -9,
+        "y": 0,
+        "size": -1,
+        "color": ""
+      }
+    },
+    "desktop": {
+      "name": {
+        "x": -9,
+        "y": 65,
+        "size": 0,
+        "color": "#e5e7eb"
+      },
+      "slogan": {
+        "x": -10,
+        "y": 16,
+        "size": 0,
+        "color": ""
+      },
+      "logo": {
+        "x": -2,
+        "y": 45,
+        "size": 0,
+        "color": ""
+      },
+      "photo": {
+        "x": -27,
+        "y": 0,
+        "size": 0,
+        "color": ""
+      }
+    }
+  }
 }
